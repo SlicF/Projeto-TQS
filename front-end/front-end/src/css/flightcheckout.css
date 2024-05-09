@@ -1,28 +1,26 @@
-/* flightcheckout.css */
-
 body, html {
   margin: 0;
   padding: 0;
   height: 100%; 
-  background: white;
+  
   background-image: url('../img/fundo.jpg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
   overflow: hidden; 
 }
+
 .flight-checkout {
-  max-width: 800px;
+  max-width: 80%;
   margin: 8rem auto;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 .flight-details-section, .payment-info-section {
-  background-color: #f7f7f7;
-  border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
+  height: 50rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -47,6 +45,7 @@ body, html {
 }
 
 .form-group input[type="text"], .form-group input[type="email"] {
+
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -83,7 +82,23 @@ button:hover {
   background-color: #e2271a; 
 }
 
-/* Responsive adjustments */
+.left-side, .right-side {
+  height: 95%;
+  border-radius: 20px;
+  width: 45%;
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  float: left;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.flight-details-section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 @media (max-width: 600px) {
   .flight-checkout {
     padding: 10px;
