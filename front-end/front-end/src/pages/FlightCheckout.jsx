@@ -7,20 +7,16 @@ import SeatSelection from '../components/SeatSelection';
 const FlightCheckout = () => {
   const navigate = useNavigate();
 
-  const seats = Array.from({ length: 100 }, (_, index) => {
+  const seats = Array.from({ length: 50 }, (_, index) => {
     let status = "AVAILABLE";
-    // Assumindo que os assentos de saída de emergência são os de número 9, 18, 27, 36.
-    if ([9, 18, 27, 36].includes(index + 1)) {
+    if ([1,2,3,4,5,6,7,8,9,10].includes(index + 1)) {
       status = "EMERGENCY_EXIT";
-    // Assumindo que os assentos preferenciais são os de número 1, 10, 19, 28, 37, 46, 55, 64, 73, 82, 91.
-    } else if ([1, 10, 19, 28, 37, 46, 55, 64, 73, 82, 91].includes(index + 1)) {
+    } else if ([11,12,13,14,15,16,17,18,19,20,21,22,23,24,25].includes(index + 1)) {
       status = "PREFERRED";
     }
     return { number: index + 1, status };
   });
   
-
- 
   const [selectedSeat, setSelectedSeat] = React.useState(null);
 
   const handleSeatSelect = (seatNumber) => {
