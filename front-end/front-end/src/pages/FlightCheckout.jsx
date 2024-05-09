@@ -50,6 +50,8 @@ const FlightCheckout = () => {
           <div className='right-side'>
             <h2 className="centered-title">Select Your Seat</h2>
             <SeatSelection seats={seats} onSeatSelect={handleSeatSelect} />
+
+           
           </div>
         </div>
       </div>

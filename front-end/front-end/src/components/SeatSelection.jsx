@@ -4,7 +4,7 @@ const SeatSelection = ({ seats, onSeatSelect }) => {
   const [selectedSeat, setSelectedSeat] = useState(null);
 
   const handleSeatClick = (seatNumber, status) => {
-    if (status === "AVAILABLE" || status === "PREFERRED") {
+    if (status !== "EMERGENCY_EXIT") {
       setSelectedSeat(seatNumber);
       onSeatSelect(seatNumber);
     }
@@ -34,6 +34,11 @@ const SeatSelection = ({ seats, onSeatSelect }) => {
           {(index + 1) % 2 === 0 && <div className="row-spacer" />}
         </div>
       ))}
+      <div className="seat-legends">
+      <button className="legend-button available"></button><span>Available</span>
+        <button className="legend-button preferred"></button><span>Preferred</span>
+        <button className="legend-button emergency-exit"></button><span>Emergency Exit</span>
+      </div>
     </div>
   );
 };
