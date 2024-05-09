@@ -5,12 +5,15 @@ import Login from './pages/login.jsx';
 import AirportControl from './pages/AirportControl.jsx';
 import MyComponent from './pages/MyComponent.jsx';
 import Formulario from './pages/Formulario.jsx';
+import Flights from './pages/Flight.jsx';
+import FlightCheckout from './pages/FlightCheckout.jsx';
+import Invoice from './pages/Invoice.jsx';
+
 
 function App() {
 
   return (
     <div>
-      
       
       <Routes>
         <Route path="/" element={<Register />} />
@@ -18,8 +21,9 @@ function App() {
         <Route path="/otherpage" element={<AirportControl />} />
         <Route path="/mycomponent" element={<MyComponent />} />
         <Route path="/airport-control" element={<AirportControl />} />
-        <Route path="/formulario" element={<Formulario />} />
-
+        <Route path="/formulario" element={<Flights />} />
+        <Route path="/flightCheckout" element={<FlightCheckout />} /> 
+        <Route path="/invoice" element={<Invoice />} />
       </Routes>
     </div>
   )
