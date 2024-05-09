@@ -1,3 +1,20 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background: white; 
+}
+
+.flightsContainer {
+    background: url('../img/sunset.jpg') no-repeat center center;
+    background-size: cover; 
+    height: 100vh; 
+}
+
+.containerFlight {
+    background: white;
+    padding: 20px;
+}
+
 .container-index {
     background-size: cover;
     display: flex;

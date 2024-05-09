@@ -1,6 +1,6 @@
 // Flight.jsx
 import React from 'react';
-import airportLogo from '../img/logo_s.png'; // Ensure this is the correct path
+import airportLogo from '../img/logo_s.png'; 
 
 const Flight = ({ flightNumber, destination, departureTime, gate }) => (
   <div className="flight">

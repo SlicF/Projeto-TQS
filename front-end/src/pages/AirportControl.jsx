@@ -3,6 +3,8 @@ import React from 'react';
 import Flight from '../components/Flight.jsx';
 import '../css/AirportControl.css'; 
 
+import { useNavigate } from 'react-router-dom';
+
 const AirportControl = () => {
   const flights = [
     { flightNumber: 'TP1219', destination: 'Braga', departureTime: '12:34', gate: '0' },
