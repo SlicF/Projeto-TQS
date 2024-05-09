@@ -10,7 +10,7 @@ const CardFlights = () => {
   
 
   const handleBookFlight = () => {
-    navigate("/Flightcheckout");//aqui
+    navigate("/Flightcheckout");
 
   };
 
