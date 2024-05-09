@@ -8,6 +8,9 @@ import Login from './pages/login.jsx';
 import AirportControl from './pages/AirportControl.jsx';
 import MyComponent from './pages/MyComponent.jsx';
 import Formulario from './pages/Formulario.jsx';
+import FlightCheckout from './pages/FlightCheckout.jsx';
+import Invoice from './pages/Invoice.jsx';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +25,9 @@ root.render(
           <Route path="airport-control" element={<AirportControl />} />
           <Route path="mycomponent" element={<MyComponent />} />
           <Route path="formulario" element={<Formulario />} />
+          <Route path="flightcheckout" element={<FlightCheckout />} /> 
+          <Route path="invoice" element={<Invoice />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

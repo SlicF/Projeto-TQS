@@ -1,42 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Fundo from '../img/fundo.jpg';  
-import casa from '../img/vv.png';
-import chaves from '../img/vvv.png';
 import Navbar from '../components/Navbar';
 import "../css/MyComponent.css";
 import { useNavigate } from 'react-router-dom';
 
 function MyComponent() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    from: '',
+    to: '',
+    departureDate: '',
+    arrivalDate: '',
+    travelClass: 'economy',
+    passengers: 1
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
   const handleSubmit = (event) => {
-    event.preventDefault(); 
-    navigate('/formulario'); 
+    event.preventDefault();
+    navigate('/formulario', { state: formData });
   };
 
   return (
+    
     <div className="container-index">
+      <Navbar />
       <div className="background-image" style={{ backgroundImage: `url(${Fundo})` }}>
-        <Navbar />
         <form className="search-area" onSubmit={handleSubmit}>
-          <input className="search-input" type="text" placeholder="Onde" />
-          <input className="search-input" type="text" placeholder="Destino" />
-          <input className="search-input" type="text" placeholder="Partida" />
-          <input className="search-input" type="text" placeholder="Chegada" />
+          <input name="from" value={formData.from} onChange={handleInputChange} className="search-input" type="text" placeholder="From" />
+          <input name="to" value={formData.to} onChange={handleInputChange} className="search-input" type="text" placeholder="To" />
+          <input name="departureDate" value={formData.departureDate} onChange={handleInputChange} className="search-input" type="date" placeholder="Departure" />
+          <input name="arrivalDate" value={formData.arrivalDate} onChange={handleInputChange} className="search-input" type="date" placeholder="Arrival" />
+          <select name="travelClass" value={formData.travelClass} onChange={handleInputChange} className="search-input">
+            <option value="economy">Economy Class</option>
+            <option value="premium">Premium Economy</option>
+            <option value="first">First Class</option>
+            <option value="second">Second Class</option>
+          </select>
+          <input name="passengers" value={formData.passengers} onChange={handleInputChange} className="search-input" type="number" min="1" placeholder="Number of Passengers" />
           <button type="submit">Enter</button>
         </form>
-      </div>
-      <div className="places-area">
-        <h1>LUGARES INDESQUECÍVEIS</h1>
-        <div className="places">
-          <div className="place">
-            <img src={casa} alt="Casa da Avó" />
-            <span>Casa da Avó</span>
-          </div>
-          <div className="place">
-            <img src={chaves} alt="Chaves" />
-            <span>Chaves</span>
-          </div>
-        </div>
       </div>
     </div>
   );

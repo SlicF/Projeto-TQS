@@ -1,5 +1,6 @@
 /* Register.css */
 body, html {
+    background: url('../img/fundo.jpg') no-repeat center center fixed; 
     margin: 0;
     padding: 0;
     overflow: hidden;
