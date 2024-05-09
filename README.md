@@ -18,4 +18,5 @@ The last service is a simple digital signage solution to handle the call screens
 | 108011 | Fábio António Teixeira Matias | Producter Owner + Developer/Tester |
 
 ## Project Bookmarks:
-- Project Backlog: 
+- Project Backlog: https://fabiomatias39.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog
+  
