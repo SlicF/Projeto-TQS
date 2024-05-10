@@ -1,11 +1,10 @@
 body, html {
     margin: 0;
     padding: 0;
-    background: white; 
+    overflow: hidden;
 }
 
 .flightsContainer {
-    background: url('../img/sunset.jpg') no-repeat center center;
     background-size: cover; 
     height: 100vh; 
 }

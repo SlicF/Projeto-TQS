@@ -26,7 +26,6 @@ function MyComponent() {
   };
 
   return (
-    
     <div className="container-index">
       <Navbar />
       <div className="background-image" style={{ backgroundImage: `url(${Fundo})` }}>
