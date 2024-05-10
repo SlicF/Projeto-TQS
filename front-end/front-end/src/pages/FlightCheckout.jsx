@@ -25,7 +25,7 @@ const FlightCheckout = () => {
   };
 
   const handlePayment = () => {
-    navigate('/invoice');
+    navigate('/payment');
   };
   
 
@@ -41,6 +41,11 @@ const FlightCheckout = () => {
             <p><strong>Date:</strong> 2024-05-15</p>
             <p><strong>Airline:</strong> AirExample</p>
             <p><strong>Flight Number:</strong> AE123</p>
+            <p><strong>Price:</strong> $500</p>
+            <p><strong>Selected Seat:</strong> {selectedSeat ? selectedSeat : "None"}</p>
+            <p><strong>Passenger Name:</strong> John Doe</p>
+            <p><strong>Classe: </strong> Economy</p>
+            <p><strong>Passenger Passport:</strong> 123456789</p>
             <div className="button-group">
               <button onClick={handlePayment}>Pay Now</button>
               <button className="cancel-button">Cancel</button>
@@ -50,8 +55,6 @@ const FlightCheckout = () => {
           <div className='right-side'>
             <h2 className="centered-title">Select Your Seat</h2>
             <SeatSelection seats={seats} onSeatSelect={handleSeatSelect} />
-
-           
           </div>
         </div>
       </div>

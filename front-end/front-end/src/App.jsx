@@ -8,6 +8,7 @@ import Formulario from './pages/Formulario.jsx';
 import Flights from './pages/Flight.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
 import Invoice from './pages/Invoice.jsx';
+import Payment from './pages/Payment.jsx';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/formulario" element={<Flights />} />
         <Route path="/flightCheckout" element={<FlightCheckout />} /> 
         <Route path="/invoice" element={<Invoice />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </div>
   )
