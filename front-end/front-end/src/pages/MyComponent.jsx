@@ -36,7 +36,6 @@ function MyComponent() {
           <input name="arrivalDate" value={formData.arrivalDate} onChange={handleInputChange} className="search-input" type="date" placeholder="Arrival" />
           <select name="travelClass" value={formData.travelClass} onChange={handleInputChange} className="search-input">
             <option value="economy">Economy Class</option>
-            <option value="premium">Premium Economy</option>
             <option value="first">First Class</option>
             <option value="second">Second Class</option>
           </select>

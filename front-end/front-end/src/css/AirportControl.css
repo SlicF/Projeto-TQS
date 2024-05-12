@@ -1,6 +1,5 @@
 /* AirportControl.css */
 .airport-container {
-    /* background: url('../img/fundo.jpg') no-repeat center center fixed;  */
     background-size: cover;
     padding-top: 2rem;
     height: 100vh; 
@@ -72,3 +71,4 @@
     height: auto; 
     object-fit: contain; 
 }
+

@@ -4,10 +4,10 @@ const SeatSelection = ({ seats, onSeatSelect }) => {
   const [selectedSeat, setSelectedSeat] = useState(null);
 
   const handleSeatClick = (seatNumber, status) => {
-    if (status !== "EMERGENCY_EXIT") {
+    
       setSelectedSeat(seatNumber);
       onSeatSelect(seatNumber);
-    }
+    
   };
 
   const rows = [];
@@ -25,7 +25,7 @@ const SeatSelection = ({ seats, onSeatSelect }) => {
               key={seat.number}
               className={`seat ${seat.status} ${seat.number === selectedSeat ? "selected" : ""}`}
               onClick={() => handleSeatClick(seat.number, seat.status)}
-              disabled={seat.status === "EMERGENCY_EXIT"}
+              disabled={seat.status === ""}
               style={{ margin: "5px", width: "30px", height: "30px" }}
             >
               {seat.number}
@@ -35,10 +35,11 @@ const SeatSelection = ({ seats, onSeatSelect }) => {
         </div>
       ))}
       <div className="seat-legends">
-      <button className="legend-button available"></button><span>Available</span>
-        <button className="legend-button preferred"></button><span>Preferred</span>
-        <button className="legend-button emergency-exit"></button><span>Emergency Exit</span>
+      <button className="legend-button available"></button><>Economy</>
+        <button className="legend-button preferred"></button><span>Second</span>
+        <button className="legend-button emergency-exit"></button><span>First</span>
       </div>
+      
     </div>
   );
 };

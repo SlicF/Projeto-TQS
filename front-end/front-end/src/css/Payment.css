@@ -2,7 +2,7 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%; 
-    background: white;
+    
     background-image: url('../img/fundo.jpg'); 
     background-size: cover; 
     background-position: center; 
@@ -15,8 +15,7 @@ body, html {
     margin: 8rem auto;
     padding: 20px;
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7; 
-    border-radius: 8px; 
+    border-radius: 12px; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
     height: 100%;
 }
@@ -30,7 +29,6 @@ body, html {
 .invoice .flight-details, .invoice .payment-details {
     padding: 20px;
     margin-bottom: 20px; 
-    background-color: white; 
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -53,7 +51,7 @@ body, html {
   
 button {
     background-color: #4CAF50;
-    color: white;
+    
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -73,7 +71,41 @@ button:hover {
 .cancel-button:hover {
     background-color: #e2271a;
 }
-  
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-group button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:first-child {
+    background-color: #4CAF50;
+}
+
+.button-group button:last-child {
+    background-color: #f44336;
+}
+
+.button-group button:hover {
+    background-color: #45a049;
+}
+
+.button-group button:last-child:hover {
+    background-color: #e2271a;
+}
+
 /* Ajustes responsivos */
 @media (max-width: 600px) {
     .invoice-container {
