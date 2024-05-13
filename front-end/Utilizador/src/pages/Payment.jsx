@@ -24,13 +24,6 @@ const Payment = () => {
           <div className='invoice'>
             <h1 className="centered-title">Payment</h1>
             <div className="payment-details">
-                {/* <p><strong>Voo:</strong> [Flight Number]</p>
-                <p><strong>Origem:</strong> [Departure]</p>
-                <p><strong>Destino:</strong> [Destination]</p>
-                <p><strong>Data:</strong> [Date]</p>
-                <p><strong>Horário:</strong> [Time]</p>
-                <p><strong>Preço:</strong> [Price]</p> */}
-
               <div>
               <label htmlFor="passengerName">Nome do Passageiro</label>
               <input type="text" id="passengerName" placeholder="Nome do Passageiro" />

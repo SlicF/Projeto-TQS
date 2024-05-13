@@ -1,4 +1,4 @@
-   /* body {
+   body {
     display: flex;
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
@@ -44,4 +44,4 @@
   .cardLuggage:hover {
     background-color: #aaaaaa;
     border-radius: 10px;
-  } */
+  }
