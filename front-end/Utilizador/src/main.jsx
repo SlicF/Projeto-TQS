@@ -5,7 +5,6 @@ import App from './App.jsx';
 import './index.css';
 import Register from './pages/Register.jsx';
 import Login from './pages/login.jsx';
-import AirportControl from './pages/AirportControl.jsx';
 import MyComponent from './pages/MyComponent.jsx';
 import Formulario from './pages/Formulario.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
@@ -26,7 +25,6 @@ root.render(
           <Route index element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="airport-control" element={<AirportControl />} />
           <Route path="mycomponent" element={<MyComponent />} />
           <Route path="formulario" element={<Formulario />} />
           <Route path="flightcheckout" element={<FlightCheckout />} /> 
