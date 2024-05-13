@@ -8,6 +8,8 @@ body, html {
   background-position: center; 
   background-repeat: no-repeat; 
   overflow: hidden; 
+  background: url('../img/fundo.jpg') no-repeat center  fixed; 
+
 }
 
 .flight-checkout {

@@ -8,6 +8,7 @@ body, html {
 }
 
 .register-container {
+    
     background-size: cover;
     display: flex;
     flex-direction: row; 
