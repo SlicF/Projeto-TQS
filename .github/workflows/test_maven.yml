@@ -19,5 +19,5 @@ jobs:
         distribution: 'temurin'
         
     - name: Build and run unit tests with Maven
-      run: cd airportManager && mvn clean test
+      run: cd airportManager/airportManager && mvn clean test
       continue-on-error: false
