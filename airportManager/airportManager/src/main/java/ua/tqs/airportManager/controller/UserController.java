@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ua.tqs.airportManager.entity.Passenger;
 import ua.tqs.airportManager.entity.Reservation;
+import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.ReservationService;
@@ -33,22 +34,15 @@ public class UserController {
     // }
 
     @GetMapping("/userinfo")
-    public ResponseEntity<User> getUserInfo() {
+    public ResponseEntity<User> getUserInfo(@RequestParam("userID") String userID) {
         
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); 
-        System.out.println("username: " + username);
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName(); 
+        // System.out.println("username: " + username);
 
-        User user = usersRespository.findByUsername(username).orElseThrow();
+        User user = usersRespository.findByUserId(userID);
        
-        UserInfoDTO userInfo = new UserInfoDTO(); 
-        userInfo.setName(user.getFirstName());
-        userInfo.setSurname(user.getLastName());
-        userInfo.setEmail(user.getUsername());
-        userInfo.setAddress(user.getStreetAddress());
-        userInfo.setPostalCode(user.getPostalCode());
-        userInfo.setCity(user.getCity());
-        return new ResponseEntity<>(userInfo, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getReservationsByUser")
