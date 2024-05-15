@@ -15,22 +15,22 @@ import ua.tqs.airportManager.service.ReservationService;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private AuthService authService;
+    // private AuthService authService;
     private UserRepository usersRespository;
-    private PassengerRepository passengerRespository;
+    // private PassengerRepository passengerRespository;
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
-        return ResponseEntity.ok(authService.register(registerDTO));
-    }
+    // @PostMapping("/register")
+    // public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
+    //     return ResponseEntity.ok(authService.register(registerDTO));
+    // }
 
-    @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
-        return ResponseEntity.ok(authService.login(loginDTO));
-    }
+    // @PostMapping("/login")
+    // public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
+    //     return ResponseEntity.ok(authService.login(loginDTO));
+    // }
 
     @GetMapping("/userinfo")
-    public ResponseEntity<UserInfoDTO> getUserInfo() {
+    public ResponseEntity<User> getUserInfo() {
         
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName(); 
@@ -62,16 +62,16 @@ public class UserController {
     }
 
 
-    @GetMapping("/getReservationsByPassenger")
-    public ResponseEntity<List<Reservation>> getReservationsByPassenger() {
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName(); 
+    // @GetMapping("/getReservationsByPassenger")
+    // public ResponseEntity<List<Reservation>> getReservationsByPassenger() {
+    //     // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     // String username = authentication.getName(); 
 
-        // devia usar o passenger???
-        //??????????????????????????
-        Passenger passenger = passengerRespository.findByUsername(passengername).orElseThrow(); 
+    //     // devia usar o passenger???
+    //     //??????????????????????????
+    //     Passenger passenger = passengerRespository.findByUsername(passengername).orElseThrow(); 
 
-        List<Reservation> reservations = ReservationService.findReservationsByUser(passenger);
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
-    }
+    //     List<Reservation> reservations = ReservationService.findReservationsByPassenger(passenger);
+    //     return new ResponseEntity<>(reservations, HttpStatus.OK);
+    // }
 }
