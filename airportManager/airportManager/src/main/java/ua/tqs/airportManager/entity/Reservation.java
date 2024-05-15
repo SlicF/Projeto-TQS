@@ -41,7 +41,7 @@ public class Reservation {
     @Column(name = "numberCard", nullable = false)
     private String numberCard;
 
-    @Column(name = "expirationDateCard", nullable = false)
+    @Column(name = "expirationDateCard", nullable = false) // ??????????????????????????
     private String expirationDateCard;
 
     // @Column(name = "cvvCard", nullable = false)

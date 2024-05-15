@@ -1,6 +1,7 @@
 package ua.tqs.airportManager.entity;
 
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

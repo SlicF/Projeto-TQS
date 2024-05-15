@@ -6,6 +6,6 @@ import ua.tqs.airportManager.entity.Reservation;
 public interface ReservationService {
     
     Reservation createReservation(Reservation reservation);
-    Reservation getFlightByReservationId(String reservationId);
+    Reservation getReservationByReservationId(String reservationId);
     List<Reservation> getAllReservations();
 }

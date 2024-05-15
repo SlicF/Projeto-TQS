@@ -21,7 +21,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation getFlightByReservationId(String reservationId) {
+    public Reservation getReservationByReservationId(String reservationId) {
         return reservationRepository.findByReservationId(reservationId);
     }
 
