@@ -1,5 +1,6 @@
 package ua.tqs.airportManager.service.impl;
 
+import java.time.LocalDate;
 import java.util.*;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ public class FlightServiceImpl implements FlightService{
     }
 
     @Override
-    public List<Flight> findByDepartureCityArrivalCityDate(String departureCity, String arrivalCity, Date flightDate) {
+    public List<Flight> findByDepartureCityArrivalCityDate(String departureCity, String arrivalCity, LocalDate flightDate) {
         return flightRepository.findByDepartureCityArrivalCityDate(departureCity, arrivalCity, flightDate);
     }
 }

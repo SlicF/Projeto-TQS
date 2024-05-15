@@ -1,5 +1,6 @@
 package ua.tqs.airportManager.entity;
 
+import java.time.LocalDate;
 import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class Flight {
     private String destinationCity;
 
     @Column(name="flightDate", nullable = false)
-    private Date date;
+    private LocalDate date;
 
     @Column(name="departureHour", nullable = false)
     private String departureHour;

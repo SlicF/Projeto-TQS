@@ -41,7 +41,7 @@ public class DatabaseInitializer {
         flight1.setDestinationCity("Porto");
         try {
             Date date = format.parse("2024-06-01");
-            flight1.setDate(date);
+            // flight1.setDate(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package ua.tqs.airportManager.entity;
 
+import java.time.LocalDate;
 import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class Reservation {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "reservationDate", nullable = false)
-    private Date reservationDate;
+    private LocalDate reservationDate;
 
     @Column(name = "nameCard", nullable = false)
     private String nameCard;
@@ -64,11 +65,11 @@ public class Reservation {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "passengerId", referencedColumnName = "userId", insertable = false, updatable = false)
-    private Airline passenger;
+    private Passenger passenger;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "flightId", referencedColumnName = "flightId", insertable = false, updatable = false)
-    private Airline flight;
+    private Flight flight;
 
     @PrePersist
     public void generateReservationId() {

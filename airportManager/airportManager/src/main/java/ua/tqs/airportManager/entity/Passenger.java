@@ -1,5 +1,7 @@
 package ua.tqs.airportManager.entity;
 
+import java.time.LocalDate;
+
 // import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -22,6 +24,7 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     int userId;
+    
     @Basic
     @Column(name = "firstName", nullable = false)
     String firstName;
@@ -33,7 +36,7 @@ public class Passenger {
     String sex;
 
     @Column(name = "birthDate", nullable = false)
-    Date birthDate;
+    LocalDate birthDate;
 
     @Column(name = "username", nullable = false)
     String username;
