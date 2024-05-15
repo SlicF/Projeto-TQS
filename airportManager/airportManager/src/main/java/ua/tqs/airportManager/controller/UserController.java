@@ -1,5 +1,6 @@
 package ua.tqs.airportManager.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ua.tqs.airportManager.entity.Passenger;
 import ua.tqs.airportManager.entity.Reservation;
+import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.ReservationService;
 
@@ -17,6 +19,7 @@ public class UserController {
 
     // private AuthService authService;
     private UserRepository usersRespository;
+    private ReservationRepository reservationRepository;
     // private PassengerRepository passengerRespository;
 
     // @PostMapping("/register")
@@ -49,15 +52,12 @@ public class UserController {
     }
 
     @GetMapping("/getReservationsByUser")
-    public ResponseEntity<List<Reservation>> getReservationsByUser() {
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName(); 
-
-        // devia usar o passenger???
-        //??????????????????????????
-        User user = userRespository.findByUsername(username).orElseThrow(); 
-
-        List<Reservation> reservations = ReservationService.findReservationsByUser(user);
+    public ResponseEntity<List<Reservation>> getReservationsByUser(@RequestParam("userID") String userID) {
+        //Array of reservations
+        List<Reservation> reservations = new ArrayList<Reservation>();
+        
+        reservations = reservationRepository.findByUserId(userID);
+        
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 

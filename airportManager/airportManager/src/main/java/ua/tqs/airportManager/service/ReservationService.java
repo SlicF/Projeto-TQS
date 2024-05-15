@@ -7,5 +7,6 @@ public interface ReservationService {
     
     Reservation createReservation(Reservation reservation);
     Reservation getReservationByReservationId(String reservationId);
+    List<Reservation> getReservationsByUserId(String userId);
     List<Reservation> getAllReservations();
 }
