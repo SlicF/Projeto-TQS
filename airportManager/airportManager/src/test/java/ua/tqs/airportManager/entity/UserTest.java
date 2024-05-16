@@ -16,7 +16,7 @@ public class UserTest {
     @BeforeAll
     public static void setUp() {
         user = new User();
-        user.setUserId(1);
+        user.setUserId("1");
         user.setFirstName("João");
         user.setLastName("Neves");
         user.setSex("Masculino");
@@ -36,9 +36,9 @@ public class UserTest {
 
     @DisplayName("Test User Entity")
     @Test
-    void testUserEntity() {
+    void getUserTest() {
         assertAll(
-            () -> assertEquals(1, user.getUserId()),
+            () -> assertEquals("1", user.getUserId()),
             () -> assertEquals("João", user.getFirstName()),
             () -> assertEquals("Neves", user.getLastName()),
             () -> assertEquals("Masculino", user.getSex()),

@@ -36,7 +36,7 @@ public class PassengerTest {
 
     @DisplayName("Test Passenger Entity")
     @Test
-    void testPassengerEntity() {
+    void getPassengerTest() {
         assertAll(
             () -> assertEquals(1, passenger.getUserId()),
             () -> assertEquals("João", passenger.getFirstName()),

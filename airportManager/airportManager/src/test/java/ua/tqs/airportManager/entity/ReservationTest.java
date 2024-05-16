@@ -38,13 +38,13 @@ public class ReservationTest {
 
     @Test
     @DisplayName("test if reservations are correctly added to the list")
-    public void testReservationsAddedToList() {
+    public void reservationsAddedToListTest() {
         assertEquals(2, reservations.size());
     }
 
     @Test
     @DisplayName("test reservation details of the reservations")
-    public void testFirstReservationDetails() {
+    public void getReservationTest() {
         Reservation reseservation1 = reservations.get(0);
         assertEquals("7XN3G", reseservation1.getReservationId());
         assertEquals("1", reseservation1.getPassengerId());
@@ -71,14 +71,14 @@ public class ReservationTest {
 
     @Test
     @DisplayName("test association between reservation and passenger")
-    public void testReservationPassengerAssociation() {
+    public void reservationPassengerAssociationTest() {
         assertEquals(passenger, reservation1.getPassenger());
         assertEquals(passenger, reservation2.getPassenger());
     }
 
     @Test
     @DisplayName("test association between reservation and flight")
-    public void testReservationFlightAssociation() {
+    public void reservationFlightAssociationTest() {
         assertEquals(flight1, reservation1.getFlight());
         assertEquals(flight2, reservation2.getFlight());
     }
