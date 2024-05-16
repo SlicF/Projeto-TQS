@@ -5,7 +5,7 @@ import App from './App.jsx';
 import './index.css';
 import Register from './pages/Register.jsx';
 import Login from './pages/login.jsx';
-import MyComponent from './pages/MyComponent.jsx';
+import SearchFlight from './pages/SearchFlight.jsx';
 import Formulario from './pages/Formulario.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
 import Invoice from './pages/Invoice.jsx';
@@ -21,7 +21,7 @@ root.render(
           <Route index element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="mycomponent" element={<MyComponent />} />
+          <Route path="searchflight" element={<SearchFlight />} />
           <Route path="formulario" element={<Formulario />} />
           <Route path="flightcheckout" element={<FlightCheckout />} /> 
           <Route path="invoice" element={<Invoice />} />

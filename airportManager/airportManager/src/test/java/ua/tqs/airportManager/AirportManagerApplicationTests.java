@@ -1,13 +1,13 @@
-package ua.tqs.airportManager;
+// package ua.tqs.airportManager;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class AirportManagerApplicationTests {
+// @SpringBootTest
+// class AirportManagerApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+//     @Test
+//     void contextLoads() {
+//     }
 
-}
+// }

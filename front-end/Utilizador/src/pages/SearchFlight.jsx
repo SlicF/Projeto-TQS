@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import Fundo from '../img/fundo.jpg';  
 import Navbar from '../components/Navbar';
-import "../css/MyComponent.css";
+import "../css/SearchFlight.css";
 import { useNavigate } from 'react-router-dom';
 
-function MyComponent() {
+function SearchFlight() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     from: '',
@@ -20,9 +21,26 @@ function MyComponent() {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    navigate('/formulario', { state: formData });
+    try {
+      const response = await fetch('http://localhost:8980/api/flights/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
+      }
+
+      const responseData = await response.json();
+      navigate('/formulario', { state: responseData });
+    } catch (error) {
+      console.error('Erro ao buscar voos:', error);
+    }
   };
 
   return (
@@ -47,4 +65,4 @@ function MyComponent() {
   );
 }
 
-export default MyComponent;
+export default SearchFlight;

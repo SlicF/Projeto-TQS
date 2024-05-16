@@ -25,7 +25,7 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(form);
-    navigate('/mycomponent');
+    navigate('/searchflight');
   };
 
 
