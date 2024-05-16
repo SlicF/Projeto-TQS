@@ -14,7 +14,9 @@
 // import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 // import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+// import ua.tqs.airportManager.entity.Airline;
 // import ua.tqs.airportManager.entity.Flight;
+// import ua.tqs.airportManager.service.FlightService;
 
 // @DataJpaTest
 // public class FlightRepositoryTest {
@@ -25,34 +27,36 @@
 //     @Autowired
 //     private FlightRepository flightRepository;
 
-//     private Flight flight;
+//     static Flight flight = new Flight("PTIT235", "TAP", "Portugal", "Itália", LocalDate.of(2024, 5, 19), "09h47", "12h53", "150€", "OK", 230, new ArrayList<>(), new Airline("TAP", "TAP Portugal"));
 
 //     @BeforeEach
 //     public void setup() {
 //         flight = new Flight();
-//         flight.setFlightId("1");
-//         flight.setState("Scheduled");
+//         flight.setFlightId("PTIT235");
+//         flight.setState("OK");
 //         flight.setDepartureCity("City A");
 //         flight.setArrivalCity("City B");
-//         flight.setFlightDate(LocalDate.now());
+//         flight.setDate(LocalDate.now());
 
-//         entityManager.persist(flight);
-//         entityManager.flush();
+//         // entityManager.persist(flight);
+//         // entityManager.flush();
+
+//         flightRepository.save(flight);
 //     }
 
 //     @DisplayName("Test findByFlightId")
 //     @Test
 //     public void testFindByFlightId() {
-//         Flight foundFlight = flightRepository.findByFlightId("1");
+//         Flight foundFlight = flightRepository.findByFlightId("PTIT235");
 
 //         assertNotNull(foundFlight);
-//         assertEquals(flight.getFlightId(), foundFlight.getFlightId());
+//         assertEquals("PTIT235", foundFlight.getFlightId());
 //     }
 
 //     @DisplayName("Test findByState")
 //     @Test
 //     public void testFindByState() {
-//         List<Flight> foundFlights = flightRepository.findByState("Scheduled");
+//         List<Flight> foundFlights = flightRepository.findByState("OK");
 
 //         assertNotNull(foundFlights);
 //         assertEquals(1, foundFlights.size());
@@ -62,12 +66,12 @@
 //     @DisplayName("Test findByDepartureCityArrivalCityDate")
 //     @Test
 //     public void testFindByDepartureCityArrivalCityDate() {
-//         List<Flight> foundFlights = flightRepository.findByDepartureCityArrivalCityDate("City A", "City B", LocalDate.now());
+//         List<Flight> foundFlights = flightRepository.findByDepartureCityAndArrivalCityAndDate("City A", "City B", LocalDate.now());
 
 //         assertNotNull(foundFlights);
 //         assertEquals(1, foundFlights.size());
 //         assertEquals(flight.getDepartureCity(), foundFlights.get(0).getDepartureCity());
 //         assertEquals(flight.getArrivalCity(), foundFlights.get(0).getArrivalCity());
-//         assertEquals(flight.getFlightDate(), foundFlights.get(0).getFlightDate());
+//         assertEquals(flight.getDate(), foundFlights.get(0).getDate());
 //     }
 // }

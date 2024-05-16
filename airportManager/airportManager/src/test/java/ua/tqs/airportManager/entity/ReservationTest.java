@@ -17,12 +17,12 @@ public class ReservationTest {
     static LocalDate flightDate1 = LocalDate.of(2024, 5, 19);
     static LocalDate flightDate2 = LocalDate.of(2024, 7, 4);
 
-    static ArrayList<String> seatsTaken12 = new ArrayList<>();
+    // static List<Seat> seatsTaken12 = new ArrayList<>();
 
     static Airline airline1 = new Airline("TAP", "TAP Portugal");
 
-    static Flight flight1 = new Flight("PTIT235", "TAP", "Portugal", "Itália", flightDate1, "09h47", "12h53", "150€", "OK", 230, seatsTaken12, airline1);
-    static Flight flight2 = new Flight("PTFR873", "TAP", "Portugal", "França", flightDate2, "06h32", "08h10", "123€", "OK", 230, seatsTaken12, airline1);
+    static Flight flight1 = new Flight("PTIT235", "TAP", "Portugal", "Itália", flightDate1, "09h47", "12h53", "150€", "OK", 230, airline1);
+    static Flight flight2 = new Flight("PTFR873", "TAP", "Portugal", "França", flightDate2, "06h32", "08h10", "123€", "OK", 230, airline1);
 
     static Passenger passenger = new Passenger(1, "João", "Neves", "Masculino", LocalDate.of(2004, 2, 11), "joaoNeves", "password123", "917133984", "joaoNeves@gmail.com", "A12485", "Portuguesa", "4430-450", "Rua Santa Inácio, 148", "Porto", "Portugal", "738204761", "8364", Roles.USER);
 

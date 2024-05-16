@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import ua.tqs.airportManager.Roles;
 
 @Getter
@@ -17,6 +18,7 @@ import ua.tqs.airportManager.Roles;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User {
     

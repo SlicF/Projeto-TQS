@@ -99,14 +99,14 @@ import ua.tqs.airportManager.service.FlightService;
 @RequestMapping("/api/flights")
 public class FlightController {
 
-    private AirlineService airlineService;
-    
+    private final AirlineService airlineService;
     private final FlightService flightService;
-
-    @Autowired
-    public FlightController(FlightService flightService) {
-        this.flightService = flightService;
-    }
+    
+    // @Autowired
+    // public FlightController(AirlineService airlineService, FlightService flightService) {
+    //     this.airlineService = airlineService;
+    //     this.flightService = flightService;
+    // }
 
     @GetMapping("/airlines")
     public ResponseEntity<List<Airline>> getAirlines() {

@@ -7,12 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name = "flights")
 public class Flight {
     
@@ -47,8 +49,8 @@ public class Flight {
     @Column(name="seatsNumber", nullable = false)
     private Integer seatsNumber;
 
-    @Column(name="seatsTaken")
-    private ArrayList<String> seatsTaken;
+    // @Column(name="seatsTaken")
+    // private List<String> seatsTaken;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airlineCode", referencedColumnName = "airlineCode", insertable = false, updatable = false)
