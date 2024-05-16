@@ -21,7 +21,7 @@ public class UserController {
     private ReservationRepository reservationRepository;
 
     @GetMapping("/userinfo")
-    public ResponseEntity<User> getUserInfo(@RequestParam("userID") String userID) {
+    public ResponseEntity<User> getUserInfo(@RequestParam("userID") Integer userID) {
 
         User user = usersRespository.findByUserId(userID);
        
@@ -29,11 +29,11 @@ public class UserController {
     }
 
     @GetMapping("/getReservationsByUser")
-    public ResponseEntity<List<Reservation>> getReservationsByUser(@RequestParam("userID") String userID) {
+    public ResponseEntity<List<Reservation>> getReservationsByUser(@RequestParam("userID") String passengerID) {
         //Array of reservations
         List<Reservation> reservations = new ArrayList<Reservation>();
         
-        reservations = reservationRepository.findByUserId(userID);
+        reservations = reservationRepository.findByPassengerId(passengerID);
         
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }

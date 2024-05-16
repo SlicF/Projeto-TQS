@@ -60,7 +60,7 @@ public class UserControllerTest {
         reservations.add(new Reservation());
         reservations.add(new Reservation());
 
-        when(reservationRepository.findByUserId("1")).thenReturn(reservations);
+        when(reservationRepository.findByPassengerId("1")).thenReturn(reservations);
 
         mockMvc.perform(get("/api/user/getReservationsByUser")
                 .param("userID", "1"))

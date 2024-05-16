@@ -26,8 +26,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByUserId(String userId) {
-        return reservationRepository.findByUserId(userId);
+    public List<Reservation> getReservationsByPassengerId(String passengerId) {
+        return reservationRepository.findByPassengerId(passengerId);
     }
 
     @Override

@@ -37,7 +37,7 @@
 //     @GetMapping("/searchFlight")
 //     public ResponseEntity<Map<String, Object>> searchFlights(
 //             @RequestParam("airportCodeOrigin") String airportCodeOrigin,
-//             @RequestParam("airportCodeDestination") String airportCodeDestination,
+//             @RequestParam("airportCodeArrival") String airportCodeArrival,
 //             @RequestParam("departureDate") String departureDateStr,
 //             @RequestParam(value = "returnDate", required = false) String returnDateStr) {
         
@@ -54,11 +54,11 @@
 //             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Invalid date format"));
 //         }
 
-//         List<Flight> outboundFlights = flightService.findByDepartureCityArrivalCityDate(airportCodeOrigin, airportCodeDestination, departureDate);
+//         List<Flight> outboundFlights = flightService.findByDepartureCityArrivalCityDate(airportCodeOrigin, airportCodeArrival, departureDate);
 //         List<Flight> returnFlights = new ArrayList<>();
 
 //         if (returnDate != null) {
-//             returnFlights = flightService.findByDepartureCityArrivalCityDate(airportCodeDestination, airportCodeOrigin, returnDate);
+//             returnFlights = flightService.findByDepartureCityArrivalCityDate(airportCodeArrival, airportCodeOrigin, returnDate);
 //         }
 
 //         Map<String, Object> response = new HashMap<>();
@@ -134,8 +134,8 @@ public class FlightController {
 
     @PostMapping(path = "/searchFlight", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight search) {
-        List<Flight> flights = flightService.findByDepartureCityArrivalCityDate(
-            search.getDepartureCity(), search.getDestinationCity(), search.getDate());
+        List<Flight> flights = flightService.findByDepartureCityAndArrivalCityAndDate(
+            search.getDepartureCity(), search.getArrivalCity(), search.getDate());
 
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }

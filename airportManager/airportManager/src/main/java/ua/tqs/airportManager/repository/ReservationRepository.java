@@ -8,5 +8,5 @@ import ua.tqs.airportManager.entity.Reservation;
 public interface ReservationRepository extends JpaRepository<Reservation, String> {
     
     Reservation findByReservationId (String reservationId);
-    List<Reservation> findByUserId (String userId);
+    List<Reservation> findByPassengerId (String passengerId);
 }

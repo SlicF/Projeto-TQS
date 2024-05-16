@@ -27,7 +27,7 @@ public class Flight {
     private String departureCity;
 
     @Column(name="arrivalCity", nullable = false)
-    private String destinationCity;
+    private String arrivalCity;
 
     @Column(name="flightDate", nullable = false)
     private LocalDate date;

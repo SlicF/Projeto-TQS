@@ -32,7 +32,7 @@ public class Reservation {
     @Column(name = "totalPrice", nullable = false)
     private double totalPrice;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "reservationDate", nullable = false)
     private LocalDate reservationDate;
 

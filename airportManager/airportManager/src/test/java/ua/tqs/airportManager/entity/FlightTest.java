@@ -45,7 +45,7 @@ public class FlightTest {
             () -> assertEquals(flightDate24, flights.get(1).getDate()),
             () -> assertEquals(seatsTaken3, flights.get(2).getSeatsTaken()),
             () -> assertEquals("Cancelado", flights.get(3).getState()),
-            () -> assertEquals("Itália", flights.get(0).getDestinationCity()),
+            () -> assertEquals("Itália", flights.get(0).getArrivalCity()),
             () -> assertEquals("06h32", flights.get(1).getDepartureHour())
         );
     }

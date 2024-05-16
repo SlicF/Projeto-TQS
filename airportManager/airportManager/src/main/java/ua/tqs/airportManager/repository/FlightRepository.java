@@ -10,5 +10,5 @@ public interface FlightRepository extends JpaRepository<Flight, String>{
     
     Flight findByFlightId(String flightId);
     List<Flight> findByState(String state);
-    List<Flight> findByDepartureCityArrivalCityDate(String departureCity, String arrivalCity, LocalDate flightDate);
+    List<Flight> findByDepartureCityAndArrivalCityAndDate(String departureCity, String arrivalCity, LocalDate flightDate);
 }
