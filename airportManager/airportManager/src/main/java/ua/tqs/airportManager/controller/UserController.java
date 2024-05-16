@@ -21,7 +21,7 @@ public class UserController {
     private ReservationRepository reservationRepository;
 
     @GetMapping("/userinfo")
-    public ResponseEntity<User> getUserInfo(@RequestParam("userID") Integer userID) {
+    public ResponseEntity<User> getUserInfo(@RequestParam("userID") String userID) {
 
         User user = usersRespository.findByUserId(userID);
        

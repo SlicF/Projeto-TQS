@@ -44,7 +44,7 @@ public class UserControllerTest {
     @Test
     public void testGetUserInfo() throws Exception {
         User user = new User();
-        user.setUserId(1);
+        user.setUserId("1");
 
         when(userRepository.findByUserId("1")).thenReturn(user);
 

@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findByUserId (Integer userId) { 
+    public User findByUserId (String userId) { 
         return userRepository.findByUserId(userId);
     }
 
