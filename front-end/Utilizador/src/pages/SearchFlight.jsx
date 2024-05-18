@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Fundo from '../img/fundo.jpg';  
 import Navbar from '../components/Navbar';
@@ -23,23 +22,31 @@ function SearchFlight() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const { from: departureCity, to: arrivalCity, departureDate: date } = formData;
+
     try {
-      const response = await fetch('http://localhost:8980/api/flights/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+        const response = await fetch('http://localhost:8980/api/flights/searchFlight', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                departureCity,
+                arrivalCity,
+                date
+            }),
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch');
-      }
+        if (!response.ok) {
+            throw new Error('Erro ao buscar voos: ' + response.statusText);
+        }
 
-      const responseData = await response.json();
-      navigate('/formulario', { state: responseData });
+        const data = await response.json();
+        console.log('Voos encontrados:', data);
+        navigate('/formulario', { state: { flights: data } });
     } catch (error) {
-      console.error('Erro ao buscar voos:', error);
+        console.error('Erro ao buscar voos:', error);
     }
   };
 

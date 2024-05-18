@@ -78,22 +78,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Airline;
 import ua.tqs.airportManager.entity.Flight;
 import ua.tqs.airportManager.service.AirlineService;
 import ua.tqs.airportManager.service.FlightService;
 
-@CrossOrigin(origins = "http://localhost:8980")
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173") // Ajuste o CORS para permitir requisições do frontend
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/flights")
@@ -101,12 +96,6 @@ public class FlightController {
 
     private final AirlineService airlineService;
     private final FlightService flightService;
-    
-    // @Autowired
-    // public FlightController(AirlineService airlineService, FlightService flightService) {
-    //     this.airlineService = airlineService;
-    //     this.flightService = flightService;
-    // }
 
     @GetMapping("/airlines")
     public ResponseEntity<List<Airline>> getAirlines() {
@@ -120,7 +109,7 @@ public class FlightController {
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
-    @GetMapping("/{state}") // nao sei como diferenciar, supostamento e com o parametro state
+    @GetMapping("/{state}")
     public ResponseEntity<List<Flight>> getFlightsState(@PathVariable("state") String state) {
         List<Flight> flight = flightService.getFlightsByState(state);
         return new ResponseEntity<>(flight, HttpStatus.OK);
@@ -132,11 +121,20 @@ public class FlightController {
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 
+    // @PostMapping(path = "/searchFlight", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight search) {
+    //     List<Flight> flights = flightService.findByDepartureCityAndArrivalCityAndDate(
+    //         search.getDepartureCity(), search.getArrivalCity(), search.getDate());
+
+    //     return new ResponseEntity<>(flights, HttpStatus.OK);
+    // }
     @PostMapping(path = "/searchFlight", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight search) {
         List<Flight> flights = flightService.findByDepartureCityAndArrivalCityAndDate(
-            search.getDepartureCity(), search.getArrivalCity(), search.getDate());
-
+            search.getDepartureCity().trim(), 
+            search.getArrivalCity().trim(), 
+            search.getDate());
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
+
 }
