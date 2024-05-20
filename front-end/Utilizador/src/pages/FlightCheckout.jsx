@@ -38,12 +38,16 @@ const FlightCheckout = () => {
         <div className="flight-details-section">
           <div className='left-side'>
             <h1 className="centered-title">Flight Details</h1>
-           
-              <img src={location.state.flightDetails.airlineLogo} alt="Airline Logo" />
-              <h1>{location.state.flightDetails.airlineName}</h1>
-              <p>{location.state.flightDetails.departureHour} - {location.state.flightDetails.arrivalHour}</p>
-              <p>{location.state.flightDetails.airportCodeOrigin} to {location.state.flightDetails.airportCodeDestination}</p>
-              <p>Duration: {location.state.flightDetails.duration}</p>
+              
+              <p><strong>Preco:</strong> €{location.state.flightDetails.price}</p>
+              <p><strong>Companhia aeria: </strong>{location.state.flightDetails.airline_Code.airlineName}</p>
+              <p><strong>Data:</strong> {location.state.flightDetails.arrivalHour}</p>
+              <p><strong>Horario de Voo</strong>{location.state.flightDetails.departureHour} - {location.state.flightDetails.arrivalHour}</p>
+              <p><strong>Duration do Voo:</strong>  {location.state.flightDetails.duration}</p>
+              <p><strong>Origem:</strong> {location.state.flightDetails.state}</p>
+              <p><strong>Destino:</strong> {location.state.flightDetails.arrivalCity}</p>
+              <p><strong>Numero de lugares:</strong> {location.state.flightDetails.seatsNumber}</p>
+              <p><strong>Estado:</strong> {location.state.flightDetails.state}</p>
             <div className="button-group">
               <button onClick={handlePayment}>Pay Now</button>
               <button className="cancel-button">Cancel</button>
