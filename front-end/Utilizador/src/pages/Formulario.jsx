@@ -41,7 +41,6 @@ const Formulario = () => {
     <div>
       <Navbar />
       <div className="flightsContainer">
-        <h1 className="flightsTitle">Discover unique places</h1>
         <div className="containerFlight">
           {flightsData.length > 0 ? (
             flightsData.map((flight, index) => (

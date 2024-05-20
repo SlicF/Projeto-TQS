@@ -149,8 +149,7 @@
   }
   
   .flight-time,
-  .flight-duration,
-  .flight-pricing {
+  .flight-duration {
     margin: 5px 0;
   }
   
@@ -159,13 +158,6 @@
     margin: 4px 0;
     color: #333;
     font-size: 16px;
-  }
-  
-  .route {
-    font-size: 14px;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
   
   .flight-pricing {

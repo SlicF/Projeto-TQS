@@ -1,12 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import "../css/flightcheckout.css";
 import Navbar from '../components/Navbar';
 import SeatSelection from '../components/SeatSelection';
+import { useNavigate, useLocation } from 'react-router-dom'; 
 
 const FlightCheckout = () => {
   const navigate = useNavigate();
 
+  const [selectedSeat, setSelectedSeat] = React.useState(null);
+  const location = useLocation();
+  
   const seats = Array.from({ length: 50 }, (_, index) => {
     let status = "AVAILABLE";
     if ([1,2,3,4,5,6,7,8,9,10].includes(index + 1)) {
@@ -17,7 +20,6 @@ const FlightCheckout = () => {
     return { number: index + 1, status };
   });
   
-  const [selectedSeat, setSelectedSeat] = React.useState(null);
 
   const handleSeatSelect = (seatNumber) => {
     setSelectedSeat(seatNumber);
@@ -36,16 +38,12 @@ const FlightCheckout = () => {
         <div className="flight-details-section">
           <div className='left-side'>
             <h1 className="centered-title">Flight Details</h1>
-            <p><strong>Departure:</strong> New York (JFK) at 10:00 AM</p>
-            <p><strong>Arrival:</strong> London (LHR) at 10:00 PM</p>
-            <p><strong>Date:</strong> 2024-05-15</p>
-            <p><strong>Airline:</strong> AirExample</p>
-            <p><strong>Flight Number:</strong> AE123</p>
-            <p><strong>Price:</strong> $500</p>
-            <p><strong>Selected Seat:</strong> {selectedSeat ? selectedSeat : "None"}</p>
-            <p><strong>Passenger Name:</strong> John Doe</p>
-            <p><strong>Classe: </strong> Economy</p>
-            <p><strong>Passenger Passport:</strong> 123456789</p>
+           
+              <img src={location.state.flightDetails.airlineLogo} alt="Airline Logo" />
+              <h1>{location.state.flightDetails.airlineName}</h1>
+              <p>{location.state.flightDetails.departureHour} - {location.state.flightDetails.arrivalHour}</p>
+              <p>{location.state.flightDetails.airportCodeOrigin} to {location.state.flightDetails.airportCodeDestination}</p>
+              <p>Duration: {location.state.flightDetails.duration}</p>
             <div className="button-group">
               <button onClick={handlePayment}>Pay Now</button>
               <button className="cancel-button">Cancel</button>
