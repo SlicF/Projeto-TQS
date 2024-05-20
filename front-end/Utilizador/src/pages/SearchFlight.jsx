@@ -45,6 +45,8 @@ function SearchFlight() {
         const data = await response.json();
         console.log('Voos encontrados:', data);
         navigate('/formulario', { state: { flights: data } });
+        navigate('/formulario', { state: { flights: data } });
+
     } catch (error) {
         console.error('Erro ao buscar voos:', error);
     }
