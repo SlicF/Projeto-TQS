@@ -14,9 +14,11 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import ua.tqs.airportManager.entity.Airline;
 import ua.tqs.airportManager.entity.Flight;
+import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.repository.AirlineRepository;
 import ua.tqs.airportManager.repository.FlightRepository;
+import ua.tqs.airportManager.repository.UserRepository;
 
 @Component
 public class DataInitializer {
@@ -27,8 +29,18 @@ public class DataInitializer {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public ArrayList<Airline> airlines = new ArrayList<>();
-    Random random;
+    public Random random;
+    public String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    public String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+    public String DIGITS = "0123456789";
+    public String SPECIAL_CHARACTERS = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
+    public String[] DOMAINS = {"gmail.com", "ua.pt", "up.pt", "hotmail.com"
+    };
 
     @PostConstruct
     public void init() {
@@ -82,6 +94,9 @@ public class DataInitializer {
         random = new Random();
         
         generateAndSaveFlights(airlines);
+
+        // users
+        generateAndSaveUsers();
     }
 
     public void generateAndSaveFlights(ArrayList<Airline> airlines) {
@@ -106,6 +121,43 @@ public class DataInitializer {
         }
     }
 
+    public void generateAndSaveUsers() {
+
+        for (int i = 0; i < 20; i++) {
+            String username = generateUsername();
+            String userId = generateUserNumber(username);
+            String firstName = generateRandomFirstName();
+            String lastName = generateRandomLastName();
+            String password = generateRandomPassword();
+            String email = generateRandomEmail(username);
+            String passportNumber = generateRandomPassportNumber();
+            String country = generateRandomCountry();
+            String city = generateRandomCity(country);
+            Roles role = random.nextBoolean() ? Roles.ADMIN : Roles.USER;
+
+            User user = new User(userId, username, firstName, lastName, password, email, passportNumber, city, country, role);
+            System.out.println(user);
+
+            userRepository.save(user);
+        }
+    }
+
+    private String generateRandomCity(String country) {
+         
+
+    }
+//é suposto meter um país e ir buscar uma cidade desse país, faz se um dicionário, onde a key é o pais o value é uma lista de cidades <- mete isto no gpt
+    private String generateRandomCountry() {
+        String[] countriesArray = {"Portugal", "Espanha", "França", "Alemanha", "Áustria", "Reino Unido", "Luxemburgo", "Bélgica"};
+    }
+
+    private String generateRandomPassportNumber() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'generateRandomPassportNumber'");
+    }
+
+    // helpful generate functions ------------------------------------------------------------------------------------------------------------------------------------------------------
+    // flights
     private String generateFlightNumber(String airlineCode) {
         return airlineCode + random.nextInt(9999) + 1000;
     }
@@ -204,6 +256,7 @@ public class DataInitializer {
     //     return seatsTaken;
     // }
 
+    // seats
     private String generateSeatId() {
 
         String[] seatPrefixes = {"AA", "AB", "AC"}; // adjust
@@ -214,62 +267,86 @@ public class DataInitializer {
 
         return seatId;
     }
+
+    // users
+    private String generateUserNumber(String username) {
+        String[] letters = username.split("");
+        return letters[0] + random.nextInt(9999) + 1000 + letters[1];
+    }
+
+    private String generateUsername() {
+
+        int length = random.nextInt(10) + 5;
+        StringBuilder username = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            username.append(CHARACTERS.charAt(index));
+        }
+
+        return username.toString();
+    }
+
+    private String generateRandomFirstName() {
+
+        String[] FIRST_NAMES = {
+            "Lucas", "Miguel", "Arthur", "Gabriel", "Heitor",
+            "Alice", "Sophia", "Laura", "Valentina", "Helena",
+            "Maria", "José", "Duarte", "João", "Rafael", "Marta",
+            "Diogo", "Beatriz", "Leonor", "Daniel", "Henrique",
+            "Bernardo", "Luísa", "Júlia", "Mariana", "Matilde", "Carlota"
+        };
+    
+        String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
+
+        return firstName;
+    }
+
+    private String generateRandomLastName() {
+
+        String[] LAST_NAMES = {
+            "Silva", "Santos", "Oliveira", "Sousa", "Lima",
+            "Ferreira", "Costa", "Pereira", "Almeida", "Ribeiro",
+            "Dias", "Teixeira", "Alves", "Madeira", "Gomes", "Miranda",
+            "Falcão", "Gameiro", "Capucho", "Godinho", "Freixo", "Carvalho"
+        };
+    
+        String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
+
+        return lastName;
+    }
+
+    public String generateRandomPassword() {
+        String ALL_CHARACTERS = UPPERCASE + LOWERCASE + DIGITS + SPECIAL_CHARACTERS;
+
+        int length = random.nextInt(8) + 8;
+        StringBuilder password = new StringBuilder(length);
+
+        password.append(UPPERCASE.charAt(random.nextInt(UPPERCASE.length())));
+        password.append(LOWERCASE.charAt(random.nextInt(LOWERCASE.length())));
+        password.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        password.append(SPECIAL_CHARACTERS.charAt(random.nextInt(SPECIAL_CHARACTERS.length())));
+
+        for (int i = 4; i < length; i++) {
+            password.append(ALL_CHARACTERS.charAt(random.nextInt(ALL_CHARACTERS.length())));
+        }
+
+        return password.toString();
+    }
+
+    public String generateRandomEmail(String username) {
+
+        int length = random.nextInt(10) + 8;
+        StringBuilder mail = new StringBuilder(length);
+        StringBuilder letters = new StringBuilder(length - username.length());
+        String domain = DOMAINS[random.nextInt(DOMAINS.length)];
+
+        for (int i = username.length(); i < length; i++) {
+            letters.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+
+        mail.append(username).append(letters).append("@").append(domain);
+
+        return mail.toString();
+    }
 }
-
-// // package ua.tqs.airportManager.entity;
-
-// // import org.springframework.stereotype.Component;
-
-// // import ua.tqs.airportManager.repository.FlightRepository;
-// // import ua.tqs.airportManager.repository.ReservationRepository;
-// // import ua.tqs.airportManager.repository.UserRepository;
-
-// // import java.text.SimpleDateFormat;
-// // import java.util.ArrayList;
-// // import java.util.Date;
-
-// // import javax.annotation.PostConstruct;
-// // import java.text.ParseException;
-
-// // @Component
-// // public class DatabaseInitializer {
-
-// //     private final UserRepository userRepository;
-// //     private final FlightRepository flightRepository;
-// //     private final ReservationRepository reservationRepository;
-
-// //     public DatabaseInitializer(UserRepository userRepository, FlightRepository flightRepository,
-// //             ReservationRepository reservationRepository) {
-// //         this.userRepository = userRepository;
-// //         this.flightRepository = flightRepository;
-// //         this.reservationRepository = reservationRepository;
-// //     }
-
-// //     @PostConstruct
-// //     public void populateDatabase() {
-
-// //         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-// //         // População da base de dados User
-// //         // ...
-
-// //         Flight flight1 = new Flight();
-// //         flight1.setAirlineCode("TP");
-// //         flight1.setDepartureCity("Lisboa");
-// //         flight1.setDestinationCity("Porto");
-// //         try {
-// //             Date date = format.parse("2024-06-01");
-// //             // flight1.setDate(date);
-// //         } catch (ParseException e) {
-// //             e.printStackTrace();
-// //         }
-// //         flight1.setDepartureHour("08:00:00");
-// //         flight1.setArrivalHour("09:00:00");
-// //         flight1.setPrice("50");
-// //         flight1.setState("active"); // active, canceled, completed
-// //         flight1.setSeatsNumber(100);
-// //         flight1.setSeatsTaken(new ArrayList<String>());
-// //         flightRepository.save(flight1);
-        
-// //     }
-// // }

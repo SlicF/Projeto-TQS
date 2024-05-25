@@ -1,5 +1,6 @@
 package ua.tqs.airportManager.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -56,4 +58,13 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
+    @GetMapping("/getReservationsByPassenger")
+    public ResponseEntity<List<Reservation>> getReservationsByPassenger(@RequestParam("passengerId") String passengerId) {
+        // array of reservations
+        List<Reservation> reservations = new ArrayList<Reservation>();
+        
+        reservations = reservationService.getReservationsByPassengerId(passengerId);
+        
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
 }

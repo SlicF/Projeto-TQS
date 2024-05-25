@@ -19,63 +19,60 @@ import ua.tqs.airportManager.Roles;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
+@Table(name="passengers")
 public class Passenger {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "passengerId")
+    private int passengerId;
+
     @Column(name = "userId")
-    int userId;
+    private int userId;
     
-    @Basic
     @Column(name = "firstName", nullable = false)
-    String firstName;
+    private String firstName;
     
     @Column(name = "lastName", nullable = false)
-    String lastName;
+    private String lastName;
+
+    @Column(name = "state", nullable = false)
+    private String state;
 
     @Column(name = "sex", nullable = false)
-    String sex;
+    private String sex;
 
     @Column(name = "birthDate", nullable = false)
-    LocalDate birthDate;
-
-    @Column(name = "username", nullable = false)
-    String username;
-
-    @Column(name = "userPassword", nullable = false)
-    String password;
-
-    @Column(name = "phoneNumber", nullable = false)
-    String phoneNumber;
+    private LocalDate birthDate;
 
     @Column(name = "email", nullable = false)
-    String email;
+    private String email;
+    
+    @Column(name = "phoneNumber", nullable = false)
+    private String phoneNumber;
 
     @Column(name = "passportNumber", nullable = false)
-    String passportNumber;
-
-    @Column(name = "nacionality", nullable = false)
-    String nationality;
+    private String passportNumber;
 
     @Column(name = "postalCode", nullable = false)
-    String postalCode;
+    private String postalCode;
 
     @Column(name = "streetAddress", nullable = false)
-    String streetAddress;
+    private String streetAddress;
     
     @Column(name = "city", nullable = false)
-    String city;
+    private String city;
 
     @Column(name = "country", nullable = false)
-    String country;
+    private String country;
 
     @Column(name = "cardNumber", nullable = false)
-    String cardNumber;
+    private String cardNumber;
 
     @Column(name = "cardPIN", nullable = false)
-    String cardPIN;
+    private String cardPIN;
 
-    @Enumerated(EnumType.STRING) 
-    Roles role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
+    private User user;
 }

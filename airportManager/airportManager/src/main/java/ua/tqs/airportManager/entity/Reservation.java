@@ -44,20 +44,8 @@ public class Reservation {
     @Column(name = "numberCard", nullable = false)
     private String numberCard;
 
-    @Column(name = "expirationDateCard", nullable = false) // ??????????????????????????
+    @Column(name = "expirationDateCard", nullable = false)
     private String expirationDateCard;
-
-    // @Column(name = "cvvCard", nullable = false)
-    // private String cvvCard;
-
-    // @Column(name = "addressCard1", nullable = false)
-    // private String addressCard1;
-
-    // @Column(name = "addressCard2", nullable = true)
-    // private String addressCard2;
-
-    // @Column(name = "cityCard", nullable = false)
-    // private String cityCard;
 
     @Column(name = "zipCodeCard", nullable = false)
     private String zipCodeCard;
@@ -66,7 +54,7 @@ public class Reservation {
     private String countryCard;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "passengerId", referencedColumnName = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = "passengerId", referencedColumnName = "passengerId", insertable = false, updatable = false)
     private Passenger passenger;
 
     @ManyToOne(fetch = FetchType.EAGER)

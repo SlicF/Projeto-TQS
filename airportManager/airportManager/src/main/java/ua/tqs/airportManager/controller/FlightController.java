@@ -109,7 +109,7 @@ public class FlightController {
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
-    @GetMapping("/{state}")
+    @GetMapping("flights/{state}")
     public ResponseEntity<List<Flight>> getFlightsState(@PathVariable("state") String state) {
         List<Flight> flight = flightService.getFlightsByState(state);
         return new ResponseEntity<>(flight, HttpStatus.OK);

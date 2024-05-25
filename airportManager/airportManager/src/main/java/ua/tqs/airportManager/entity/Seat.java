@@ -17,11 +17,10 @@ import lombok.ToString;
 public class Seat {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seatId")
+    @Column(name="seatId", nullable = false, unique = true)
     private String seatId;
 
-    @Column(name = "flightId", nullable = false)
+    @Column(name="flightId", nullable = false)
     private String flightId;
 
     @ManyToOne(fetch = FetchType.EAGER)

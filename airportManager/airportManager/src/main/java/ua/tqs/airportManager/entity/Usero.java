@@ -9,27 +9,28 @@ import lombok.ToString;
 import ua.tqs.airportManager.Roles;
 
 @Getter
-@Setter
+@Setter     
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "accounts")
-public class User {
+@Table(name="users")
+public class Usero {
     
     @Id
-    @Column(name="userId", nullable = false, unique = true)
-    private String userId;
-
-    @Column(name="username", nullable = false, unique = true)
-    private String username;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
+    String userId;
+    
     @Basic
     @Column(name = "firstName", nullable = false)
     String firstName;
     
     @Column(name = "lastName", nullable = false)
     String lastName;
+
+    @Column(name = "username", nullable = false)
+    String username;
 
     @Column(name = "userPassword", nullable = false)
     String password;
@@ -48,4 +49,28 @@ public class User {
 
     @Enumerated(EnumType.STRING) 
     Roles role;
+
+    // @Column(name = "sex")
+    // String sex;
+
+    // @Column(name = "birthDate")
+    // LocalDate birthDate;
+
+    // @Column(name = "phoneNumber")
+    // String phoneNumber;
+
+    // @Column(name = "nacionality")
+    // String nationality;
+
+    // @Column(name = "postalCode", nullable = false)
+    // String postalCode;
+
+    // @Column(name = "streetAddress", nullable = false)
+    // String streetAddress;
+    
+    // @Column(name = "cardNumber")
+    // String cardNumber;
+
+    // @Column(name = "cardPIN")
+    // String cardPIN;
 }
