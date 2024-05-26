@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -19,6 +21,7 @@ import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.repository.AirlineRepository;
 import ua.tqs.airportManager.repository.FlightRepository;
 import ua.tqs.airportManager.repository.UserRepository;
+import ua.tqs.airportManager.repository.*;
 
 @Component
 public class DataInitializer {
@@ -143,17 +146,31 @@ public class DataInitializer {
     }
 
     private String generateRandomCity(String country) {
+        Map<String, List<String>> countryCityMap = new HashMap<>();
+        countryCityMap.put("Portugal", Arrays.asList("Lisboa", "Porto", "Faro", "Funchal"));
+        countryCityMap.put("Espanha", Arrays.asList("Madrid", "Barcelona", "Vigo"));
+        countryCityMap.put("França", Arrays.asList("Paris", "Marselha", "Lyon"));
+        countryCityMap.put("Alemanha", Arrays.asList("Berlim", "Munique", "Hamburgo"));
+        countryCityMap.put("Áustria", Arrays.asList("Viena", "Salzburgo", "Innsbruck"));
+        countryCityMap.put("Reino Unido", Arrays.asList("Londres", "Manchester", "Liverpool"));
+        countryCityMap.put("Luxemburgo", Arrays.asList("Luxemburgo"));
+        countryCityMap.put("Bélgica", Arrays.asList("Bruxelas", "Antuérpia", "Gent"));
+
+        List<String> cities = countryCityMap.get(country);
+        return cities.get(this.random.nextInt(cities.size()));
+
          
 
     }
-//é suposto meter um país e ir buscar uma cidade desse país, faz se um dicionário, onde a key é o pais o value é uma lista de cidades <- mete isto no gpt
+
     private String generateRandomCountry() {
         String[] countriesArray = {"Portugal", "Espanha", "França", "Alemanha", "Áustria", "Reino Unido", "Luxemburgo", "Bélgica"};
+        List<String> countries = new ArrayList<>(Arrays.asList(countriesArray));
+        return countries.get(this.random.nextInt(countries.size()));
     }
 
     private String generateRandomPassportNumber() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'generateRandomPassportNumber'");
+        return "A" + random.nextInt(999999) + 100000;
     }
 
     // helpful generate functions ------------------------------------------------------------------------------------------------------------------------------------------------------
