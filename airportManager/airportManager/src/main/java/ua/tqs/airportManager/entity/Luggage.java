@@ -22,21 +22,14 @@ public class Luggage {
     @Column(name = "luggageId")
     private String luggageId;
 
-    @Column(name = "passengerId", nullable = false)
-    private String passengerId;
-
     @Column(name = "reservationId", nullable = false)
     private String reservationId;
 
     @Column(name = "weight", nullable = false)
     private String weight;
 
-    @Column(name = "state", nullable = false)
-    private String state;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "passengerId", referencedColumnName = "passengerId", insertable = false, updatable = false)
-    private Passenger passenger;
+    // @Column(name = "state", nullable = false)
+    // private String state;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reservationId", referencedColumnName = "reservationId", insertable = false, updatable = false)

@@ -13,12 +13,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name = "seats")
+@Table(name = "seats") // para guardar os lugares ocupados
 public class Seat {
     
     @Id
     @Column(name="seatId", nullable = false, unique = true)
     private String seatId;
+
+    @Column(name="seatNumber", nullable = false)
+    private String seatNumber;
 
     @Column(name="flightId", nullable = false)
     private String flightId;

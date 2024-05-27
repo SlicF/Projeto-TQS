@@ -25,7 +25,7 @@ public class PassengerServiceImpl implements PassengerService{
 
     @Override
     public List<Passenger> findByState (String state) {
-        return passengerRepository.findPassengersByState(state);
+        return passengerRepository.findByState(state);
     }
 
     @Override

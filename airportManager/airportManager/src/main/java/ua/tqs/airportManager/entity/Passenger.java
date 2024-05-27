@@ -1,17 +1,12 @@
 package ua.tqs.airportManager.entity;
 
 import java.time.LocalDate;
-
-// import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ua.tqs.airportManager.Roles;
 
 @Getter
 @Setter
@@ -19,24 +14,23 @@ import ua.tqs.airportManager.Roles;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name="passengers")
+@Table(name = "passengers")
 public class Passenger {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "passengerId")
-    private int passengerId;
+    @Column(name="passengerId", nullable = false, unique = true)
+    private String passengerId;
 
     @Column(name = "userId")
-    private int userId;
-    
-    @Column(name = "firstName", nullable = false)
+    private String userId;
+
+    @Column(name="firstName", nullable = false)
     private String firstName;
-    
+
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "state", nullable = false)
+    @Column(name="state", nullable = false)
     private String state;
 
     @Column(name = "sex", nullable = false)

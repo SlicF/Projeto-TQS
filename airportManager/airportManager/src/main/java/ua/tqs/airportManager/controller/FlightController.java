@@ -88,7 +88,7 @@ import ua.tqs.airportManager.service.FlightService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173") // Ajuste o CORS para permitir requisições do frontend
+@CrossOrigin(origins = "http://localhost:8981") // Ajuste o CORS para permitir requisições do frontend
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/flights")

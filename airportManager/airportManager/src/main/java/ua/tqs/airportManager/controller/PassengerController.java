@@ -20,6 +20,14 @@ public class PassengerController {
     // private AuthService authService;
     private PassengerRepository passengersRespository;
 
+    @GetMapping("/passengers")
+    public ResponseEntity<List<Passenger>> getPassengers() {
+
+        List<Passenger> passengers = passengersRespository.findAll();
+       
+        return new ResponseEntity<>(passengers, HttpStatus.OK);
+    }
+
     @GetMapping("/passengerInfo")
     public ResponseEntity<Passenger> getPassengerInfo(@RequestParam("passengerId") String passengerId) {
 
@@ -29,9 +37,9 @@ public class PassengerController {
     }
 
     @GetMapping("/passengers/{state}")
-    public ResponseEntity<List<Passenger>> getUserInfo(@PathVariable("state") String state) {
+    public ResponseEntity<List<Passenger>> getPassengerInfoByState(@PathVariable("state") String state) {
 
-        List<Passenger> passengers = passengersRespository.findPassengersByState(state);
+        List<Passenger> passengers = passengersRespository.findByState(state);
        
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }

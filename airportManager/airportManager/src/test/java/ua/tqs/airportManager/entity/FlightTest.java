@@ -27,9 +27,9 @@ public class FlightTest {
     static Flight flight3 = new Flight("PTMDR014", "RYA", "Portugal", "Madrid", flightDate13, "15h20", "17h43", "187€", "OK", 140, airline2);
     static Flight flight4 = new Flight("PTGRC059", "EJU", "Portugal", "Grécia", flightDate24, "05h25", "08h52", "237€", "Cancelado", 125, airline3);
 
-    static Seat seat1F3 = new Seat("AA3", "PTMDR014", flight3);
-    static Seat seat2F3 = new Seat("AB4", "PTMDR014", flight3);
-    static Seat seat3F3 = new Seat("AC7", "PTMDR014", flight3);
+    // static Seat seat1F3 = new Seat("AA3", "PTMDR014", flight3);
+    // static Seat seat2F3 = new Seat("AB4", "PTMDR014", flight3);
+    // static Seat seat3F3 = new Seat("AC7", "PTMDR014", flight3);
 
     @BeforeAll
     public static void setUp() {

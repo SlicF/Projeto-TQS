@@ -7,20 +7,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import ua.tqs.airportManager.entity.Airline;
 import ua.tqs.airportManager.entity.Flight;
+import ua.tqs.airportManager.entity.Passenger;
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.entity.Seat;
-import ua.tqs.airportManager.repository.AirlineRepository;
-import ua.tqs.airportManager.repository.FlightRepository;
-import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.repository.*;
 
 @Component
@@ -35,15 +31,28 @@ public class DataInitializer {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PassengerRepository passengerRepository;
+
+    @Autowired
+    private SeatRepository seatRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
+
+    @Autowired
+    private LuggageRepository luggageRepository;
+
     public ArrayList<Airline> airlines = new ArrayList<>();
+    public ArrayList<Flight> flights = new ArrayList<>();
+    public ArrayList<User> users = new ArrayList<>();
     public Random random;
     public String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     public String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
     public String DIGITS = "0123456789";
     public String SPECIAL_CHARACTERS = "!@#$%^&*()-_=+[]{}|;:'\",.<>?/";
-    public String[] DOMAINS = {"gmail.com", "ua.pt", "up.pt", "hotmail.com"
-    };
+    public String[] DOMAINS = { "gmail.com", "ua.pt", "up.pt", "hotmail.com" };
 
     @PostConstruct
     public void init() {
@@ -100,6 +109,18 @@ public class DataInitializer {
 
         // users
         generateAndSaveUsers();
+
+        // passengers
+        generateAndSavePassengers();
+
+        // seats
+        generateAndSaveSeats();
+
+        // reservations
+        generateAndSaveReservations();
+
+        // luggage
+        generateAndSaveLuggage();
     }
 
     public void generateAndSaveFlights(ArrayList<Airline> airlines) {
@@ -120,6 +141,7 @@ public class DataInitializer {
             Flight flight = new Flight(flightNumber, airline.getAirlineCode(), departure, destination, departureDate, departureTime, arrivalTime, price, status, capacity, airline);
             System.out.println(flight);
 
+            flights.add(flight);
             flightRepository.save(flight);
         }
     }
@@ -141,36 +163,90 @@ public class DataInitializer {
             User user = new User(userId, username, firstName, lastName, password, email, passportNumber, city, country, role);
             System.out.println(user);
 
+            users.add(user);
             userRepository.save(user);
         }
     }
 
-    private String generateRandomCity(String country) {
-        Map<String, List<String>> countryCityMap = new HashMap<>();
-        countryCityMap.put("Portugal", Arrays.asList("Lisboa", "Porto", "Faro", "Funchal"));
-        countryCityMap.put("Espanha", Arrays.asList("Madrid", "Barcelona", "Vigo"));
-        countryCityMap.put("França", Arrays.asList("Paris", "Marselha", "Lyon"));
-        countryCityMap.put("Alemanha", Arrays.asList("Berlim", "Munique", "Hamburgo"));
-        countryCityMap.put("Áustria", Arrays.asList("Viena", "Salzburgo", "Innsbruck"));
-        countryCityMap.put("Reino Unido", Arrays.asList("Londres", "Manchester", "Liverpool"));
-        countryCityMap.put("Luxemburgo", Arrays.asList("Luxemburgo"));
-        countryCityMap.put("Bélgica", Arrays.asList("Bruxelas", "Antuérpia", "Gent"));
+    public void generateAndSavePassengers() {
 
-        List<String> cities = countryCityMap.get(country);
-        return cities.get(this.random.nextInt(cities.size()));
+        for (int i = 0; i < 10; i++) {
 
-         
+            User user = users.get(random.nextInt(users.size()));
 
+            String passengerId = generatePassengerNumber();
+            String userId = user.getUserId();
+            String firstName = generateRandomFirstName();
+            String lastName = generateRandomLastName();
+            String state = random.nextBoolean() ? "null" : "checked-in";
+            String sex = random.nextBoolean() ? "masculino" : "feminino";
+            LocalDate birthDate = generatebirthDate();
+            String email = user.getEmail();
+            String phoneNumber = generateRandomPhoneNumber();
+            String passportNumber = generateRandomPassportNumber();
+            String postalCode = generateRandomPostalCode();
+            String streetAddress = generateRandomStreetAddress();
+            String country = generateRandomCountry();
+            String city = generateRandomCity(country);
+            String cardNumber = generateRandomCardNumber();
+            String cardPIN = generateRandomCardPIN();
+
+            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN, user);
+            System.out.println(passenger);
+
+            passengerRepository.save(passenger);
+        }
     }
 
-    private String generateRandomCountry() {
-        String[] countriesArray = {"Portugal", "Espanha", "França", "Alemanha", "Áustria", "Reino Unido", "Luxemburgo", "Bélgica"};
-        List<String> countries = new ArrayList<>(Arrays.asList(countriesArray));
-        return countries.get(this.random.nextInt(countries.size()));
+    public void generateAndSaveSeats() {
+
+        for (int i = 0; i < 80; i++) {
+
+            Flight flight = flights.get(random.nextInt(flights.size()));
+
+            String seatId = generateSeatId();
+            String seatNumber = generateSeatNumber();
+            String flightId = flight.getFlightId();
+
+            Seat seat = new Seat(seatId, seatNumber, flightId, flight);
+            System.out.println(seat);
+
+            seatRepository.save(seat);
+        }
     }
 
-    private String generateRandomPassportNumber() {
-        return "A" + random.nextInt(999999) + 100000;
+    public void generateAndSaveReservations() {
+
+        // for (int i = 0; i < 80; i++) {
+
+        //     Flight flight = flights.get(random.nextInt(flights.size()));
+
+        //     String seatId = generateSeatId();
+        //     String seatNumber = generateSeatNumber();
+        //     String flightId = flight.getFlightId();
+
+        //     Seat seat = new Seat(seatId, seatNumber, flightId, flight);
+        //     System.out.println(seat);
+
+        //     seatRepository.save(seat);
+        // }
+    }
+
+    public void generateAndSaveLuggage() {
+
+        // for (int i = 0; i < 80; i++) {
+
+        //     Flight flight = flights.get(random.nextInt(flights.size()));
+
+        //     String seatId = generateSeatId();
+        //     String seatNumber = generateSeatNumber();
+        //     String flightId = flight.getFlightId();
+
+        //     Seat seat = new Seat(seatId, seatNumber, flightId, flight);
+        //     System.out.println(seat);
+
+        //     seatRepository.save(seat);
+        // }
     }
 
     // helpful generate functions ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -180,6 +256,7 @@ public class DataInitializer {
     }
 
     private String generateRandomDepartureCity() {
+
         String[] citiesArray = {
                 "Londres", "Paris", "Madrid", "Roma", "Berlim",
                 "Amesterdão", "Barcelona", "Milão", "Frankfurt", "Viena",
@@ -194,6 +271,7 @@ public class DataInitializer {
     }
 
     private String generateRandomDestinationCity(String departure) {
+
         String[] citiesArray = {
                 "Londres", "Paris", "Madrid", "Roma", "Berlim",
                 "Amesterdão", "Barcelona", "Milão", "Frankfurt", "Viena",
@@ -209,6 +287,7 @@ public class DataInitializer {
     }
 
     private LocalDate generateRandomDepartureDate() {
+
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2026, 12, 31);
         long startDay = startDate.toEpochDay();
@@ -218,6 +297,7 @@ public class DataInitializer {
     }
 
     private String generateRandomTime() {
+
         int hour = this.random.nextInt(23) + 1;
         int minute = this.random.nextInt(60);
         String hourStr = String.format("%02d", hour);
@@ -226,6 +306,7 @@ public class DataInitializer {
     }
 
     private String generateRandomArrivalTime(String departureTime) {
+
         int departureHour = Integer.parseInt(departureTime.substring(0, 2));
         int travelTime = this.random.nextInt(4) + 2;
         int arrivalHour = (departureHour + travelTime) % 24;
@@ -236,6 +317,7 @@ public class DataInitializer {
     }
 
     private String generateRandomPrice() {
+
         Random random = new Random();
         int basePrice = random.nextInt(500) + 50;
         int discount = random.nextInt(30);
@@ -272,18 +354,6 @@ public class DataInitializer {
 
     //     return seatsTaken;
     // }
-
-    // seats
-    private String generateSeatId() {
-
-        String[] seatPrefixes = {"AA", "AB", "AC"}; // adjust
-
-        String seatPrefix = seatPrefixes[random.nextInt(seatPrefixes.length)];
-        int seatNumber = random.nextInt(200) + 40;
-        String seatId = seatPrefix + seatNumber;
-
-        return seatId;
-    }
 
     // users
     private String generateUserNumber(String username) {
@@ -353,12 +423,13 @@ public class DataInitializer {
 
     public String generateRandomEmail(String username) {
 
-        int length = random.nextInt(10) + 8;
+        int minLenght = username.length() + 1;
+        int length = random.nextInt(10) + minLenght;
         StringBuilder mail = new StringBuilder(length);
         StringBuilder letters = new StringBuilder(length - username.length());
         String domain = DOMAINS[random.nextInt(DOMAINS.length)];
 
-        for (int i = username.length(); i < length; i++) {
+        for (int i = 0; i < length - username.length(); i++) {
             letters.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }
 
@@ -366,4 +437,149 @@ public class DataInitializer {
 
         return mail.toString();
     }
+
+    private String generateRandomPassportNumber() {
+        
+        Character letter = UPPERCASE.charAt(random.nextInt(UPPERCASE.length()));
+
+        return letter + random.nextInt(999999) + 100000 + "";
+    }
+
+    private String generateRandomCity(String country) {
+        Map<String, List<String>> countryCityMap = new HashMap<>();
+        countryCityMap.put("Portugal", Arrays.asList("Lisboa", "Porto", "Faro", "Funchal"));
+        countryCityMap.put("Espanha", Arrays.asList("Madrid", "Barcelona", "Vigo"));
+        countryCityMap.put("França", Arrays.asList("Paris", "Marselha", "Lyon"));
+        countryCityMap.put("Alemanha", Arrays.asList("Berlim", "Munique", "Hamburgo"));
+        countryCityMap.put("Áustria", Arrays.asList("Viena", "Salzburgo", "Innsbruck"));
+        countryCityMap.put("Reino Unido", Arrays.asList("Londres", "Manchester", "Liverpool"));
+        countryCityMap.put("Luxemburgo", Arrays.asList("Luxemburgo"));
+        countryCityMap.put("Bélgica", Arrays.asList("Bruxelas", "Antuérpia", "Gent"));
+
+        List<String> cities = countryCityMap.get(country);
+        return cities.get(this.random.nextInt(cities.size()));
+    }
+
+    private String generateRandomCountry() {
+        String[] countriesArray = {"Portugal", "Espanha", "França", "Alemanha", "Áustria", "Reino Unido", "Luxemburgo", "Bélgica"};
+        List<String> countries = new ArrayList<>(Arrays.asList(countriesArray));
+        return countries.get(this.random.nextInt(countries.size()));
+    }
+
+    // passengers
+    private String generatePassengerNumber() {
+        
+        StringBuilder passengerNumber = new StringBuilder(7);
+
+        for (int i = 0; i < 7; i++) {
+            passengerNumber.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+
+        return passengerNumber.toString();
+    }
+
+    private LocalDate generatebirthDate() {
+        
+        LocalDate startDate = LocalDate.of(1920, 1, 1);
+        LocalDate endDate = LocalDate.of(2024, 12, 31);
+        long startDay = startDate.toEpochDay();
+        long endDay = endDate.toEpochDay();
+        long randomDay = Math.round(Math.random() * (endDay - startDay) + startDay);
+        return LocalDate.ofEpochDay(randomDay);
+    }
+
+    private String generateRandomPhoneNumber() {
+
+        StringBuilder phoneNumber = new StringBuilder(7);
+
+        phoneNumber.append(9);
+
+        for (int i = 0; i < 8; i++) {
+            phoneNumber.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        }
+
+        return phoneNumber.toString();
+    }
+
+    private String generateRandomPostalCode() {
+
+        StringBuilder postalCode = new StringBuilder(8);
+
+        for (int i = 0; i < 4; i++) {
+            postalCode.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        }
+
+        postalCode.append("-");
+
+        for (int i = 0; i < 3; i++) {
+            postalCode.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        }
+
+        return postalCode.toString();
+    }
+
+    private String generateRandomStreetAddress() {
+
+        String[] PREFIX = { "Rua", "Avenida", "Travessa", "Largo", "Praço" };
+        String[] NOMES = { " das Flores", " do Sol", " da Paz", " da Liberdade", " do Horizonte", " dos Pinheiros", " da Alegria", " do Mar", " do Rio", " da Serra", " Comandante", " Augusto" };
+        String[] SUFIX = { "", " Velha", " Nova", " Grande", " Pequena", " do Sul", " do Norte", " do Leste", " do Oeste", " Santos", " Pereira" };
+
+        StringBuilder streetAddress = new StringBuilder();
+
+        streetAddress.append(PREFIX[random.nextInt(PREFIX.length)]);
+        streetAddress.append(NOMES[random.nextInt(NOMES.length)]);
+        streetAddress.append(SUFIX[random.nextInt(SUFIX.length)]);
+
+        return streetAddress.toString();
+    }
+
+    private String generateRandomCardNumber() {
+        
+        StringBuilder cardNumber = new StringBuilder(16);
+
+        for (int i = 0; i < 16; i++) {
+            cardNumber.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        }
+
+        return cardNumber.toString();
+    }
+
+    private String generateRandomCardPIN() {
+        
+        StringBuilder cardPIN = new StringBuilder(4);
+
+        for (int i = 0; i < 4; i++) {
+            cardPIN.append(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        }
+
+        return cardPIN.toString();
+    }
+
+    // seats
+    private String generateSeatId() {
+
+        StringBuilder seatId = new StringBuilder(5);
+
+        for (int i = 0; i < 5; i++) {
+            seatId.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+
+        return seatId.toString();
+    }
+    
+    private String generateSeatNumber() {
+
+        String[] seatPrefixes = {"AA", "AB", "AC"}; // adjust
+
+        String seatPrefix = seatPrefixes[random.nextInt(seatPrefixes.length)];
+        int seatNumber = random.nextInt(200) + 40;
+        String seatId = seatPrefix + seatNumber;
+
+        return seatId;
+    }
+    
+    // reservations
+
+    // luggage
+
 }

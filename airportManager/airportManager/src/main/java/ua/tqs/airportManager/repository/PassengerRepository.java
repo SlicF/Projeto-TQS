@@ -7,6 +7,6 @@ import ua.tqs.airportManager.entity.Passenger;
 public interface PassengerRepository extends JpaRepository<Passenger, String> {
     
     Passenger findByPassengerId (String passengerId);
-    List<Passenger> findPassengersByState (String state);
-    List<Passenger> getAllPassengers();
+    List<Passenger> findByState (String state);
+    // List<Passenger> getAllPassengers();
 }
