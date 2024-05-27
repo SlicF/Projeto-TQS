@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './pages/Register.jsx';
 import Login from './pages/login.jsx';
 import AirportControl from './pages/AirportControl.jsx';
-import MyComponent from './pages/MyComponent.jsx';
+import SearchFlight from './pages/SearchFlight.jsx';
 import Flights from './pages/Flight.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
 import Invoice from './pages/Invoice.jsx';
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mycomponent" element={<MyComponent />} />
+        <Route path="/searchflight" element={<SearchFlight />} />
         <Route path="/flightCheckout" element={<FlightCheckout />} />
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/payment" element={<Payment />} />

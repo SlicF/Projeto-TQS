@@ -1,12 +1,11 @@
-// src/pages/Register.jsx
 import React, { useState } from 'react';
-import '../css/Login.css'; 
-import fundo from '../img/fundo.jpg'; 
+import '../css/Register.css'; 
+import fundo from '../img/fond.jpg'; 
 import logo_s from '../img/logo_s.png'; 
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
+function Register() {
 
-function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     nome: '',
@@ -22,10 +21,16 @@ function Login() {
     });
   };
 
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(form);
-    navigate('/searchflight');
+    navigate('/loginadmin'); 
+  };
+
+  const handleCancel = () => {
+    navigate('/otherpage'); 
   };
 
 
@@ -34,57 +39,56 @@ function Login() {
         className="register-container"
         style={{ backgroundImage: `url(${fundo})` }} 
         >
-           
       <div className='left'>
         <form onSubmit={handleSubmit} className="register-form">
-            <h2 className='Title'>LOGIN</h2>
-            <div className="input-group">
+            <h2 className='Title'>REGISTER</h2>
             <p className="label">Nome:</p>
-            <input 
+            <div className="input-group">
+              <input 
                 type="text" 
                 name="nome" 
                 value={form.nome} 
                 onChange={handleInputChange} 
                 placeholder="Nome"
                 required 
-            />
+              />
             </div>
-            <div className="input-group">
             <p className="label">Mail:</p>
-            <input 
+            <div className="input-group">
+              <input 
                 type="email" 
                 name="email" 
                 value={form.email} 
                 onChange={handleInputChange} 
                 placeholder="Mail"
                 required 
-            />
+              />
             </div>
-            <div className="input-group">
             <p className="label">Senha:</p>
-            <input 
+            <div className="input-group">
+              <input 
                 type="password" 
                 name="senha" 
                 value={form.senha} 
                 onChange={handleInputChange} 
                 placeholder="Senha"
                 required 
-            />
+              />
             </div>
-            
             <div className="form-actions">
-            <button type="submit" className="btn btn-success">Login</button>
-            <button type="button" className="btn btn-cancel">Cancel</button>
+              <button type="submit" className="btn btn-success">Registrar</button>
+              <button type="button" className="btn btn-cancel" onClick={handleCancel}>Cancel</button>
             </div>
         </form>
       </div>
       <div className='right'>
-        <div className="register-logo">
-            <img src={logo_s} alt="Logo" /> 
-        </div>
+      <div className="register-logo">
+          <img src={logo_s} alt="Logo" className="logo-style" />
+      </div>
+
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
