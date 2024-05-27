@@ -7,13 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Passenger;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.PassengerRepository;
 
+@CrossOrigin(origins = "http://localhost:8981")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/passengers")
 public class PassengerController {
 

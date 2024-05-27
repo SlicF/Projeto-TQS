@@ -88,7 +88,7 @@ import ua.tqs.airportManager.service.FlightService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8981") // Ajuste o CORS para permitir requisições do frontend
+@CrossOrigin(origins = "http://localhost:8981")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/flights")
@@ -136,5 +136,4 @@ public class FlightController {
             search.getDate());
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
-
 }

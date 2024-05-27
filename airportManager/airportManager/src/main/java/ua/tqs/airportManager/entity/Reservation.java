@@ -47,9 +47,6 @@ public class Reservation {
     @Column(name = "expirationDateCard", nullable = false)
     private String expirationDateCard;
 
-    @Column(name = "zipCodeCard", nullable = false)
-    private String zipCodeCard;
-
     @Column(name = "countryCard", nullable = false)
     private String countryCard;
 

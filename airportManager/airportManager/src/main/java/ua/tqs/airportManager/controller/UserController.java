@@ -14,6 +14,7 @@ import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.UserService;
 
+@CrossOrigin(origins = "http://localhost:8981")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/accounts")
@@ -33,9 +34,9 @@ public class UserController {
     // }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<User> getUserInfo(@RequestParam("userID") String userID) {
+    public ResponseEntity<User> getUserInfo(@RequestParam("userId") String userId) {
 
-        User user = usersService.findByUserId(userID);
+        User user = usersService.findByUserId(userId);
        
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.ReservationService;
 
-// @CrossOrigin(origins = "http://localhost:8981")
+@CrossOrigin(origins = "http://localhost:8981")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/reservations")
@@ -29,13 +29,13 @@ public class ReservationController {
     private ReservationService reservationService;
     
     @PostMapping("/createReservation")
-    public ResponseEntity<?> createReservation(@RequestBody Reservation reservationDTO) {
+    public ResponseEntity<?> createReservation(@RequestBody Reservation reserv) {
         
         // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // String username = authentication.getName(); 
         // User user = UserRepository.findByUsername(username).orElseThrow();
         
-        var reservation = reservationService.createReservation(reservationDTO);
+        var reservation = reservationService.createReservation(reserv);
         if (reservation == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating reservation");
         }

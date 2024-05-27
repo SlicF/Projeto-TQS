@@ -14,7 +14,9 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 import ua.tqs.airportManager.entity.Airline;
 import ua.tqs.airportManager.entity.Flight;
+import ua.tqs.airportManager.entity.Luggage;
 import ua.tqs.airportManager.entity.Passenger;
+import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.repository.*;
@@ -46,6 +48,8 @@ public class DataInitializer {
     public ArrayList<Airline> airlines = new ArrayList<>();
     public ArrayList<Flight> flights = new ArrayList<>();
     public ArrayList<User> users = new ArrayList<>();
+    public ArrayList<Passenger> passengers = new ArrayList<>();
+    public List<Reservation> reservations;
     public Random random;
     public String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     public String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -119,6 +123,8 @@ public class DataInitializer {
         // reservations
         generateAndSaveReservations();
 
+        reservations = reservationRepository.findAll();
+        
         // luggage
         generateAndSaveLuggage();
     }
@@ -194,6 +200,7 @@ public class DataInitializer {
             Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN, user);
             System.out.println(passenger);
 
+            passengers.add(passenger);
             passengerRepository.save(passenger);
         }
     }
@@ -217,36 +224,47 @@ public class DataInitializer {
 
     public void generateAndSaveReservations() {
 
-        // for (int i = 0; i < 80; i++) {
+        for (int i = 0; i < 7; i++) {
 
-        //     Flight flight = flights.get(random.nextInt(flights.size()));
+            Passenger passenger = passengers.get(random.nextInt(passengers.size()));
+            Flight flight = flights.get(random.nextInt(flights.size()));
 
-        //     String seatId = generateSeatId();
-        //     String seatNumber = generateSeatNumber();
-        //     String flightId = flight.getFlightId();
+            String reservationNumber = generateReservationNumber();
+            String passengerId = passenger.getPassengerId();
+            String flightId = flight.getFlightId();
+            String seat = generateSeatNumber();
+            Double totalPrice = Double.parseDouble(flight.getPrice());
+            LocalDate reservationDate = generateRandomReservationDate(flight.getDate());
+            String nameCard = passenger.getFirstName() + " " + passenger.getLastName();
+            String numberCard = passenger.getCardNumber();
+            String expirationDateCard = generateRandomExpirationDateCard();
+            String countryCard = passenger.getCountry();
 
-        //     Seat seat = new Seat(seatId, seatNumber, flightId, flight);
-        //     System.out.println(seat);
+            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, expirationDateCard, countryCard, passenger, flight);
+            System.out.println(reservation);
 
-        //     seatRepository.save(seat);
-        // }
+            // reservations.add(reservation);
+            reservationRepository.save(reservation);
+        }
     }
 
     public void generateAndSaveLuggage() {
 
-        // for (int i = 0; i < 80; i++) {
+        for (int i = 0; i < 5; i++) {
 
-        //     Flight flight = flights.get(random.nextInt(flights.size()));
+            System.out.println("reservations: " + reservations);
+            Reservation reservation = reservations.get(random.nextInt(reservations.size()));
+            System.out.println("olaaaaaaaaaaa: " + reservations.size());
+            
+            String luggageNumber = generateLuggageNumber();
+            String reservationId = reservation.getReservationId();
+            String weight = generateRandomWeight();
 
-        //     String seatId = generateSeatId();
-        //     String seatNumber = generateSeatNumber();
-        //     String flightId = flight.getFlightId();
+            Luggage luggage = new Luggage(luggageNumber, reservationId, weight, reservation);
+            System.out.println(luggage);
 
-        //     Seat seat = new Seat(seatId, seatNumber, flightId, flight);
-        //     System.out.println(seat);
-
-        //     seatRepository.save(seat);
-        // }
+            luggageRepository.save(luggage);
+        }
     }
 
     // helpful generate functions ------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -322,7 +340,7 @@ public class DataInitializer {
         int basePrice = random.nextInt(500) + 50;
         int discount = random.nextInt(30);
         int finalPrice = Math.max(basePrice - (basePrice * discount / 100), 50);
-        return finalPrice + "€";
+        return Integer.toString(finalPrice);
     }
 
     // private List<Seat> generateRandomSeats(int capacity) {
@@ -579,7 +597,53 @@ public class DataInitializer {
     }
     
     // reservations
+    private String generateReservationNumber() {
+
+        StringBuilder reservationNumber = new StringBuilder(5);
+        for (int i = 0; i < 5; i++) {
+            reservationNumber.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+        return reservationNumber.toString();
+    }
+
+    private LocalDate generateRandomReservationDate(LocalDate flightDate) {
+
+        LocalDate startDate = LocalDate.of(2023, 1, 1);
+        LocalDate endDate = LocalDate.of(flightDate.getYear(), flightDate.getMonth(), flightDate.getDayOfMonth() - 1);
+        long startDay = startDate.toEpochDay();
+        long endDay = endDate.toEpochDay();
+        long randomDay = Math.round(Math.random() * (endDay - startDay) + startDay);
+        return LocalDate.ofEpochDay(randomDay);
+    }
+
+    public String generateRandomExpirationDateCard() {
+
+        StringBuilder expirationDateCard = new StringBuilder();
+        String year = Integer.toString(random.nextInt(6) + 2024);
+        String month = Integer.toString(random.nextInt(12) + 1);
+
+        expirationDateCard.append(year).append(" - ").append(month);
+
+        return expirationDateCard.toString();
+    }
 
     // luggage
+    public String generateLuggageNumber() {
+
+        StringBuilder luggageNumber = new StringBuilder(11);
+
+        for (int i = 0; i < 11; i++) {
+            luggageNumber.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+
+        return luggageNumber.toString();
+    }
+
+    public String generateRandomWeight() {
+
+        Double weight = random.nextDouble(45) + 5;
+        
+        return Double.toString(Math.round(weight * 10) / 10.0);
+    }
 
 }
