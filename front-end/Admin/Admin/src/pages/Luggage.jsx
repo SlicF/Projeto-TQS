@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/luggage.css";
 import Navbar from '../components/NavbarAdmin';
 import { useNavigate } from "react-router-dom";
+import fundo from '../img/fond.jpg';
 
 
 
@@ -48,10 +49,10 @@ const BaggageRegistration = () => {
 
 
     return (
-        <div>
+        <div className="register-container"
+        style={{ backgroundImage: `url(${fundo})` }} 
+        >
             <Navbar />
-
-            <h1>Airport Organizer Baggage</h1>
             <div className="container">
                 <div className="baggage-registration">
                     <h2>Baggage Registration</h2>
