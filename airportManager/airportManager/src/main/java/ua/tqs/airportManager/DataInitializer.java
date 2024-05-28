@@ -45,10 +45,10 @@ public class DataInitializer {
     @Autowired
     private LuggageRepository luggageRepository;
 
-    public ArrayList<Airline> airlines = new ArrayList<>();
-    public ArrayList<Flight> flights = new ArrayList<>();
-    public ArrayList<User> users = new ArrayList<>();
-    public ArrayList<Passenger> passengers = new ArrayList<>();
+    public List<Airline> airlines;
+    public List<Flight> flights;
+    public List<User> users;
+    public List<Passenger> passengers;
     public List<Reservation> reservations;
     public Random random;
     public String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -61,6 +61,8 @@ public class DataInitializer {
     @PostConstruct
     public void init() {
         
+        random = new Random();
+
         // airlines
         Airline airline1 = new Airline("TAP", "TAP Portugal");
         airlines.add(airline1);
@@ -91,31 +93,37 @@ public class DataInitializer {
         Airline airline14 = new Airline("CA", "Air China");
         airlines.add(airline14);
 
-            airlineRepository.save(airline1);
-            airlineRepository.save(airline2);
-            airlineRepository.save(airline3);
-            airlineRepository.save(airline4);
-            airlineRepository.save(airline5);
-            airlineRepository.save(airline6);
-            airlineRepository.save(airline7);
-            airlineRepository.save(airline8);
-            airlineRepository.save(airline9);
-            airlineRepository.save(airline10);
-            airlineRepository.save(airline11);
-            airlineRepository.save(airline12);
-            airlineRepository.save(airline13);
-            airlineRepository.save(airline14);
+        airlineRepository.save(airline1);
+        airlineRepository.save(airline2);
+        airlineRepository.save(airline3);
+        airlineRepository.save(airline4);
+        airlineRepository.save(airline5);
+        airlineRepository.save(airline6);
+        airlineRepository.save(airline7);
+        airlineRepository.save(airline8);
+        airlineRepository.save(airline9);
+        airlineRepository.save(airline10);
+        airlineRepository.save(airline11);
+        airlineRepository.save(airline12);
+        airlineRepository.save(airline13);
+        airlineRepository.save(airline14);
+
+        airlines = airlineRepository.findAll();
 
         // flights
-        random = new Random();
-        
         generateAndSaveFlights(airlines);
+
+        flights = flightRepository.findAll();
 
         // users
         generateAndSaveUsers();
 
+        users = userRepository.findAll();
+
         // passengers
         generateAndSavePassengers();
+
+        passengers = passengerRepository.findAll();
 
         // seats
         generateAndSaveSeats();
@@ -129,7 +137,7 @@ public class DataInitializer {
         generateAndSaveLuggage();
     }
 
-    public void generateAndSaveFlights(ArrayList<Airline> airlines) {
+    public void generateAndSaveFlights(List<Airline> airlines) {
 
         for (int i = 0; i < 50; i++) {
             Airline airline = airlines.get(random.nextInt(airlines.size()));
