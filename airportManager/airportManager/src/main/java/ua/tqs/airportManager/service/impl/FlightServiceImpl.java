@@ -38,4 +38,16 @@ public class FlightServiceImpl implements FlightService{
     public List<Flight> findByDepartureCityAndArrivalCityAndDate(String departureCity, String arrivalCity, LocalDate flightDate) {
         return flightRepository.findByDepartureCityAndArrivalCityAndDate(departureCity, arrivalCity, flightDate);
     }
+
+    public List<String> getAllCities() {
+        List<String> departureCities = flightRepository.findAllDepartureCities();
+        List<String> arrivalCities = flightRepository.findAllArrivalCities();
+        
+        // Combine as listas de cidades de partida e chegada e remova duplicatas
+        Set<String> uniqueCities = new HashSet<>();
+        uniqueCities.addAll(departureCities);
+        uniqueCities.addAll(arrivalCities);
+        
+        return new ArrayList<>(uniqueCities);
+    }
 }

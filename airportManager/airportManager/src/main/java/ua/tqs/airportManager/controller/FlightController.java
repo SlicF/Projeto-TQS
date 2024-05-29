@@ -103,6 +103,12 @@ public class FlightController {
         return new ResponseEntity<>(airlines, HttpStatus.OK);
     }
 
+    @GetMapping("/cities")
+    public ResponseEntity<List<String>> getAllCities() {
+        List<String> cities = flightService.getAllCities();
+        return new ResponseEntity<>(cities, HttpStatus.OK);
+    }
+    
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> getFlights() {
         List<Flight> flights = flightService.getAllFlights();
@@ -128,6 +134,7 @@ public class FlightController {
 
     //     return new ResponseEntity<>(flights, HttpStatus.OK);
     // }
+    
     @PostMapping(path = "/searchFlight", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight search) {
         List<Flight> flights = flightService.findByDepartureCityAndArrivalCityAndDate(

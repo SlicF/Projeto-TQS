@@ -11,4 +11,5 @@ public interface FlightService { // pode ter os mesmos nomes que os metodos do r
     List<Flight> getFlightsByState(String state);
     List<Flight> getAllFlights();
     List<Flight> findByDepartureCityAndArrivalCityAndDate(String departureCity, String arrivalCity, LocalDate flightDate);
+    List<String> getAllCities();
 }

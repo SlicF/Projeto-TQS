@@ -65,33 +65,33 @@ public class DataInitializer {
 
         // airlines
         Airline airline1 = new Airline("TAP", "TAP Portugal");
-        airlines.add(airline1);
-        Airline airline2 = new Airline("RYA", "Ryan Air Services");
-        airlines.add(airline2);
+        // airlines.add(airline1);
+        Airline airline2 = new Airline("RYA", "RyanAir Services");
+        // airlines.add(airline2);
         Airline airline3 = new Airline("EJU", "easyJet Europe");
-        airlines.add(airline3);
+        // airlines.add(airline3);
         Airline airline4 = new Airline("QTR", "Qatar Airways");
-        airlines.add(airline4);
+        // airlines.add(airline4);
         Airline airline5 = new Airline("LH", "Lufthansa");
-        airlines.add(airline5);
+        // airlines.add(airline5);
         Airline airline6 = new Airline("BA", "British Airways");
-        airlines.add(airline6);
+        // airlines.add(airline6);
         Airline airline7 = new Airline("KL", "KLM");
-        airlines.add(airline7);
+        // airlines.add(airline7);
         Airline airline8 = new Airline("AF", "Air France");
-        airlines.add(airline8);
+        // airlines.add(airline8);
         Airline airline9 = new Airline("IB", "Iberia");
-        airlines.add(airline9);
+        // airlines.add(airline9);
         Airline airline10 = new Airline("TK", "Turkish Airlines");
-        airlines.add(airline10);
+        // airlines.add(airline10);
         Airline airline11 = new Airline("AI", "Air India");
-        airlines.add(airline11);
+        // airlines.add(airline11);
         Airline airline12 = new Airline("SQ", "Singapore Airlines");
-        airlines.add(airline12);
+        // airlines.add(airline12);
         Airline airline13 = new Airline("MH", "Malaysia Airlines");
-        airlines.add(airline13);
+        // airlines.add(airline13);
         Airline airline14 = new Airline("CA", "Air China");
-        airlines.add(airline14);
+        // airlines.add(airline14);
 
         airlineRepository.save(airline1);
         airlineRepository.save(airline2);
@@ -155,7 +155,7 @@ public class DataInitializer {
             Flight flight = new Flight(flightNumber, airline.getAirlineCode(), departure, destination, departureDate, departureTime, arrivalTime, price, status, capacity, airline);
             System.out.println(flight);
 
-            flights.add(flight);
+            // flights.add(flight);
             flightRepository.save(flight);
         }
     }
@@ -177,7 +177,7 @@ public class DataInitializer {
             User user = new User(userId, username, firstName, lastName, password, email, passportNumber, city, country, role);
             System.out.println(user);
 
-            users.add(user);
+            // users.add(user);
             userRepository.save(user);
         }
     }
@@ -208,7 +208,7 @@ public class DataInitializer {
             Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN, user);
             System.out.println(passenger);
 
-            passengers.add(passenger);
+            // passengers.add(passenger);
             passengerRepository.save(passenger);
         }
     }
@@ -617,7 +617,7 @@ public class DataInitializer {
     private LocalDate generateRandomReservationDate(LocalDate flightDate) {
 
         LocalDate startDate = LocalDate.of(2023, 1, 1);
-        LocalDate endDate = LocalDate.of(flightDate.getYear(), flightDate.getMonth(), flightDate.getDayOfMonth() - 1);
+        LocalDate endDate = flightDate.minusDays(1);
         long startDay = startDate.toEpochDay();
         long endDay = endDate.toEpochDay();
         long randomDay = Math.round(Math.random() * (endDay - startDay) + startDay);
