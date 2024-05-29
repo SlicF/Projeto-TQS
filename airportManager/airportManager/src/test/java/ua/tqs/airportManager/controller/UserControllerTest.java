@@ -57,28 +57,29 @@ public class UserControllerTest {
                 // .andExpect(jsonPath("$.lastName").value("test"));
     }
 
-    @DisplayName("Test getUserInfoByUsername")
-    @Test
-    public void testGetUserInfoByUsername() throws Exception {
-        User user = new User();
-        user.setUserId("1");
-        user.setFirstName("user");
-        user.setLastName("test");
-        user.setUsername("user123");
+    
+    // @DisplayName("Test getUserInfoByUsername")
+    // @Test
+    // public void testGetUserInfoByUsername() throws Exception {
+    //     User user = new User();
+    //     user.setUserId("1");
+    //     user.setFirstName("user");
+    //     user.setLastName("test");
+    //     user.setUsername("user123");
 
-        System.out.println("user: " + user);
+    //     System.out.println("user: " + user);
 
-        when(userService.findByUsername("user123")).thenReturn(user);
+    //     when(userService.findByUsername("user123")).thenReturn(user);
 
-        mockMvc.perform(get("/api/accounts/userInfoByUsername")
-                .param("username", "user123"))
-                .andExpect(status().isOk());
+    //     mockMvc.perform(get("/api/accounts/userInfoByUsername")
+    //             .param("username", "user123"))
+    //             .andExpect(status().isOk());
 
-                // .andExpect(jsonPath("$.userId").value("1"))
-                // .andExpect(jsonPath("$.firstName").value("user"))
-                // .andExpect(jsonPath("$.lastName").value("test"))
-                // .andExpect(jsonPath("$.username").value("user123"));
-    }
+    //             // .andExpect(jsonPath("$.userId").value("1"))
+    //             // .andExpect(jsonPath("$.firstName").value("user"))
+    //             // .andExpect(jsonPath("$.lastName").value("test"))
+    //             // .andExpect(jsonPath("$.username").value("user123"));
+    // }
 
     @DisplayName("Test getUsers")
     @Test
