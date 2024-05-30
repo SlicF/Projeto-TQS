@@ -113,6 +113,11 @@ public class DataInitializer {
         // flights
         generateAndSaveFlights(airlines);
 
+        Flight flight1 = new Flight("RYA9830", "RYA", "Viena", "Paris", LocalDate.of(2024,06,07), "07h45", "09h15", "100", "OK", 230, airline2);
+        Flight flight2 = new Flight("RYA9833", "RYA", "Viena", "Paris", LocalDate.of(2024,06,07), "09h45", "11h15", "120", "OK", 210, airline2);
+        flightRepository.save(flight1);
+        flightRepository.save(flight2);
+
         flights = flightRepository.findAll();
 
         // users

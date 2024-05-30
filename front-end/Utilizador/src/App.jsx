@@ -17,10 +17,10 @@ function App() {
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/searchflight" element={<SearchFlight />} />
-        <Route path="/flightCheckout" element={<FlightCheckout />} />
+        <Route path="/flightCheckout/:flightId" element={<FlightCheckout />} />
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/formulario" element={<Flights />} />
+        <Route path="/flights" element={<Flights />} />
       </Routes>
     </div>
   );

@@ -10,6 +10,7 @@ import Formulario from './pages/Formulario.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
 import Invoice from './pages/Invoice.jsx';
 import Payment from './pages/Payment.jsx';
+import Flights from './pages/Flight.jsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,8 +23,9 @@ root.render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="searchflight" element={<SearchFlight />} />
+          <Route path="flights" element={<Flights />} />
           <Route path="formulario" element={<Formulario />} />
-          <Route path="flightcheckout" element={<FlightCheckout />} /> 
+          <Route path="flightCheckout/:flightId" element={<FlightCheckout />} /> 
           <Route path="invoice" element={<Invoice />} />
           <Route path="payment" element={<Payment />} />
         </Route>
