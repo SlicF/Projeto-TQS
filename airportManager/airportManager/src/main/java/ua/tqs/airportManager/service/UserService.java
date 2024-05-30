@@ -9,7 +9,7 @@ public interface UserService {
     
     User registUser(User user);
     User findByUserId (String userId);
-    Optional<User> findByUsername (String username);
+    User findByUsername (String username);
     List<User> getAllUsers();
 
     //autenticação

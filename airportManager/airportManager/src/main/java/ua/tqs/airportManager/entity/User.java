@@ -56,9 +56,9 @@ package ua.tqs.airportManager.entity;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -81,7 +81,7 @@ import ua.tqs.airportManager.Roles;
 @AllArgsConstructor
 @ToString
 @Table(name="accounts")
-public class User implements UserDetails {
+public class User{
     
     @Id
     @Column(name = "userId", nullable = false, unique = true)
@@ -115,28 +115,28 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING) 
     private Roles role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    //     return List.of(new SimpleGrantedAuthority(role.name()));
+    // }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
+    //     return true;
+    // }
 
-    @Override
-    public boolean isAccountNonLocked() {
-       return true;
-    }
+    // @Override
+    // public boolean isAccountNonLocked() {
+    //    return true;
+    // }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    //     return true;
+    // }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    // @Override
+    // public boolean isEnabled() {
+    //     return true;
+    // }
 }

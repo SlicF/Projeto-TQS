@@ -122,7 +122,7 @@ const FlightCheckout = ({flight}) => {
         <div className="flight-details-section">
           <div className='left-side'>
             <h1 className="centered-title">Flight Details</h1>
-            <p><strong>Preço:</strong> {details.price}€ </p>
+            <p><strong>Preço:</strong> {selectedFlight.price}€ </p>
             <p><strong>Companhia Aérea:</strong> {details.airlineCode} - {details.airline.airlineName} </p>
             <p><strong>Data:</strong> 06h55 </p>
             <p><strong>Horário de Voo:</strong> 08h45 </p>
