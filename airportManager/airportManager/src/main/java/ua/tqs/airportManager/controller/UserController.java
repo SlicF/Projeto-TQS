@@ -31,20 +31,20 @@ import ua.tqs.airportManager.dto.RegisterDTO;
 @RequestMapping("/api/accounts")
 public class UserController {
 
-    // private AuthService authService;
+    private AuthService authService;
     private UserService usersService;
     private UserRepository userRespository;
 
 
-    // @PostMapping("/register")
-    // public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
-    // return ResponseEntity.ok(authService.register(registerDTO));
-    // }
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
+    return ResponseEntity.ok(authService.register(registerDTO));
+    }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
-    // return ResponseEntity.ok(authService.login(loginDTO));
-    // }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
+    return ResponseEntity.ok(authService.login(loginDTO));
+    }
 
     @GetMapping("/userInfo")
     public ResponseEntity<User> getUserInfo(@RequestParam("userId") String userId) {
