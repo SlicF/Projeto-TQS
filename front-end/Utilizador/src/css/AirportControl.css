@@ -1,0 +1,74 @@
+/* AirportControl.css */
+.airport-container {
+    background-size: cover;
+    padding-top: 2rem;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+.flight-header {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    background-color: #f2f2f2; 
+}
+
+.flight-header span {
+    font-weight: bold; 
+    color: #333; 
+    font-size: 1.2rem; 
+    padding: 10px 0; 
+}
+
+
+.logo-container img {
+    width: 120px; 
+    height: 120px;
+}
+
+.Title-Viagar {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3rem;
+
+}
+
+.flights-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    width: 80%;
+    max-width: 2000px; 
+    margin-top: 2rem; 
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.flight {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+
+.flight img {
+    max-width: 120px; 
+    max-height: 70px;
+    width: auto; 
+    height: auto; 
+    object-fit: contain; 
+}
+
