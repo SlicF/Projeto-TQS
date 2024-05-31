@@ -1,6 +1,8 @@
 package ua.tqs.airportManager.entity;
 
 import java.time.LocalDate;
+import java.util.Random;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -69,4 +71,19 @@ public class Passenger {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
     private User user;
+
+    @PrePersist
+    public void generateReservationId() {
+        this.passengerId = generateRandomId();
+    }
+
+    private String generateRandomId() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder result = new StringBuilder(7);
+        Random random = new Random();
+        for (int i = 0; i < 7; i++) {
+            result.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        return result.toString();
+    }
 }

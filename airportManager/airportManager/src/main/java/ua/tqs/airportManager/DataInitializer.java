@@ -603,7 +603,7 @@ public class DataInitializer {
         String[] seatPrefixes = {"AA", "AB", "AC"}; // adjust
 
         String seatPrefix = seatPrefixes[random.nextInt(seatPrefixes.length)];
-        int seatNumber = random.nextInt(200) + 40;
+        int seatNumber = random.nextInt(40) + 5;
         String seatId = seatPrefix + seatNumber;
 
         return seatId;
