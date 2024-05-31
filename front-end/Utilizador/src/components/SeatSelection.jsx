@@ -23,8 +23,8 @@ const SeatSelection = ({ seats, onSeatSelect, selectedSeat }) => {
               key={seat.number}
               className={`seat ${seat.status} ${seat.number === localSelectedSeat ? "selected" : ""}`}
               onClick={() => handleSeatClick(seat.number)}
-              disabled={seat.status === "UNAVAILABLE"}
-              style={{ margin: "5px", width: "30px", height: "30px" }}
+              disabled={seat.status !== "AVAILABLE"}
+              style={{ margin: "5px", width: "30px", height: "30px", backgroundColor: "rgba(220, 200, 100}" }}
             >
               {seat.number}
             </button>

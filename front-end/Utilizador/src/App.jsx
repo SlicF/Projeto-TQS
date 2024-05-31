@@ -19,7 +19,7 @@ function App() {
         <Route path="/searchflight" element={<SearchFlight />} />
         <Route path="/flightCheckout/:flightId" element={<FlightCheckout />} />
         <Route path="/invoice" element={<Invoice />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/reservation" element={<Payment />} />
         <Route path="/flights" element={<Flights />} />
       </Routes>
     </div>

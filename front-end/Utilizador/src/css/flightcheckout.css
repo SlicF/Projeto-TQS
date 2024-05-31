@@ -1,4 +1,4 @@
-body, html {
+/* body, html {
   margin: 0;
   padding: 0;
   height: 100%; 
@@ -7,7 +7,7 @@ body, html {
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  overflow: hidden; 
+  overflow: hidden;
   background: url('../img/fundo.jpg') no-repeat center  fixed; 
 
 }
@@ -17,6 +17,30 @@ body, html {
   margin: 8rem auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+} */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+  background-image: url('../img/fundo.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  font-family: Arial, sans-serif; /* Adicionado o estilo da fonte padrão */
+}
+
+.flight-checkout {
+  max-width: 80%;
+  margin: 8rem auto;
+  padding: 20px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .flight-details-section, .payment-info-section {
