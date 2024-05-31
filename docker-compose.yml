@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  airportmanager:
+    build: ./airportManager/airportManager
+    container_name: airport_manager
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydatabase
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: secret
+    ports:
+      - "8981:8981"
+    depends_on:
+      - mysql
+
+  admin:
+    build: ./front-end/Admin/Admin
+    container_name: admin_frontend
+    ports:
+      - "5173:5173"
+    command: ["npx", "vite", "--host", "0.0.0.0", "--port", "5173"]
+
+  painel:
+    build: ./front-end/Painel/Painel
+    container_name: painel_frontend
+    ports:
+      - "5174:5174"
+    command: ["npx", "vite", "--host", "0.0.0.0", "--port", "5174"]
+
+  utilizador:
+    build: ./front-end/Utilizador
+    container_name: utilizador_frontend
+    ports:
+      - "5175:5175"
+    command: ["npx", "vite", "--host", "0.0.0.0", "--port", "5175"]
+
+volumes:
+  mysql_data:
