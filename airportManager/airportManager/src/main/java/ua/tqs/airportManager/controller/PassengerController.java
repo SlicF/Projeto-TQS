@@ -1,6 +1,5 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -9,9 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Passenger;
-import ua.tqs.airportManager.entity.Reservation;
-import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.PassengerRepository;
 
 @CrossOrigin(origins = "http://localhost:8981")

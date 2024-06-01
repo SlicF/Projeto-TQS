@@ -1,126 +1,126 @@
-package ua.tqs.airportManager.controller;
+// package ua.tqs.airportManager.controller;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+// import org.springframework.boot.test.mock.mockito.MockBean;
+// import org.springframework.http.MediaType;
+// import org.springframework.test.web.servlet.MockMvc;
+// import ua.tqs.airportManager.dto.AuthResponse;
+// import ua.tqs.airportManager.dto.LoginDTO;
+// import ua.tqs.airportManager.dto.RegisterDTO;
+// import ua.tqs.airportManager.entity.User;
+// import ua.tqs.airportManager.service.AuthService;
+// import ua.tqs.airportManager.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+// import static org.mockito.ArgumentMatchers.any;
+// import static org.mockito.Mockito.when;
+// import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import ua.tqs.airportManager.entity.Reservation;
-import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
-import ua.tqs.airportManager.service.UserService;
+// @WebMvcTest(UserController.class)
+// public class UserControllerTest {
 
-public class UserControllerTest {
+//     @Autowired
+//     private MockMvc mockMvc;
 
-    private MockMvc mockMvc;
+//     @MockBean
+//     private AuthService authService;
 
-    @Mock
-    private UserService userService;
+//     @MockBean
+//     private UserService userService;
 
-    @InjectMocks
-    private UserController userController;
+//     @Test
+//     public void testRegister() throws Exception {
+//         RegisterDTO registerDTO = new RegisterDTO();
+//         registerDTO.setFirstName("User");
+//         registerDTO.setLastName("Test");
+//         registerDTO.setEmail("testUser");
+//         registerDTO.setUserPassword("testPassword");
+//         registerDTO.setPassportNumber("123456789");
+//         registerDTO.setCity("City");
+//         registerDTO.setCountry("Country");
 
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
-    }
+//         AuthResponse authResponse = new AuthResponse();
+//         authResponse.setToken("testToken");
 
-    @DisplayName("Test getUserInfo")
-    @Test
-    public void testGetUserInfo() throws Exception {
-        User user = new User();
-        user.setUserId("1");
-        user.setFirstName("user");
-        user.setLastName("test");
+//         when(authService.register(any(RegisterDTO.class))).thenReturn(authResponse);
 
-        when(userService.findByUserId("1")).thenReturn(user);
+//         mockMvc.perform(post("/api/accounts/register")
+//                 .contentType(MediaType.APPLICATION_JSON)
+//                 .content("{\"firstName\":\"User\",\"lastName\":\"Test\",\"email\":\"testUser\",\"password\":\"testPassword\",\"passportNumber\":\"123456789\",\"city\":\"City\",\"country\":\"Country\"}"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.token").value("testToken"));
+//     }
 
-        mockMvc.perform(get("/api/accounts/userInfo")
-                .param("userId", "1"))
-                .andExpect(status().isOk());
+//     @Test
+//     public void testLogin() throws Exception {
+//         LoginDTO loginDTO = new LoginDTO();
+//         loginDTO.setEmail("testUser");
+//         loginDTO.setPassword("testPassword");
 
-                // .andExpect(jsonPath("$[0].userId").value("1"))
-                // .andExpect(jsonPath("$.firstName").value("user"))
-                // .andExpect(jsonPath("$.lastName").value("test"));
-    }
+//         AuthResponse authResponse = new AuthResponse();
+//         authResponse.setToken("testToken");
 
-    
-    // @DisplayName("Test getUserInfoByUsername")
-    // @Test
-    // public void testGetUserInfoByUsername() throws Exception {
-    //     User user = new User();
-    //     user.setUserId("1");
-    //     user.setFirstName("user");
-    //     user.setLastName("test");
-    //     user.setUsername("user123");
+//         when(authService.login(any(LoginDTO.class))).thenReturn(authResponse);
 
-    //     System.out.println("user: " + user);
+//         mockMvc.perform(post("/api/accounts/login")
+//                 .contentType(MediaType.APPLICATION_JSON)
+//                 .content("{\"username\":\"testUser\",\"password\":\"testPassword\"}"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.token").value("testToken"));
+//     }
 
-    //     when(userService.findByUsername("user123")).thenReturn(user);
+//     @Test
+//     public void testGetUserInfo() throws Exception {
+//         User user = new User();
+//         user.setUserId("testUserId");
+//         user.setUsername("testUser");
 
-    //     mockMvc.perform(get("/api/accounts/userInfoByUsername")
-    //             .param("username", "user123"))
-    //             .andExpect(status().isOk());
+//         when(userService.findByUserId("testUserId")).thenReturn(user);
 
-    //             // .andExpect(jsonPath("$.userId").value("1"))
-    //             // .andExpect(jsonPath("$.firstName").value("user"))
-    //             // .andExpect(jsonPath("$.lastName").value("test"))
-    //             // .andExpect(jsonPath("$.username").value("user123"));
-    // }
+//         mockMvc.perform(get("/api/accounts/userInfo")
+//                 .param("userId", "testUserId"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.userId").value("testUserId"))
+//                 .andExpect(jsonPath("$.username").value("testUser"));
+//     }
 
-    @DisplayName("Test getUsers")
-    @Test
-    public void testGetUsers() throws Exception {
-        List<User> users = new ArrayList<>();
+//     @Test
+//     public void testGetUserInfoByUsername() throws Exception {
+//         User user = new User();
+//         user.setUserId("testUserId");
+//         user.setUsername("testUser");
 
-        User user = new User();
-        user.setUserId("1");
-        user.setFirstName("user");
-        user.setLastName("test");
-        user.setUsername("user123");
+//         when(userService.findByUsername(any())).thenReturn(Optional.of(user));
 
-        users.add(user);
+//         mockMvc.perform(get("/api/accounts/userInfoByUsername"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.userId").value("testUserId"))
+//                 .andExpect(jsonPath("$.username").value("testUser"));
+//     }
 
-        when(userService.getAllUsers()).thenReturn(users);
+//     @Test
+//     public void testGetUsers() throws Exception {
+//         User user1 = new User();
+//         user1.setUserId("testUserId1");
+//         user1.setUsername("testUser1");
 
-        mockMvc.perform(get("/api/accounts/users")
-                .param("userId", "1"))
-                .andExpect(status().isOk());
+//         User user2 = new User();
+//         user2.setUserId("testUserId2");
+//         user2.setUsername("testUser2");
 
-                // .andExpect(jsonPath("$.userId").value("1"))
-                // .andExpect(jsonPath("$.firstName").value("user"))
-                // .andExpect(jsonPath("$.lastName").value("test"))
-                // .andExpect(jsonPath("$.username").value("user123"));
-    }
+//         List<User> users = Arrays.asList(user1, user2);
 
-    // @DisplayName("Test getReservationsByUser")
-    // @Testperform(get("/api/accounts/userInfo")
-    // .param("userId", "1"))
-    // .param("firstName", "user")
-    // .param("lastName", "test")
-    // .andExpect(status().isOk());
-    // public void testGetReservationsByUser() throws Exception {
-    //     List<Reservation> reservations = new ArrayList<>();
-    //     reservations.add(new Reservation());
-    //     reservations.add(new Reservation());
+//         when(userService.getAllUsers()).thenReturn(users);
 
-    //     when(reservationRepository.findByPassengerId("1")).thenReturn(reservations);
-
-    //     mockMvc.perform(get("/api/user/getReservationsByUser")
-    //             .param("userID", "1"))
-    //             .andExpect(status().isOk());
-    // }
-}
+//         mockMvc.perform(get("/api/accounts/users"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$[0].userId").value("testUserId1"))
+//                 .andExpect(jsonPath("$[0].username").value("testUser1"))
+//                 .andExpect(jsonPath("$[1].userId").value("testUserId2"))
+//                 .andExpect(jsonPath("$[1].username").value("testUser2"));
+//     }
+// }

@@ -1,7 +1,5 @@
 package ua.tqs.airportManager.entity;
 
-import java.time.LocalDate;
-import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
