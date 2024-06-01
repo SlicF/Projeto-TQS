@@ -61,9 +61,7 @@ public class ReservationController {
     @GetMapping("/getReservationsByPassenger")
     public ResponseEntity<List<Reservation>> getReservationsByPassenger(@RequestParam("passengerId") String passengerId) {
         // array of reservations
-        List<Reservation> reservations = new ArrayList<Reservation>();
-        
-        reservations = reservationService.getReservationsByPassengerId(passengerId);
+        List<Reservation> reservations = reservationService.getReservationsByPassengerId(passengerId);
         
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }

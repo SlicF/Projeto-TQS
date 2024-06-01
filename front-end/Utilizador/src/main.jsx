@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 import Register from './pages/Register.jsx';
-import Login from './pages/login.jsx';
+import Login from './pages/Login.jsx';
 import SearchFlight from './pages/SearchFlight.jsx';
 import Formulario from './pages/Formulario.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
@@ -19,8 +19,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>  
-          <Route index element={<Register />} />
-          <Route path="login" element={<Login />} />
+          <Route index element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="searchflight" element={<SearchFlight />} />
           <Route path="flights" element={<Flights />} />

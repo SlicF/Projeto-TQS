@@ -30,7 +30,7 @@ public class PassengerController {
     public ResponseEntity<List<Passenger>> getPassengers() {
 
         List<Passenger> passengers = passengersService.getAllPassengers();
-       
+
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
 
@@ -38,7 +38,7 @@ public class PassengerController {
     public ResponseEntity<Passenger> getPassengerInfo(@RequestParam("passengerId") String passengerId) {
 
         Passenger passenger = passengersService.findByPassengerId(passengerId);
-       
+
         return new ResponseEntity<>(passenger, HttpStatus.OK);
     }
 
@@ -46,25 +46,32 @@ public class PassengerController {
     public ResponseEntity<List<Passenger>> getPassengerInfoByState(@PathVariable("state") String state) {
 
         List<Passenger> passengers = passengersService.findByState(state);
-       
+
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
 
     @PostMapping("/createPassenger")
     public ResponseEntity<?> createPassenger(@RequestBody Passenger passeng) {
-        
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName(); 
+
+        // Authentication authentication =
+        // SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
         // User user = UserRepository.findByUsername(username).orElseThrow();
 
         var passenger = passengersService.createPassenger(passeng);
         if (passenger == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating passenger");
-        }
-        else {
+        } else {
             Map<String, Object> response = new HashMap<>();
             response.put("passengerId", passenger.getPassengerId());
             return ResponseEntity.ok().body(response);
         }
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Passenger>> getPassengersByUserId(@PathVariable("userId") String userId) {
+        List<Passenger> passengers = passengersService.findByUserId(userId);
+        return new ResponseEntity<>(passengers, HttpStatus.OK);
+    }
+
 }

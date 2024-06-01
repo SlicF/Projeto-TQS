@@ -1,0 +1,104 @@
+.containerFlightReserved {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px;
+
+  margin: 20px;
+
+  background-color: #e6eefd;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  border-radius: 8px;
+
+}
+  
+  .infoFlightReserved {
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    width: 50%;
+  
+    padding: 10px;
+  
+  }
+  
+  
+  .titleFlightReserved {
+  
+    font-size: 24px;
+  
+    font-weight: bold;
+  
+    margin-bottom: 10px;
+  
+  }
+  
+  
+  .subtitleFlightReserved {
+  
+    font-size: 16px;
+  
+    color: #555;
+  
+    margin-bottom: 10px;
+  
+  }
+  
+  
+  .flightFlightReserved {
+  
+    display: flex;
+  
+    align-items: center;
+  
+    margin-bottom: 10px;
+  
+  }
+  
+
+  
+  
+  .flightFlightReserved-details {
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+  
+  }
+  
+  
+  .flightFlightReserved-time {
+  
+    font-size: 18px;
+  
+    font-weight: bold;
+  
+  }
+  
+  
+  .flightFlightReserved-location {
+  
+    font-size: 14px;
+  
+    color: #777;
+  
+  }
+  
+  
+  .flightFlightReserved-duration {
+  
+    font-size: 14px;
+    margin: 20px;
+  
+    color: #555;
+  
+  }
+  

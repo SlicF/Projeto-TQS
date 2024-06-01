@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/Register.css'; 
 import fundo from '../img/fundo.jpg'; 
 import logo_s from '../img/logo_s.png'; 
+import Navbar from '../components/Navbar';
 
 import { useNavigate } from 'react-router-dom'; 
 function Register() {
@@ -35,6 +36,8 @@ function Register() {
 
 
   return (
+    <div>
+    <Navbar />
     <div 
         className="register-container"
         style={{ backgroundImage: `url(${fundo})` }} 
@@ -86,6 +89,7 @@ function Register() {
             <img src={logo_s} alt="Logo" style={{ width: 'auto', height: '80%' }} />
         </div>
       </div>
+    </div>
     </div>
   );
 }
