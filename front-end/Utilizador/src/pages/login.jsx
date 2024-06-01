@@ -1,4 +1,3 @@
-// src/pages/Register.jsx
 import React, { useState } from 'react';
 import '../css/Login.css'; 
 import fundo from '../img/fundo.jpg'; 
@@ -28,59 +27,57 @@ function Login() {
     navigate('/searchflight');
   };
 
-
   return (
     <div 
-        className="register-container"
-        style={{ backgroundImage: `url(${fundo})` }} 
-        >
-           
+      className="register-container"
+      style={{ backgroundImage: `url(${fundo})` }}
+    >
       <div className='left'>
         <form onSubmit={handleSubmit} className="register-form">
-            <h2 className='Title'>LOGIN</h2>
-            <div className="input-group">
+          <h2 className='Title'>LOGIN</h2>
+          <div className="input-group">
             <p className="label">Nome:</p>
             <input 
-                type="text" 
-                name="nome" 
-                value={form.nome} 
-                onChange={handleInputChange} 
-                placeholder="Nome"
-                required 
+              type="text" 
+              name="nome" 
+              value={form.nome} 
+              onChange={handleInputChange} 
+              placeholder="Nome"
+              required 
             />
-            </div>
-            <div className="input-group">
+          </div>
+          <div className="input-group">
             <p className="label">Mail:</p>
             <input 
-                type="email" 
-                name="email" 
-                value={form.email} 
-                onChange={handleInputChange} 
-                placeholder="Mail"
-                required 
+              type="email" 
+              name="email" 
+              value={form.email} 
+              onChange={handleInputChange} 
+              placeholder="Mail"
+              required 
             />
-            </div>
-            <div className="input-group">
+          </div>
+          <div className="input-group">
             <p className="label">Senha:</p>
             <input 
-                type="password" 
-                name="senha" 
-                value={form.senha} 
-                onChange={handleInputChange} 
-                placeholder="Senha"
-                required 
+              type="password" 
+              name="senha" 
+              value={form.senha} 
+              onChange={handleInputChange} 
+              placeholder="Senha"
+              required 
             />
-            </div>
-            
-            <div className="form-actions">
+          </div>
+          
+          <div className="form-actions">
             <button type="submit" className="btn btn-success">Login</button>
-            <button type="button" className="btn btn-cancel">Cancel</button>
-            </div>
+            <button type="button" className="btn btn-danger">Cancelar</button>
+          </div>
         </form>
       </div>
       <div className='right'>
         <div className="register-logo">
-            <img src={logo_s} alt="Logo" /> 
+          <img src={logo_s} alt="Logo" /> 
         </div>
       </div>
     </div>

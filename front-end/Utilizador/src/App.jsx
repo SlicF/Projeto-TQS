@@ -8,6 +8,8 @@ import Flights from './pages/Flight.jsx';
 import FlightCheckout from './pages/FlightCheckout.jsx';
 import Invoice from './pages/Invoice.jsx';
 import Payment from './pages/Payment.jsx';
+import Profile from './pages/Profile.jsx';
+import Navbar from './components/Navbar.jsx';
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/reservation" element={<Payment />} />
         <Route path="/flights" element={<Flights />} />
+        <Route path="/profile" element={<Profile />} />
+
       </Routes>
     </div>
   );

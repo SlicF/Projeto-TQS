@@ -30,7 +30,7 @@ function Register() {
   };
 
   const handleCancel = () => {
-    navigate('/otherpage'); 
+    navigate('/');
   };
 
 
@@ -77,7 +77,7 @@ function Register() {
             </div>
             <div className="form-actions">
               <button type="submit" className="btn btn-success">Registrar</button>
-              <button type="button" className="btn btn-cancel" onClick={handleCancel}>Cancel</button>
+              <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
             </div>
         </form>
       </div>
