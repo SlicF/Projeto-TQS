@@ -5,23 +5,17 @@ import Navbar from '../components/Navbar';
 
 const Profile = () => {
   const location = useLocation();
-  const { flightDetails, selectedSeat } = location.state || {}; // Use um valor padrão vazio para evitar erros
+  const { flightDetails, selectedSeat } = location.state || { flightDetails: null, selectedSeat: null };
 
   return (
     <div className="profile-page">
       <Navbar />
       <div className="profile-content">
-        <h1>TEU PERFIL</h1>
+        <h1 className="profile-title">Your Profile</h1>
         <div className="flight-details">
-          <h2>TEUS BILHETES DE AVIÃO</h2>
-          {flightDetails && selectedSeat ? (
-            <div>
-              <p>Flight Details: {flightDetails}</p>
-              <p>Selected Seat: {selectedSeat}</p>
-            </div>
-          ) : (
-            <p>No flight details available.</p>
-          )}
+          <h2 className="flight-details-title">YOUR PLANE TICKETS</h2>
+          
+         
         </div>
       </div>
     </div>
