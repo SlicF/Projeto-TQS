@@ -81,7 +81,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchPassengerIds = async () => {
       try {
-        const response = await fetch(`/api/passengers/user/${userId}`);
+        const response = await fetch(`http://localhost:8981/api/passengers/user/${userId}`);
+
+        console.log('response');
+        console.log(response);
+
         if (response.ok) {
           const passengers = await response.json();
           return passengers.map(p => p.passengerId);
@@ -99,7 +103,7 @@ const Profile = () => {
       try {
         const allReservations = [];
         for (const passengerId of passengerIds) {
-          const response = await fetch(`/api/reservations/getReservationsByPassenger?passengerId=${passengerId}`);
+          const response = await fetch(`http://localhost:8981/api/reservations/getReservationsByPassenger?passengerId=${passengerId}`);
           if (response.ok) {
             const reservations = await response.json();
             allReservations.push(...reservations);

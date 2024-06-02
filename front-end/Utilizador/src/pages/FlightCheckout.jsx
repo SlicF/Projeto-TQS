@@ -35,10 +35,10 @@
 //     cardPIN: '',
 //   });
 
-  // const seats = Array.from({ length: 50 }, (_, index) => ({
-  //   number: index + 1,
-  //   status: index < 10 ? "EMERGENCY_EXIT" : index < 25 ? "PREFERRED" : "AVAILABLE"
-  // }));
+// const seats = Array.from({ length: 50 }, (_, index) => ({
+//   number: index + 1,
+//   status: index < 10 ? "EMERGENCY_EXIT" : index < 25 ? "PREFERRED" : "AVAILABLE"
+// }));
 
 //   const handleSeatSelect = (seatNumber) => {
 //     setSelectedSeat(seatNumber);
@@ -122,7 +122,7 @@
 //         console.error('Error creating seat:', error);
 //       });
 //   };
-  
+
 //   const handleInputChange = (e) => {
 //     const { name, value } = e.target;
 //     setPassenger(prevState => ({
@@ -178,10 +178,11 @@ const FlightCheckout = () => {
     seatId: '',
     seatNumber: '',
     flightId: '',
-    flight: null  
+    flight: null
   });
   const [modalShow, setModalShow] = useState(false);
   const [passenger, setPassenger] = useState({
+    userId: localStorage.getItem('userId'),
     firstName: '',
     lastName: '',
     state: '',
@@ -227,7 +228,7 @@ const FlightCheckout = () => {
   };
 
   const generateRandomSeatPrefix = () => {
-    const seatPrefixes = ["AA", "AB", "AC", " BA", "BB", "BC", "CA", "CB", "CC"]; 
+    const seatPrefixes = ["AA", "AB", "AC", " BA", "BB", "BC", "CA", "CB", "CC"];
     let seatPrefix = seatPrefixes[Math.floor(Math.random() * seatPrefixes.length)];
     return seatPrefix;
   };
@@ -240,28 +241,106 @@ const FlightCheckout = () => {
     }));
   };
 
-  const handlePayment = () => {
-    const newSeatId = generateRandomSeatId();
-    const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
-    const updatedSeat = {
-      seatId: newSeatId,
-      seatNumber: newSeatNumber,
-      flightId: selectedFlight.flightId,
-      flight: selectedFlight
-    };
+  // const handlePayment = () => {
+  //   const newSeatId = generateRandomSeatId();
+  //   const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
+  //   const updatedSeat = {
+  //     seatId: newSeatId,
+  //     seatNumber: newSeatNumber,
+  //     flightId: selectedFlight.flightId,
+  //     flight: selectedFlight
+  //   };
 
-    // Save the seat to the database
-    createSeat(updatedSeat);
+  //   // Save the seat to the database
+  //   createSeat(updatedSeat);
 
-    // Create a new passenger object
-    const newPassenger = {
-      ...passenger,
-      reservationId: generateRandomId()
-    };
 
-    // Save the passenger to the database
-    createPassenger(newPassenger);
+  //   // Get the userId from local storage
+  //   // const userId = localStorage.getItem('userId');
+
+  //   // Create a new passenger object
+  //   const newPassenger = {
+  //     ...passenger
+  //     // reservationId: generateRandomId()
+  //     // userId: userId // Associate the passenger with the userId
+  //   };
+
+  //   // Save the passenger to the database
+  //   createPassenger(newPassenger);
+
+  //   // Criar um novo objeto reserva
+
+  //   alert(newPassenger.passengerId);
+
+  //   const newReservation = {
+  //     reservationId: generateRandomId(),
+  //     passengerId: newPassenger.passengerId, // Você precisa ter o ID do passageiro para associá-lo à reserva
+  //     flightId: selectedFlight.flightId,
+  //     seat: newSeatNumber,
+  //     totalPrice: selectedFlight.price, // Defina o preço total da reserva conforme necessário
+  //     reservationDate: new Date().toISOString(), // Ou qualquer lógica para definir a data da reserva
+  //     nameCard: passenger.firstName + ' ' + passenger.lastName, // Ou como você deseja definir o nome no cartão
+  //     numberCard: passenger.cardNumber, // Ou como você deseja definir o número do cartão
+  //     expirationDateCard: passenger.expirationDateCard, // Ou como você deseja definir a data de validade do cartão
+  //     countryCard: passenger.country // Ou como você deseja definir o país do cartão
+  //   };
+
+  //   // Salvar a reserva no banco de dados
+  //   createReservation(newReservation);
+  // };
+
+  const handlePayment = async () => {
+    try {
+      const newSeatId = generateRandomSeatId();
+      const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
+      const updatedSeat = {
+        seatId: newSeatId,
+        seatNumber: newSeatNumber,
+        flightId: selectedFlight.flightId,
+        flight: selectedFlight
+      };
+  
+      // Save the seat to the database
+      createSeat(updatedSeat);
+  
+      // Create a new passenger object
+      const newPassenger = {
+        ...passenger
+      };
+  
+      // Save the passenger to the database and get the passengerId
+      const passengerId = await createPassenger(newPassenger);
+  
+      // console.log(passengerId.passengerId);
+      // console.log(selectedFlight.flightId);
+      // console.log(newSeatNumber);
+      // console.log(selectedFlight.price);
+      // console.log(new Date().toISOString().slice(0, 10));
+      // console.log(passenger.firstName + ' ' + passenger.lastName);
+      // console.log(passenger.cardNumber);
+      // console.log(passenger.country);
+
+      // Create a new reservation object
+      const newReservation = {
+        // reservationId: generateRandomId(),
+        passengerId: passengerId.passengerId, // Use the passengerId returned from createPassenger
+        flightId: selectedFlight.flightId,
+        seat: newSeatNumber,
+        totalPrice: selectedFlight.price, // Define the total price as needed
+        reservationDate: new Date().toISOString().slice(0, 10), // Or any logic to set the reservation date
+        nameCard: passenger.firstName + ' ' + passenger.lastName, // Or how you want to set the name on the card
+        numberCard: passenger.cardNumber, // Or how you want to set the card number
+        countryCard: passenger.country // Or how you want to set the card country
+      
+      };
+  
+      // Save the reservation to the database
+      createReservation(newReservation);
+    } catch (error) {
+      console.error('Error during payment:', error);
+    }
   };
+  
 
   const createSeat = (seatData) => {
     fetch('http://localhost:8981/api/seats/createSeat', {
@@ -285,8 +364,56 @@ const FlightCheckout = () => {
       });
   };
 
+  const createReservation = (reservationData) => {
+    fetch('http://localhost:8981/api/reservations/createReservation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservationData),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to create reservation');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Reservation created:', data);
+        alert("RESERVATION CREATED");
+        navigate('/searchFlight');
+      })
+      .catch(error => {
+        console.error('Error creating reservation:', error);
+      });
+  };
+
+  // const createPassenger = (passengerData) => {
+  //   fetch('http://localhost:8981/api/passengers/createPassenger', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(passengerData),
+  //   })
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error('Failed to create passenger');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       console.log('Passenger created:', data);
+  //       // alert("Registration successful")
+  //       // navigate('/reservation', { state: { passengerId: data.passengerId, passengerDetails: passengerData } });
+  //     })
+  //     .catch(error => {
+  //       console.error('Error creating passenger:', error);
+  //     });
+  // };
+
   const createPassenger = (passengerData) => {
-    fetch('http://localhost:8981/api/passengers/createPassenger', {
+    return fetch('http://localhost:8981/api/passengers/createPassenger', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -301,12 +428,14 @@ const FlightCheckout = () => {
       })
       .then(data => {
         console.log('Passenger created:', data);
-        navigate('/reservation', { state: { passengerId: data.passengerId, passengerDetails: passengerData } });
+        return data;  // Return the passengerId
       })
       .catch(error => {
         console.error('Error creating passenger:', error);
+        throw error;
       });
   };
+  
 
   useEffect(() => {
     const selectedFlight = JSON.parse(localStorage.getItem('selectedFlight'));
@@ -315,12 +444,12 @@ const FlightCheckout = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const selectedFlight = JSON.parse(localStorage.getItem('selectedFlight'));
-  //   if (selectedFlight && selectedFlight.flightId) {
-  //     fetchFlightById(selectedFlight);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const selectedFlight = JSON.parse(localStorage.getItem('selectedFlight'));
+    if (selectedFlight && selectedFlight.flightId) {
+      fetchFlightById(selectedFlight);
+    }
+  }, []);
 
   const fetchFlightById = async (selectedFlight) => {
     try {
@@ -428,7 +557,7 @@ const FlightCheckout = () => {
                 </div>
               </form>
               <div className="button-group">
-                <button disabled={!passenger.firstName || !passenger.lastName} onClick={handlePayment}>Payment</button>
+                <button disabled={!passenger.firstName || !passenger.lastName} onClick={handlePayment}>Finish</button>
                 <button className="cancel-button" onClick={() => navigate('/searchFlight')}>Cancel</button>
               </div>
             </div>

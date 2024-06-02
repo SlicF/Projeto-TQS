@@ -193,7 +193,7 @@ const FlightReservedCard = ({ reservation }) => {
             <div className="flightFlightReserved-time">Departure Time: {flight.departureHour}</div>
             <div className="flightFlightReserved-location">Departure City: {flight.departureCity}</div>
           </div>
-          <div className="flightFlightReserved-duration">Duration: {flight.duration}</div>
+          <div className="flightFlightReserved-duration">{Array(11).fill(String.fromCharCode(62)).join('')}</div>
           <div className="flightFlightReserved-details">
             <div className="flightFlightReserved-time">Arrival Time: {flight.arrivalHour}</div>
             <div className="flightFlightReserved-location">Arrival City: {flight.arrivalCity}</div>

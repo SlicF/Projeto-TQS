@@ -64,7 +64,9 @@ public class PassengerController {
         } else {
             Map<String, Object> response = new HashMap<>();
             response.put("passengerId", passenger.getPassengerId());
-            return ResponseEntity.ok().body(response);
+            // return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok().body(passenger);
+
         }
     }
 

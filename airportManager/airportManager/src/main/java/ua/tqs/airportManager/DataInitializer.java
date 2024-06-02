@@ -251,10 +251,10 @@ public class DataInitializer {
             LocalDate reservationDate = generateRandomReservationDate(flight.getDate());
             String nameCard = passenger.getFirstName() + " " + passenger.getLastName();
             String numberCard = passenger.getCardNumber();
-            String expirationDateCard = generateRandomExpirationDateCard();
+            // String expirationDateCard = generateRandomExpirationDateCard();
             String countryCard = passenger.getCountry();
 
-            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, expirationDateCard, countryCard, passenger, flight);
+            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, countryCard, passenger, flight);
             System.out.println(reservation);
 
             // reservations.add(reservation);

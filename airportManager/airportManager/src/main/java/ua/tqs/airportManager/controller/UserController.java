@@ -51,14 +51,14 @@ public class UserController {
     }
 
     @GetMapping("/userInfoByUsername")
-    // public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
-    public ResponseEntity<User> getUserInfoByUsername() {
+    public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
+    // public ResponseEntity<User> getUserInfoByUsername() {
 
         // User user = userService.findByUsername(username);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.out.println("username: " + username);
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // System.out.println("username: " + username);
 
         User user = userRespository.findByUsername(username).orElseThrow();
 

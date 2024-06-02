@@ -23,7 +23,7 @@ public class Passenger {
     @Column(name="passengerId", nullable = false, unique = true)
     private String passengerId;
 
-    @Column(name = "userId")
+    @Column(name = "userId", nullable = false)
     private int userId;
 
     @Column(name="firstName", nullable = false)

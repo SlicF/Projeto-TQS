@@ -42,12 +42,14 @@ function Login() {
 
       console.log("Login response:", data);
       localStorage.setItem("token", data.token);
+      // localStorage.setItem("user", JSON.stringify(data));  // Save user details in local storage
       // localStorage.setItem("userId", data.userID);
       // localStorage.setItem('user', JSON.stringify({ email, password }));
 
 
       alert("Login Successful");
 
+      UserInfo(email);
       navigate("/searchflight");
     } catch (error) {
       alert("Login error");
@@ -57,25 +59,30 @@ function Login() {
     }
   };
 
-  // const [form, setForm] = useState({
-  //   nome: '',
-  //   email: '',
-  //   senha: ''
-  // });
+  const UserInfo = async (email) => {
 
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setForm({
-  //     ...form,
-  //     [name]: value
-  //   });
-  // };
+    try {
+      const response = await fetch(`http://localhost:8981/api/accounts/userInfoByUsername?username=${email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(form);
-  //   navigate('/searchflight');
-  // };
+      if (!response.ok) {
+        throw new Error('Failed to fetch flights: ' + response.statusText);
+      }
+
+      const data = await response.json();
+      console.log('User loged in :', data);
+      localStorage.setItem("userId", data.userId);
+
+      return data;
+    } catch (error) {
+      console.error('Failed to fetch user loged in:', error);
+    }
+  };
+
 
   return (
     <div>
