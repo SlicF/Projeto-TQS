@@ -7,33 +7,103 @@ import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom'; 
 function Register() {
 
+  // const navigate = useNavigate();
+  // const [form, setForm] = useState({
+  //   nome: '',
+  //   email: '',
+  //   senha: ''
+  // });
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setForm({
+  //     ...form,
+  //     [name]: value
+  //   });
+  // };
+
+
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(form);
+  //   navigate('/login'); 
+  // };
+
+  // const handleCancel = () => {
+  //   navigate('/');
+  // };
+  
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    nome: '',
-    email: '',
-    senha: ''
-  });
+  const [error, setError] = useState("");
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setForm({
-      ...form,
-      [name]: value
-    });
+
+
+  const handleRegister = async () => {
+    try {
+      if (
+        firstName.length < 2 ||
+        lastName.length < 2 ||
+        email.length < 2 ||
+        password.length < 2 ||
+        city.length < 2 ||
+        country.length < 2
+      ) {
+        alert("Please fill in all the fields");
+        throw new Error("Please fill in all the fields");
+      }
+
+      // if (userPassword !== userPasswordRepeated) {
+      //   alert("Passwords do not match");
+      //   throw new Error("Passwords do not match");
+      // }
+
+      const userData = {
+        firstName,
+        lastName,
+        password,
+        email,
+        city,
+        country
+      };
+
+      console.log(JSON.stringify(userData));
+
+      const response = await fetch(
+        `http://localhost:8981/api/accounts/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+
+      console.log("Registration successful");
+
+      alert("Registration successful");
+      navigate("/");
+    } catch (error) {
+      alert("Registration error");
+      // alert(error);
+      setError(error.message);
+    }
   };
 
-
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(form);
-    navigate('/login'); 
+  const handleLogin = () => {
+    navigate("/");
   };
-
-  const handleCancel = () => {
-    navigate('/');
-  };
-
 
   return (
     <div>
@@ -43,46 +113,83 @@ function Register() {
         style={{ backgroundImage: `url(${fundo})` }} 
         >
       <div className='left'>
-        <form onSubmit={handleSubmit} className="register-form">
+        <div className="register-form">
             <h2 className='Title'>REGISTER</h2>
-            <p className="label">Nome:</p>
+            <p className="label">First Name:</p>
             <div className="input-group">
-              <input 
-                type="text" 
-                name="nome" 
-                value={form.nome} 
-                onChange={handleInputChange} 
-                placeholder="Nome"
-                required 
+            <input
+                id="firstName"
+                type="firstName"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
               />
             </div>
-            <p className="label">Mail:</p>
+            <p className="label">Last Name:</p>
             <div className="input-group">
-              <input 
-                type="email" 
-                name="email" 
-                value={form.email} 
-                onChange={handleInputChange} 
-                placeholder="Mail"
-                required 
+            <input
+                id="lastName"
+                type="lastName"
+                placeholder="Enter last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
               />
             </div>
-            <p className="label">Senha:</p>
+            <p className="label">City:</p>
             <div className="input-group">
-              <input 
-                type="password" 
-                name="senha" 
-                value={form.senha} 
-                onChange={handleInputChange} 
-                placeholder="Senha"
-                required 
+            <input
+                id="city"
+                type="city"
+                placeholder="Enter city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              />
+            </div>
+            <p className="label">Country:</p>
+            <div className="input-group">
+            <input
+                id="country"
+                type="conutry"
+                placeholder="Enter country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+              />
+            </div>
+            <p className="label">Email:</p>
+            <div className="input-group">
+            <input
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <p className="label">Password:</p>
+            <div className="input-group">
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="form-actions">
-              <button type="submit" className="btn btn-success">Registrar</button>
-              <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
+              <button className="btn btn-success" onClick={handleRegister}>Sign Up</button>
             </div>
-        </form>
+            <div style={{ marginTop: "10px" }}>
+              <p style={{ textAlign: "center" }}>
+                Already have an account? <i className="buttonCreateAccount" onClick={handleLogin}>Login now!</i>
+              </p>
+            </div>
+        </div>
       </div>
       <div className='right'>
         <div className="register-logo">

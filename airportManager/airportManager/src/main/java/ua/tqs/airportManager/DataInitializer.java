@@ -169,7 +169,7 @@ public class DataInitializer {
 
         for (int i = 0; i < 20; i++) {
             String username = generateUsername();
-            String userId = generateUserNumber(username);
+            // String userId = generateUserNumber(username);
             String firstName = generateRandomFirstName();
             String lastName = generateRandomLastName();
             String password = generateRandomPassword();
@@ -179,11 +179,12 @@ public class DataInitializer {
             String city = generateRandomCity(country);
             Roles role = random.nextBoolean() ? Roles.ADMIN : Roles.USER;
 
-            User user = new User(userId, username, firstName, lastName, password, email, passportNumber, city, country, role);
+            User user = new User(username, firstName, lastName, password, email, passportNumber, city, country, role);
             System.out.println(user);
 
             // users.add(user);
             userRepository.save(user);
+            // System.out.println("\n\n\n\n\n\nn done \n\n\n\n\\n\n");
         }
     }
 
@@ -194,7 +195,7 @@ public class DataInitializer {
             User user = users.get(random.nextInt(users.size()));
 
             String passengerId = generatePassengerNumber();
-            String userId = user.getUserId();
+            int userId = user.getUserId();
             String firstName = generateRandomFirstName();
             String lastName = generateRandomLastName();
             String state = random.nextBoolean() ? "null" : "checked-in";
@@ -210,7 +211,7 @@ public class DataInitializer {
             String cardNumber = generateRandomCardNumber();
             String cardPIN = generateRandomCardPIN();
 
-            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN, user);
+            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN);
             System.out.println(passenger);
 
             // passengers.add(passenger);

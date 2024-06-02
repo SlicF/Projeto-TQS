@@ -69,7 +69,7 @@ public class PassengerController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Passenger>> getPassengersByUserId(@PathVariable("userId") String userId) {
+    public ResponseEntity<List<Passenger>> getPassengersByUserId(@PathVariable("userId") int userId) {
         List<Passenger> passengers = passengersService.findByUserId(userId);
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }

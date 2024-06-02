@@ -9,5 +9,5 @@ public interface PassengerService {
     Passenger findByPassengerId (String passengerId);
     List<Passenger> findByState (String state);
     List<Passenger> getAllPassengers();
-    List<Passenger> findByUserId(String userId);
+    List<Passenger> findByUserId(int userId);
 }

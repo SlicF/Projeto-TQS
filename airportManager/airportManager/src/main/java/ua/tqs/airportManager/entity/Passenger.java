@@ -24,7 +24,7 @@ public class Passenger {
     private String passengerId;
 
     @Column(name = "userId")
-    private String userId;
+    private int userId;
 
     @Column(name="firstName", nullable = false)
     private String firstName;
@@ -67,10 +67,6 @@ public class Passenger {
 
     @Column(name = "cardPIN", nullable = false)
     private String cardPIN;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
-    private User user;
 
     @PrePersist
     public void generateReservationId() {

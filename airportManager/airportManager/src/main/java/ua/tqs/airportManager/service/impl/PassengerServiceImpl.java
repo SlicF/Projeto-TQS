@@ -34,7 +34,7 @@ public class PassengerServiceImpl implements PassengerService{
     }
 
     @Override
-    public List<Passenger> findByUserId(String userId) {
+    public List<Passenger> findByUserId(int userId) {
         return passengerRepository.findByUserId(userId);
     }
 }

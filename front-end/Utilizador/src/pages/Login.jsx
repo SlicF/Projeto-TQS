@@ -3,30 +3,79 @@ import '../css/Login.css';
 import fundo from '../img/fundo.jpg';
 import logo_s from '../img/logo_s.png';
 import Navbar from '../components/Navbar';
+// import { Stomp } from "@stomp/stompjs";
+// import SockJS from "sockjs-client";
 
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
-  const [form, setForm] = useState({
-    nome: '',
-    email: '',
-    senha: ''
-  });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setForm({
-      ...form,
-      [name]: value
-    });
+  const handleRegister = () => {
+    navigate("/register");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(form);
-    navigate('/searchflight');
+  const handleLogin = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:8981/api/accounts/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (!response.ok) {
+        alert("Login failed");
+        return;
+      }
+
+      const data = await response.json();
+
+      console.log("Login response:", data);
+      localStorage.setItem("token", data.token);
+      // localStorage.setItem("userId", data.userID);
+      // localStorage.setItem('user', JSON.stringify({ email, password }));
+
+
+      alert("Login Successful");
+
+      navigate("/searchflight");
+    } catch (error) {
+      alert("Login error");
+      // alert(error);
+
+      console.error("Login error:", error);
+    }
   };
+
+  // const [form, setForm] = useState({
+  //   nome: '',
+  //   email: '',
+  //   senha: ''
+  // });
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setForm({
+  //     ...form,
+  //     [name]: value
+  //   });
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(form);
+  //   navigate('/searchflight');
+  // };
 
   return (
     <div>
@@ -36,9 +85,9 @@ function Login() {
         style={{ backgroundImage: `url(${fundo})` }}
       >
         <div className='left'>
-          <form onSubmit={handleSubmit} className="register-form">
+          <div className="register-form">
             <h2 className='Title'>LOGIN</h2>
-            <div className="input-group">
+            {/* <div className="input-group">
               <p className="label">Nome:</p>
               <input
                 type="text"
@@ -48,35 +97,39 @@ function Login() {
                 placeholder="Nome"
                 required
               />
-            </div>
+            </div> */}
             <div className="input-group">
-              <p className="label">Mail:</p>
+              <p className="label">Email:</p>
               <input
+                id="email"
                 type="email"
-                name="email"
-                value={form.email}
-                onChange={handleInputChange}
-                placeholder="Mail"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="input-group">
               <p className="label">Senha:</p>
               <input
+                id="password"
                 type="password"
-                name="senha"
-                value={form.senha}
-                onChange={handleInputChange}
-                placeholder="Senha"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="btn btn-success">Login</button>
-              <button type="button" className="btn btn-danger">Cancelar</button>
+              <button type="submit" className="btn btn-success" onClick={handleLogin}>Login</button>
             </div>
-          </form>
+            <div style={{ marginTop: "10px" }}>
+              <p style={{ textAlign: "center" }}>
+                Don’t have an account? <i className="buttonCreateAccount" onClick={handleRegister}>Create one now!</i>
+              </p>
+            </div>
+          </div>
         </div>
         <div className='right'>
           <div className="register-logo">

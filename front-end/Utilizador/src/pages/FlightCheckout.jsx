@@ -1,3 +1,168 @@
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import Navbar from '../components/Navbar';
+// import SeatsModal from '../components/SeatsModal';
+// import "../css/flightcheckout.css";
+// import Button from 'react-bootstrap/Button';  //npm install react-bootstrap bootstrap//
+
+// const FlightCheckout = () => {
+//   const navigate = useNavigate();
+//   const [selectedFlight, setSelectedFlight] = useState(null);
+//   const [selectedSeat, setSelectedSeat] = useState(null);
+//   const [reservationId, setReservationId] = useState(null);
+//   const [seat, setSeat] = useState({
+//     seatId: '',
+//     seatNumber: '',
+//     flightId: '',
+//     flight: null  
+//   });
+//   const [modalShow, setModalShow] = useState(false);
+//   const [passenger, setPassenger] = useState({
+//     passengerId: '',
+//     firstName: '',
+//     lastName: '',
+//     state: 'null',
+//     sex: '',
+//     birthDate: '',
+//     email: '',
+//     phoneNumber: '',
+//     passportNumber: '',
+//     postalCode: '',
+//     streetAddress: '',
+//     city: '',
+//     country: '',
+//     cardNumber: '',
+//     cardPIN: '',
+//   });
+
+  // const seats = Array.from({ length: 50 }, (_, index) => ({
+  //   number: index + 1,
+  //   status: index < 10 ? "EMERGENCY_EXIT" : index < 25 ? "PREFERRED" : "AVAILABLE"
+  // }));
+
+//   const handleSeatSelect = (seatNumber) => {
+//     setSelectedSeat(seatNumber);
+//     console.log(`Seat ${seatNumber} selected!`);
+//   };
+
+//   const generateRandomId = () => {
+//     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//     let result = '';
+//     for (let i = 0; i < 7; i++) {
+//       result += characters.charAt(Math.floor(Math.random() * characters.length));
+//     }
+//     return result;
+//   };
+
+//   const generateRandomSeatId = () => {
+//     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+//     let result = '';
+//     for (let i = 0; i < 11; i++) {
+//       result += characters.charAt(Math.floor(Math.random() * characters.length));
+//     }
+//     return result;
+//   };
+
+//   const generateRandomSeatPrefix = () => {
+//     const seatPrefixes = ["AA", "AB", "AC", " BA", "BB", "BC", "CA", "CB", "CC"]; 
+//     let seatPrefix = seatPrefixes[Math.floor(Math.random() * seatPrefixes.length)];
+//     return seatPrefix;
+//   };
+
+//   const generateRandomReservationId = () => {
+//     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+//     let result = '';
+//     for (let i = 0; i < 11; i++) {
+//       result += characters.charAt(Math.floor(Math.random() * characters.length));
+//     }
+//     return result;
+//   };
+
+//   const handlePassengerStore = (updatedPassenger, reservationId, seatDetails, flightDetails) => {
+//     fetch('http://localhost:8981/api/passengers/createPassenger', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(updatedPassenger),
+//     })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Failed to create passenger');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         console.log('Passenger created:', data);
+//         navigate('/reservation', { state: { passengerId: data, passengerDetails: updatedPassenger, reservationId, seatDetails, flightDetails } });
+//       })
+//       .catch(error => {
+//         console.error('Error creating passenger:', error);
+//       });
+//   };
+
+//   const handleSeatStore = (updatedSeat) => {
+//     fetch('http://localhost:8981/api/seats/createSeat', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(updatedSeat),
+//     })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Failed to create seat');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         console.log('Seat created:', data);
+//       })
+//       .catch(error => {
+//         console.error('Error creating seat:', error);
+//       });
+//   };
+  
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setPassenger(prevState => ({
+//       ...prevState,
+//       [name]: value
+//     }));
+//   };
+
+//   const handlePayment = () => {
+//     const newSeatId = generateRandomSeatId();
+//     const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
+//     const updatedSeat = {
+//       ...seat,
+//       seatId: newSeatId,
+//       seatNumber: newSeatNumber,
+//       flightId: selectedFlight.flightId,
+//       flight: selectedFlight
+//     };
+//     setSeat(updatedSeat);
+//     localStorage.setItem('seat', JSON.stringify(updatedSeat));
+
+//     alert(JSON.stringify(updatedSeat));
+//     handleSeatStore(updatedSeat);
+
+//     const newPassengerId = generateRandomId();
+//     const updatedPassenger = {
+//       ...passenger,
+//       passengerId: newPassengerId
+//     };
+//     setPassenger(updatedPassenger);
+//     localStorage.setItem('passenger', JSON.stringify(updatedPassenger));
+
+//     const reservationId = generateRandomReservationId();
+//     setReservationId(reservationId);
+//     localStorage.setItem('reservationId', JSON.stringify(reservationId));
+
+//     handlePassengerStore(updatedPassenger, reservationId, updatedSeat, selectedFlight);
+//   };
+
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -9,7 +174,6 @@ const FlightCheckout = () => {
   const navigate = useNavigate();
   const [selectedFlight, setSelectedFlight] = useState(null);
   const [selectedSeat, setSelectedSeat] = useState(null);
-  const [reservationId, setReservationId] = useState(null);
   const [seat, setSeat] = useState({
     seatId: '',
     seatNumber: '',
@@ -18,10 +182,9 @@ const FlightCheckout = () => {
   });
   const [modalShow, setModalShow] = useState(false);
   const [passenger, setPassenger] = useState({
-    passengerId: '',
     firstName: '',
     lastName: '',
-    state: 'null',
+    state: '',
     sex: '',
     birthDate: '',
     email: '',
@@ -69,45 +232,44 @@ const FlightCheckout = () => {
     return seatPrefix;
   };
 
-  const generateRandomReservationId = () => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = '';
-    for (let i = 0; i < 11; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPassenger(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  const handlePassengerStore = (updatedPassenger, reservationId, seatDetails, flightDetails) => {
-    fetch('http://localhost:8981/api/passengers/createPassenger', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedPassenger),
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to create passenger');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Passenger created:', data);
-        navigate('/reservation', { state: { passengerId: data, passengerDetails: updatedPassenger, reservationId, seatDetails, flightDetails } });
-      })
-      .catch(error => {
-        console.error('Error creating passenger:', error);
-      });
+  const handlePayment = () => {
+    const newSeatId = generateRandomSeatId();
+    const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
+    const updatedSeat = {
+      seatId: newSeatId,
+      seatNumber: newSeatNumber,
+      flightId: selectedFlight.flightId,
+      flight: selectedFlight
+    };
+
+    // Save the seat to the database
+    createSeat(updatedSeat);
+
+    // Create a new passenger object
+    const newPassenger = {
+      ...passenger,
+      reservationId: generateRandomId()
+    };
+
+    // Save the passenger to the database
+    createPassenger(newPassenger);
   };
 
-  const handleSeatStore = (updatedSeat) => {
+  const createSeat = (seatData) => {
     fetch('http://localhost:8981/api/seats/createSeat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedSeat),
+      body: JSON.stringify(seatData),
     })
       .then(response => {
         if (!response.ok) {
@@ -122,50 +284,43 @@ const FlightCheckout = () => {
         console.error('Error creating seat:', error);
       });
   };
-  
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPassenger(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
 
-  const handlePayment = () => {
-    const newSeatId = generateRandomSeatId();
-    const newSeatNumber = generateRandomSeatPrefix() + selectedSeat;
-    const updatedSeat = {
-      ...seat,
-      seatId: newSeatId,
-      seatNumber: newSeatNumber,
-      flightId: selectedFlight.flightId,
-      flight: selectedFlight
-    };
-    setSeat(updatedSeat);
-    localStorage.setItem('seat', JSON.stringify(updatedSeat));
-    handleSeatStore(updatedSeat);
-
-    const newPassengerId = generateRandomId();
-    const updatedPassenger = {
-      ...passenger,
-      passengerId: newPassengerId
-    };
-    setPassenger(updatedPassenger);
-    localStorage.setItem('passenger', JSON.stringify(updatedPassenger));
-
-    const reservationId = generateRandomReservationId();
-    setReservationId(reservationId);
-    localStorage.setItem('reservationId', JSON.stringify(reservationId));
-
-    handlePassengerStore(updatedPassenger, reservationId, updatedSeat, selectedFlight);
+  const createPassenger = (passengerData) => {
+    fetch('http://localhost:8981/api/passengers/createPassenger', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(passengerData),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to create passenger');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Passenger created:', data);
+        navigate('/reservation', { state: { passengerId: data.passengerId, passengerDetails: passengerData } });
+      })
+      .catch(error => {
+        console.error('Error creating passenger:', error);
+      });
   };
 
   useEffect(() => {
     const selectedFlight = JSON.parse(localStorage.getItem('selectedFlight'));
     if (selectedFlight && selectedFlight.flightId) {
-      fetchFlightById(selectedFlight);
+      setSelectedFlight(selectedFlight);
     }
   }, []);
+
+  // useEffect(() => {
+  //   const selectedFlight = JSON.parse(localStorage.getItem('selectedFlight'));
+  //   if (selectedFlight && selectedFlight.flightId) {
+  //     fetchFlightById(selectedFlight);
+  //   }
+  // }, []);
 
   const fetchFlightById = async (selectedFlight) => {
     try {
