@@ -50,27 +50,5 @@ public class Usero {
     @Enumerated(EnumType.STRING) 
     Roles role;
 
-    // @Column(name = "sex")
-    // String sex;
-
-    // @Column(name = "birthDate")
-    // LocalDate birthDate;
-
-    // @Column(name = "phoneNumber")
-    // String phoneNumber;
-
-    // @Column(name = "nacionality")
-    // String nationality;
-
-    // @Column(name = "postalCode", nullable = false)
-    // String postalCode;
-
-    // @Column(name = "streetAddress", nullable = false)
-    // String streetAddress;
     
-    // @Column(name = "cardNumber")
-    // String cardNumber;
-
-    // @Column(name = "cardPIN")
-    // String cardPIN;
 }

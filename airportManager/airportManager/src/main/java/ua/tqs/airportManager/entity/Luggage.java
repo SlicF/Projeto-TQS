@@ -26,9 +26,6 @@ public class Luggage {
     @Column(name = "weight", nullable = false)
     private String weight;
 
-    // @Column(name = "state", nullable = false)
-    // private String state;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reservationId", referencedColumnName = "reservationId", insertable = false, updatable = false)
     private Reservation reservation;

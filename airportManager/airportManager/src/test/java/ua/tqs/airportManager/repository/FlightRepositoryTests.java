@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-public class FlightRepositoryTests {
+class FlightRepositoryTests {
 
     @Autowired
     private FlightRepository flightRepository;
@@ -22,7 +22,7 @@ public class FlightRepositoryTests {
     private AirlineRepository airlineRepository;
 
     @Test
-    public void testFindByFlightId() {
+        void testFindByFlightId() {
         Flight flight;
         Airline airline = new Airline("EX", "Example Air");
 
@@ -40,7 +40,7 @@ public class FlightRepositoryTests {
     }
 
     @Test
-    public void testFindByState() {
+        void testFindByState() {
         Airline airline = new Airline("EX", "Example Air");
         airlineRepository.save(airline);
 
@@ -61,7 +61,7 @@ public class FlightRepositoryTests {
     }
 
     @Test
-    public void testFindByDepartureCityAndArrivalCityAndDate() {
+        void testFindByDepartureCityAndArrivalCityAndDate() {
         Airline airline = new Airline("EX", "Example Air");
         airlineRepository.save(airline);
 
@@ -90,7 +90,7 @@ public class FlightRepositoryTests {
     }
 
     @Test
-    public void testFindAllDepartureCities() {
+        void testFindAllDepartureCities() {
         Airline airline = new Airline("EX", "Example Air");
         airlineRepository.save(airline);
 
@@ -112,7 +112,7 @@ public class FlightRepositoryTests {
     }
 
     @Test
-    public void testFindAllArrivalCities() {
+        void testFindAllArrivalCities() {
         Airline airline = new Airline("EX", "Example Air");
         airlineRepository.save(airline);
 

@@ -14,14 +14,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ua.tqs.airportManager.entity.Passenger;
 
 @DataJpaTest
-public class PassengerRepositoryTest {
+class PassengerRepositoryTest {
 
     @Autowired
     private PassengerRepository passengerRepository;
 
     @DisplayName("Test findByPassengerId")
     @Test
-    public void testFindByPassengerId() {
+    void testFindByPassengerId() {
         // Create a passenger
         Passenger passenger = new Passenger();
         passenger.setPassengerId("1");
@@ -53,7 +53,7 @@ public class PassengerRepositoryTest {
 
     @DisplayName("Test findByState")
     @Test
-    public void testFindByState() {
+    void testFindByState() {
         // Create passengers with different states
         Passenger passenger1 = new Passenger();
         passenger1.setPassengerId("1");

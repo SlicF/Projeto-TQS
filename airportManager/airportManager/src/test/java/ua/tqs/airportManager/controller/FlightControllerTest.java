@@ -25,7 +25,7 @@ import ua.tqs.airportManager.service.FlightService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class FlightControllerTest {
+class FlightControllerTest {
 
     private MockMvc mockMvc;
 
@@ -39,14 +39,14 @@ public class FlightControllerTest {
     private FlightController flightController;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(flightController).build();
     }
 
     @DisplayName("Test getAirlines")
     @Test
-    public void testGetAirlines() throws Exception {
+    void testGetAirlines() throws Exception {
         List<Airline> airlines = new ArrayList<>();
         airlines.add(new Airline());
         airlines.add(new Airline());
@@ -59,7 +59,7 @@ public class FlightControllerTest {
 
     @DisplayName("Test getAllCities")
     @Test
-    public void testGetAllCities() throws Exception {
+    void testGetAllCities() throws Exception {
         List<String> cities = new ArrayList<>();
         cities.add("City1");
         cities.add("City2");
@@ -72,7 +72,7 @@ public class FlightControllerTest {
 
     @DisplayName("Test getFlights")
     @Test
-    public void testGetFlights() throws Exception {
+    void testGetFlights() throws Exception {
         List<Flight> flights = new ArrayList<>();
         flights.add(new Flight());
         flights.add(new Flight());
@@ -85,7 +85,7 @@ public class FlightControllerTest {
 
     @DisplayName("Test getFlightsState")
     @Test
-    public void testGetFlightsState() throws Exception {
+    void testGetFlightsState() throws Exception {
         String state = "State1";
         List<Flight> flights = new ArrayList<>();
         flights.add(new Flight());
@@ -99,7 +99,7 @@ public class FlightControllerTest {
 
     @DisplayName("Test getFlightCheckout")
     @Test
-    public void testGetFlightCheckout() throws Exception {
+    void testGetFlightCheckout() throws Exception {
         String flightId = "1";
         Flight flight = new Flight();
         flight.setFlightId(flightId);
@@ -112,7 +112,7 @@ public class FlightControllerTest {
 
     @DisplayName("Test searchFlights")
     @Test
-    public void testSearchFlights() throws Exception {
+    void testSearchFlights() throws Exception {
         Flight search = new Flight();
         search.setDepartureCity("City1");
         search.setArrivalCity("City2");

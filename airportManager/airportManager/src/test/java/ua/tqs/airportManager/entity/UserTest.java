@@ -7,12 +7,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ua.tqs.airportManager.Roles;
 
-public class UserTest {
+class UserTest {
     
     private static User user;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         user = new User();
         user.setUserId("1");
         user.setFirstName("João");

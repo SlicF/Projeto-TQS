@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ua.tqs.airportManager.entity.Airline;
 
 @DataJpaTest
-public class AirlineRepositoryTest {
+class AirlineRepositoryTest {
 
     @Autowired
     private AirlineRepository airlineRepository;

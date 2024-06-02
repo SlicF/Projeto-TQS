@@ -15,8 +15,6 @@ import ua.tqs.airportManager.repository.PassengerRepository;
 @AllArgsConstructor
 @RequestMapping("/api/passengers")
 public class PassengerController {
-
-    // private AuthService authService;
     private PassengerRepository passengersRespository;
 
     @GetMapping("/passengers")

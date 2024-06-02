@@ -26,23 +26,17 @@ import ua.tqs.airportManager.service.ReservationService;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
-    private ReservationService reservationService;
+    private final ReservationService reservationService;
     
     @PostMapping("/createReservation")
-    public ResponseEntity<?> createReservation(@RequestBody Reservation reserv) {
-        
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName(); 
-        // User user = UserRepository.findByUsername(username).orElseThrow();
-        
-        var reservation = reservationService.createReservation(reserv);
+    public ResponseEntity<Map<String, Object>> createReservation(@RequestBody Reservation reserv) {
+        Reservation reservation = reservationService.createReservation(reserv);
         if (reservation == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating reservation");
-        }
-        else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Error creating reservation"));
+        } else {
             Map<String, Object> response = new HashMap<>();
             response.put("reservationId", reservation.getReservationId());
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok(response);
         }
     }
 
@@ -60,11 +54,7 @@ public class ReservationController {
 
     @GetMapping("/getReservationsByPassenger")
     public ResponseEntity<List<Reservation>> getReservationsByPassenger(@RequestParam("passengerId") String passengerId) {
-        // array of reservations
-        List<Reservation> reservations = new ArrayList<Reservation>();
-        
-        reservations = reservationService.getReservationsByPassengerId(passengerId);
-        
+        List<Reservation> reservations = reservationService.getReservationsByPassengerId(passengerId);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 }

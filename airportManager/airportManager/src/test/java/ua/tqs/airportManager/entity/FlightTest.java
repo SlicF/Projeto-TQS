@@ -7,15 +7,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class FlightTest {
+class FlightTest {
     
     private static List<Flight> flights = new ArrayList<>();
 
     static LocalDate flightDate13 = LocalDate.of(2024, 5, 19);
     static LocalDate flightDate24 = LocalDate.of(2024, 7, 4);
 
-    // static List<Seat> seatsTaken124 = new ArrayList<>();
-    // static List<Seat> seatsTaken3 = new ArrayList<>(Arrays.asList(seat1F3, seat2F3, seat3F3));
     
     static Airline airline1 = new Airline("TAP", "TAP Portugal");
     static Airline airline2 = new Airline("RYA", "Ryan Air Services");
@@ -26,12 +24,8 @@ public class FlightTest {
     static Flight flight3 = new Flight("PTMDR014", "RYA", "Portugal", "Madrid", flightDate13, "15h20", "17h43", "187€", "OK", 140, airline2);
     static Flight flight4 = new Flight("PTGRC059", "EJU", "Portugal", "Grécia", flightDate24, "05h25", "08h52", "237€", "Cancelado", 125, airline3);
 
-    // static Seat seat1F3 = new Seat("AA3", "PTMDR014", flight3);
-    // static Seat seat2F3 = new Seat("AB4", "PTMDR014", flight3);
-    // static Seat seat3F3 = new Seat("AC7", "PTMDR014", flight3);
-
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
 
         flights.add(flight1);
         flights.add(flight2);
@@ -55,7 +49,7 @@ public class FlightTest {
 
     @Test
     @DisplayName("test association between flight and airline")
-    public void testReservationFlightAssociation() {
+    void testReservationFlightAssociation() {
         assertEquals(airline1, flight1.getAirline());
         assertEquals(airline2, flight3.getAirline());
     }

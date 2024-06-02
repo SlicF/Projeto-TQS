@@ -48,9 +48,6 @@ public class Flight {
     @Column(name="seatsNumber", nullable = false)
     private Integer seatsNumber;
 
-    // @Column(name="seatsTaken")
-    // private List<String> seatsTaken;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airlineCode", referencedColumnName = "airlineCode", insertable = false, updatable = false)
     private Airline airline;
