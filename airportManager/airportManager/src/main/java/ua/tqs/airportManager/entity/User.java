@@ -247,7 +247,7 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setId(int i) {
+    public void setId(String string) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setId'");
     }

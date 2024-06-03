@@ -1,85 +1,103 @@
-// package ua.tqs.airportManager.entity;
+package ua.tqs.airportManager.entity;
 
-// import static org.junit.jupiter.api.Assertions.*;
-// import java.time.LocalDate;
-// import java.util.*;
-// import org.junit.jupiter.api.BeforeAll;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.DisplayName;
-// import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-// import ua.tqs.airportManager.Roles;
+import java.time.LocalDate;
 
-// public class ReservationTest {
-    
-//     private static List<Reservation> reservations = new ArrayList<>();
+import org.junit.jupiter.api.Test;
 
-//     static LocalDate flightDate1 = LocalDate.of(2024, 5, 19);
-//     static LocalDate flightDate2 = LocalDate.of(2024, 7, 4);
+class ReservationTest {
 
-//     // static List<Seat> seatsTaken12 = new ArrayList<>();
+    @Test
+    void testNoArgsConstructor() {
+        Reservation reservation = new Reservation();
+        assertThat(reservation).isNotNull();
+    }
 
-//     static Airline airline1 = new Airline("TAP", "TAP Portugal");
+    @Test
+    void testAllArgsConstructor() {
+        Passenger passenger = new Passenger();
+        Flight flight = new Flight();
+        LocalDate reservationDate = LocalDate.of(2023, 1, 1);
+        
+        Reservation reservation = new Reservation(
+            "R12345", "P123", "F123", "12A", 100.0, reservationDate,
+            "John Doe", "1234567890123456", "USA", passenger, flight
+        );
+        
+        assertThat(reservation.getReservationId()).isEqualTo("R12345");
+        assertThat(reservation.getPassengerId()).isEqualTo("P123");
+        assertThat(reservation.getFlightId()).isEqualTo("F123");
+        assertThat(reservation.getSeat()).isEqualTo("12A");
+        assertThat(reservation.getTotalPrice()).isEqualTo(100.0);
+        assertThat(reservation.getReservationDate()).isEqualTo(reservationDate);
+        assertThat(reservation.getNameCard()).isEqualTo("John Doe");
+        assertThat(reservation.getNumberCard()).isEqualTo("1234567890123456");
+        assertThat(reservation.getCountryCard()).isEqualTo("USA");
+        assertThat(reservation.getPassenger()).isEqualTo(passenger);
+        assertThat(reservation.getFlight()).isEqualTo(flight);
+    }
 
-//     static Flight flight1 = new Flight("PTIT235", "TAP", "Portugal", "Itália", flightDate1, "09h47", "12h53", "150€", "OK", 230, airline1);
-//     static Flight flight2 = new Flight("PTFR873", "TAP", "Portugal", "França", flightDate2, "06h32", "08h10", "123€", "OK", 230, airline1);
+    @Test
+    void testSettersAndGetters() {
+        Passenger passenger = new Passenger();
+        Flight flight = new Flight();
+        LocalDate reservationDate = LocalDate.of(2023, 1, 1);
 
-//     static Passenger passenger = new Passenger(1, "João", "Neves", "Masculino", LocalDate.of(2004, 2, 11), "joaoNeves", "password123", "917133984", "joaoNeves@gmail.com", "A12485", "Portuguesa", "4430-450", "Rua Santa Inácio, 148", "Porto", "Portugal", "738204761", "8364", Roles.USER);
+        Reservation reservation = new Reservation();
+        reservation.setReservationId("R12345");
+        reservation.setPassengerId("P123");
+        reservation.setFlightId("F123");
+        reservation.setSeat("12A");
+        reservation.setTotalPrice(100.0);
+        reservation.setReservationDate(reservationDate);
+        reservation.setNameCard("John Doe");
+        reservation.setNumberCard("1234567890123456");
+        reservation.setCountryCard("USA");
+        reservation.setPassenger(passenger);
+        reservation.setFlight(flight);
 
-//     static Reservation reservation1 = new Reservation("7XN3G", "1", "PTIT235", "AA5", 150.0, flightDate1, "João Neves", "738204761", "11-2027", "4430-450", "Portugal", passenger, flight1);
-//     static Reservation reservation2 = new Reservation("N39DF", "1", "PTFR873", "AB6", 123.0, flightDate2, "João Neves", "738204761", "11-2027", "4430-450", "Portugal", passenger, flight2);
+        assertThat(reservation.getReservationId()).isEqualTo("R12345");
+        assertThat(reservation.getPassengerId()).isEqualTo("P123");
+        assertThat(reservation.getFlightId()).isEqualTo("F123");
+        assertThat(reservation.getSeat()).isEqualTo("12A");
+        assertThat(reservation.getTotalPrice()).isEqualTo(100.0);
+        assertThat(reservation.getReservationDate()).isEqualTo(reservationDate);
+        assertThat(reservation.getNameCard()).isEqualTo("John Doe");
+        assertThat(reservation.getNumberCard()).isEqualTo("1234567890123456");
+        assertThat(reservation.getCountryCard()).isEqualTo("USA");
+        assertThat(reservation.getPassenger()).isEqualTo(passenger);
+        assertThat(reservation.getFlight()).isEqualTo(flight);
+    }
 
-//     @BeforeAll
-//     public static void setUp() {
+    @Test
+    void testToString() {
+        Passenger passenger = new Passenger();
+        Flight flight = new Flight();
+        LocalDate reservationDate = LocalDate.of(2023, 1, 1);
+        
+        Reservation reservation = new Reservation(
+            "R12345", "P123", "F123", "12A", 100.0, reservationDate,
+            "John Doe", "1234567890123456", "USA", passenger, flight
+        );
+        
+        String expectedString = "Reservation(reservationId=R12345, passengerId=P123, flightId=F123, seat=12A, totalPrice=100.0, reservationDate=2023-01-01, nameCard=John Doe, numberCard=1234567890123456, countryCard=USA, passenger=Passenger(...), flight=Flight(...))";
+        assertThat(reservation.toString()).contains("reservationId=R12345");
+        assertThat(reservation.toString()).contains("passengerId=P123");
+        assertThat(reservation.toString()).contains("flightId=F123");
+        assertThat(reservation.toString()).contains("seat=12A");
+        assertThat(reservation.toString()).contains("totalPrice=100.0");
+        assertThat(reservation.toString()).contains("reservationDate=2023-01-01");
+        assertThat(reservation.toString()).contains("nameCard=John Doe");
+        assertThat(reservation.toString()).contains("numberCard=1234567890123456");
+        assertThat(reservation.toString()).contains("countryCard=USA");
+    }
 
-//         reservations.add(reservation1);
-//         reservations.add(reservation2);
-//     }
-
-//     @Test
-//     @DisplayName("test if reservations are correctly added to the list")
-//     public void reservationsAddedToListTest() {
-//         assertEquals(2, reservations.size());
-//     }
-
-//     @Test
-//     @DisplayName("test reservation details of the reservations")
-//     public void getReservationTest() {
-//         Reservation reseservation1 = reservations.get(0);
-//         assertEquals("7XN3G", reseservation1.getReservationId());
-//         assertEquals("1", reseservation1.getPassengerId());
-//         assertEquals("PTIT235", reseservation1.getFlightId());
-//         assertEquals("AA5", reseservation1.getSeat());
-//         assertEquals(150.0, reseservation1.getTotalPrice());
-//         assertEquals(flightDate1, reseservation1.getReservationDate());
-//         assertEquals("João Neves", reseservation1.getNameCard());
-//         assertEquals("738204761", reseservation1.getNumberCard());
-//         assertEquals("11-2027", reseservation1.getExpirationDateCard());
-//         assertEquals("4430-450", reseservation1.getZipCodeCard());
-//         assertEquals("Portugal", reseservation1.getCountryCard());
-
-//         Reservation reservation2 = reservations.get(1);
-//         assertEquals("N39DF", reservation2.getReservationId());
-//         assertEquals("1", reservation2.getPassengerId());
-//         assertEquals(flightDate2, reservation2.getReservationDate());
-//         assertEquals("João Neves", reservation2.getNameCard());
-//         assertEquals("738204761", reservation2.getNumberCard());
-//         assertEquals("11-2027", reservation2.getExpirationDateCard());
-//         assertEquals("4430-450", reservation2.getZipCodeCard());
-//         assertEquals("Portugal", reservation2.getCountryCard());
-//     }
-
-//     @Test
-//     @DisplayName("test association between reservation and passenger")
-//     public void reservationPassengerAssociationTest() {
-//         assertEquals(passenger, reservation1.getPassenger());
-//         assertEquals(passenger, reservation2.getPassenger());
-//     }
-
-//     @Test
-//     @DisplayName("test association between reservation and flight")
-//     public void reservationFlightAssociationTest() {
-//         assertEquals(flight1, reservation1.getFlight());
-//         assertEquals(flight2, reservation2.getFlight());
-//     }
-// }
+    @Test
+    void testGenerateReservationId() {
+        Reservation reservation = new Reservation();
+        reservation.generateReservationId();
+        assertThat(reservation.getReservationId()).isNotNull();
+        assertThat(reservation.getReservationId()).hasSize(5);
+    }
+}
