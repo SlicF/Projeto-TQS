@@ -6,8 +6,7 @@ import ua.tqs.airportManager.entity.Passenger;
 public interface PassengerService {
     
     Passenger createPassenger(Passenger passenger);
-    Passenger findByPassengerId (String passengerId);
+    Passenger findByPassengerId (String userId);
     List<Passenger> findByState (String state);
     List<Passenger> getAllPassengers();
-    List<Passenger> findByUserId(int userId);
 }

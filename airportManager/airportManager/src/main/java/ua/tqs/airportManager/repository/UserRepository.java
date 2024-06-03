@@ -6,8 +6,8 @@ import ua.tqs.airportManager.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
     
-    User findByUserId (int userId);
-    // Optional<User> findByEmail (String email);
+    User findByUserId (String userId);
+    User findByEmail (String email);
     Optional<User> findByUsername (String username);
     // List<User> getAll();
 

@@ -17,9 +17,8 @@
 // import org.springframework.test.web.servlet.MockMvc;
 // import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-// import ua.tqs.airportManager.entity.Reservation;
+// import ua.tqs.airportManager.entity.Role;
 // import ua.tqs.airportManager.entity.User;
-// import ua.tqs.airportManager.repository.ReservationRepository;
 // import ua.tqs.airportManager.service.UserService;
 
 // public class UserControllerTest {
@@ -45,41 +44,17 @@
 //         user.setUserId("1");
 //         user.setFirstName("user");
 //         user.setLastName("test");
+//         user.setRole(new Role("ROLE_USER"));
 
 //         when(userService.findByUserId("1")).thenReturn(user);
 
 //         mockMvc.perform(get("/api/accounts/userInfo")
 //                 .param("userId", "1"))
-//                 .andExpect(status().isOk());
-
-//                 // .andExpect(jsonPath("$[0].userId").value("1"))
-//                 // .andExpect(jsonPath("$.firstName").value("user"))
-//                 // .andExpect(jsonPath("$.lastName").value("test"));
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.userId").value("1"))
+//                 .andExpect(jsonPath("$.firstName").value("user"))
+//                 .andExpect(jsonPath("$.lastName").value("test"));
 //     }
-
-    
-//     // @DisplayName("Test getUserInfoByUsername")
-//     // @Test
-//     // public void testGetUserInfoByUsername() throws Exception {
-//     //     User user = new User();
-//     //     user.setUserId("1");
-//     //     user.setFirstName("user");
-//     //     user.setLastName("test");
-//     //     user.setUsername("user123");
-
-//     //     System.out.println("user: " + user);
-
-//     //     when(userService.findByUsername("user123")).thenReturn(user);
-
-//     //     mockMvc.perform(get("/api/accounts/userInfoByUsername")
-//     //             .param("username", "user123"))
-//     //             .andExpect(status().isOk());
-
-//     //             // .andExpect(jsonPath("$.userId").value("1"))
-//     //             // .andExpect(jsonPath("$.firstName").value("user"))
-//     //             // .andExpect(jsonPath("$.lastName").value("test"))
-//     //             // .andExpect(jsonPath("$.username").value("user123"));
-//     // }
 
 //     @DisplayName("Test getUsers")
 //     @Test
@@ -91,36 +66,17 @@
 //         user.setFirstName("user");
 //         user.setLastName("test");
 //         user.setUsername("user123");
+//         user.setRole(new Role("ROLE_USER"));
 
 //         users.add(user);
 
 //         when(userService.getAllUsers()).thenReturn(users);
 
-//         mockMvc.perform(get("/api/accounts/users")
-//                 .param("userId", "1"))
-//                 .andExpect(status().isOk());
-
-//                 // .andExpect(jsonPath("$.userId").value("1"))
-//                 // .andExpect(jsonPath("$.firstName").value("user"))
-//                 // .andExpect(jsonPath("$.lastName").value("test"))
-//                 // .andExpect(jsonPath("$.username").value("user123"));
+//         mockMvc.perform(get("/api/accounts/users"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$[0].userId").value("1"))
+//                 .andExpect(jsonPath("$[0].firstName").value("user"))
+//                 .andExpect(jsonPath("$[0].lastName").value("test"))
+//                 .andExpect(jsonPath("$[0].username").value("user123"));
 //     }
-
-//     // @DisplayName("Test getReservationsByUser")
-//     // @Testperform(get("/api/accounts/userInfo")
-//     // .param("userId", "1"))
-//     // .param("firstName", "user")
-//     // .param("lastName", "test")
-//     // .andExpect(status().isOk());
-//     // public void testGetReservationsByUser() throws Exception {
-//     //     List<Reservation> reservations = new ArrayList<>();
-//     //     reservations.add(new Reservation());
-//     //     reservations.add(new Reservation());
-
-//     //     when(reservationRepository.findByPassengerId("1")).thenReturn(reservations);
-
-//     //     mockMvc.perform(get("/api/user/getReservationsByUser")
-//     //             .param("userID", "1"))
-//     //             .andExpect(status().isOk());
-//     // }
 // }
