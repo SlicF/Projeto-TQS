@@ -68,8 +68,17 @@ public class AirlineTest {
         Airline airline = new Airline("AC123", "Airline Name");
 
         String expectedString = "Airline(airlineCode=AC123, airlineName=Airline Name)";
-        assertThat(airline.toString()).isEqualTo(expectedString);
+        assertThat(airline).hasToString(expectedString);
     }
 
+    @Test
+    void testEqualsAndHashCode() {
+        Airline airline1 = new Airline("AC123", "Airline Name");
+        Airline airline2 = new Airline("AC123", "Airline Name");
 
+        airline2.setAirlineCode("AC124");
+        assertThat(airline1).isNotEqualTo(airline2);
+        assertThat(airline1.hashCode()).isNotEqualTo(airline2.hashCode());
+
+    }
 }

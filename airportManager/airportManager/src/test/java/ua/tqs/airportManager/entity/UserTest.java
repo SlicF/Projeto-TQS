@@ -63,7 +63,7 @@ class UserTest {
     void testToString() {
         User user = new User("john.doe", "John", "Doe", "password", "john.doe@example.com", "A1234567", "New York", "USA", Roles.USER);
         String expectedString = "User(userId=0, username=john.doe, firstName=John, lastName=Doe, password=password, email=john.doe@example.com, passportNumber=A1234567, city=New York, country=USA, role=USER)";
-        assertThat(user.toString()).isEqualTo(expectedString);
+        assertThat(user).hasToString(expectedString);
     }
 
     @Test
