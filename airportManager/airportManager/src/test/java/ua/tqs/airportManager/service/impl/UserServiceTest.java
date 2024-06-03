@@ -2,9 +2,11 @@ package ua.tqs.airportManager.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -43,7 +45,7 @@ class UserServiceTest {
 
     @Test
     void testRegistUser() {
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
         User createdUser = userService.registUser(user);
 
@@ -51,6 +53,16 @@ class UserServiceTest {
         assertEquals(user.getUsername(), createdUser.getUsername());
     }
 
+    @Test
+    void testFindByUserId() {
+        when(userRepository.findByUserId(anyInt())).thenReturn(user);
+
+        User foundUser = userService.findByUserId(1);
+
+        assertNotNull(foundUser);
+        assertEquals(1, foundUser.getUserId());
+        assertEquals("testUser", foundUser.getUsername());
+    }
 
     @Test
     void testFindByUsername() {
@@ -58,8 +70,8 @@ class UserServiceTest {
 
         Optional<User> foundUser = userService.findByUsername("testUser");
 
-        assertNotNull(foundUser);
-        assertEquals(user.getUsername(), foundUser.get().getUsername());
+        assertTrue(foundUser.isPresent());
+        assertEquals("testUser", foundUser.get().getUsername());
     }
 
     @Test
@@ -76,7 +88,18 @@ class UserServiceTest {
 
         assertNotNull(allUsers);
         assertEquals(2, allUsers.size());
+        assertEquals("testUser", allUsers.get(0).getUsername());
+        assertEquals("secondUser", allUsers.get(1).getUsername());
     }
 
- 
+    @Test
+    void testAuthenticateUser() {
+        when(userRepository.findByUsernameAndPassword(anyString(), anyString())).thenReturn(user);
+
+        User authenticatedUser = userService.authenticateUser("test@example.com", "password123");
+
+        assertNotNull(authenticatedUser);
+        assertEquals("testUser", authenticatedUser.getUsername());
+        assertEquals("password123", authenticatedUser.getPassword());
+    }
 }

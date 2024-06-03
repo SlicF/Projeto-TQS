@@ -2,6 +2,7 @@ package ua.tqs.airportManager.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,5 +52,19 @@ class LoginDTOTest {
         LoginDTO loginDTO = new LoginDTO("test@example.com", "password123");
         String expectedString = "LoginDTO(email=test@example.com, password=password123)";
         assertEquals(expectedString, loginDTO.toString());
+    }
+
+    @Test
+    void testEquals() {
+        LoginDTO loginDTO1 = new LoginDTO("test@example.com", "password123");
+        LoginDTO loginDTO2 = new LoginDTO("test@example.com", "password123");
+        assertEquals(loginDTO1, loginDTO2);
+    }
+
+    @Test
+    void testHashCode() {
+        LoginDTO loginDTO1 = new LoginDTO("test@example.com", "password123");
+        LoginDTO loginDTO2 = new LoginDTO("test@example.com", "password123");
+        assertEquals(loginDTO1.hashCode(), loginDTO2.hashCode());
     }
 }
