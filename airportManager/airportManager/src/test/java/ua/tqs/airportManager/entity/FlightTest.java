@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class FlightTest {
+class FlightTest {
 
     private static List<Flight> flights = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class FlightTest {
 
     @Test
     @DisplayName("test association between flight and airline")
-    public void testReservationFlightAssociation() {
+    void testReservationFlightAssociation() {
         assertEquals(airline1, flight1.getAirline());
         assertEquals(airline2, flight3.getAirline());
     }

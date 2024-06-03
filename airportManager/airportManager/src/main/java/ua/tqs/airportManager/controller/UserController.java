@@ -1,23 +1,18 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.dto.RegisterDTO;
-import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.AuthService;
 import ua.tqs.airportManager.service.UserService;
 
-import org.springframework.security.core.Authentication;
 import ua.tqs.airportManager.dto.AuthResponse;
 import ua.tqs.airportManager.dto.LoginDTO;
 
@@ -52,13 +47,6 @@ public class UserController {
 
     @GetMapping("/userInfoByUsername")
     public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
-    // public ResponseEntity<User> getUserInfoByUsername() {
-
-        // User user = userService.findByUsername(username);
-
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName();
-        // System.out.println("username: " + username);
 
         User user = userRespository.findByUsername(username).orElseThrow();
 

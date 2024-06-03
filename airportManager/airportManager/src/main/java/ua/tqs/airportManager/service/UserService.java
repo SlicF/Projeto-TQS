@@ -14,6 +14,6 @@ public interface UserService {
 
     //autenticação
     User authenticateUser(String email, String password);
-    // User getUser(String email);
+
 
 }

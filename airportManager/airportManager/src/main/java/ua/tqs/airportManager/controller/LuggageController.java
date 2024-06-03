@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.tqs.airportManager.entity.Luggage;
-import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.LuggageService;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class LuggageController {
         return luggageService.getAllLuggages();
     }
 
-    @GetMapping("luggage/{luggageId}")
+    @GetMapping("/luggage/{luggageId}")
     public ResponseEntity<Luggage> getLuggageById(@PathVariable String id) {
         Optional<Luggage> luggage = luggageService.findByLuggageId(id);
         return luggage.map(ResponseEntity::ok)
@@ -36,12 +35,4 @@ public class LuggageController {
         return new ResponseEntity<>(savedLuggage, HttpStatus.CREATED);
     }
 
-    // @GetMapping("/getLuggagesByReservation")
-    // public ResponseEntity<List<Luggage>> getLuggagesByReservation(
-    //         @RequestParam("reservationId") String reservationId) {
-    //     // array of reservations
-    //     List<Luggage> luggages = luggageService.getLuggagesByReservationId(reservationId);
-
-    //     return new ResponseEntity<>(luggages, HttpStatus.OK);
-    // }
 }

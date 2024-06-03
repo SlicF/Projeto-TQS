@@ -1,6 +1,6 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import ua.tqs.airportManager.entity.Luggage;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.ReservationService;
 
@@ -31,11 +30,6 @@ public class ReservationController {
 
     @PostMapping("/createReservation")
     public ResponseEntity<?> createReservation(@RequestBody Reservation reserv) {
-
-        // Authentication authentication =
-        // SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName();
-        // User user = UserRepository.findByUsername(username).orElseThrow();
 
         var reservation = reservationService.createReservation(reserv);
         if (reservation == null) {

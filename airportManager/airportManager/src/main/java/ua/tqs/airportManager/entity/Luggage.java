@@ -1,7 +1,5 @@
 package ua.tqs.airportManager.entity;
 
-import java.time.LocalDate;
-import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +26,6 @@ public class Luggage {
     @Column(name = "weight", nullable = false)
     private String weight;
 
-    // @Column(name = "state", nullable = false)
-    // private String state;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "reservationId", referencedColumnName = "reservationId", insertable = false, updatable = false)

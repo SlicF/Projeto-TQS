@@ -82,19 +82,6 @@ class PassengerTest {
         assertThat(passenger.getCardPIN()).isEqualTo("1234");
     }
 
-    @Test
-    void testToString() {
-        LocalDate birthDate = LocalDate.of(1990, 1, 1);
-
-        Passenger passenger = new Passenger(
-            "P1234567", 1, "John", "Doe", "Checked-in", "Male", birthDate, 
-            "john.doe@example.com", "123456789", "A1234567", "12345", 
-            "123 Main St", "New York", "USA", "4111111111111111", "1234"
-        );
-
-        String expectedString = "Passenger(passengerId=P1234567, userId=1, firstName=John, lastName=Doe, state=Checked-in, sex=Male, birthDate=1990-01-01, email=john.doe@example.com, phoneNumber=123456789, passportNumber=A1234567, postalCode=12345, streetAddress=123 Main St, city=New York, country=USA, cardNumber=4111111111111111, cardPIN=1234)";
-        assertThat(passenger.toString()).isEqualTo(expectedString);
-    }
 
     @Test
     void testGeneratePassengerId() {

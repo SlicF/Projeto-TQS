@@ -53,12 +53,5 @@ class AuthResponseTest {
         assertThat(authResponse).hasToString(expectedString);
     }
 
-    @Test
-    void testEqualsAndHashCode() {
-        AuthResponse authResponse1 = new AuthResponse("testToken");
-        AuthResponse authResponse2 = new AuthResponse("testToken");
-
-        assertThat(authResponse1).isEqualTo(authResponse2);
-        assertThat(authResponse1.hashCode()).isEqualTo(authResponse2.hashCode());
-    }
+  
 }

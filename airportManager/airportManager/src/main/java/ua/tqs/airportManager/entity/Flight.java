@@ -1,7 +1,6 @@
 package ua.tqs.airportManager.entity;
 
 import java.time.LocalDate;
-import java.util.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,9 +47,6 @@ public class Flight {
     
     @Column(name="seatsNumber", nullable = false)
     private Integer seatsNumber;
-
-    // @Column(name="seatsTaken")
-    // private List<String> seatsTaken;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airlineCode", referencedColumnName = "airlineCode", insertable = false, updatable = false)

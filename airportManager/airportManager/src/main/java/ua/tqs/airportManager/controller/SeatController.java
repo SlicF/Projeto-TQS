@@ -1,6 +1,5 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Seat;
-import ua.tqs.airportManager.entity.Reservation;
-import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.service.SeatService;
-import ua.tqs.airportManager.repository.SeatRepository;
 
 @CrossOrigin(origins = "http://localhost:8981")
 @RestController
@@ -23,7 +18,6 @@ import ua.tqs.airportManager.repository.SeatRepository;
 @RequestMapping("/api/seats")
 public class SeatController {
 
-    // private AuthService authService;
     private SeatService seatsService;
 
     @GetMapping("/seats")
@@ -52,10 +46,7 @@ public class SeatController {
 
     @PostMapping("/createSeat")
     public ResponseEntity<?> createSeat(@RequestBody Seat passeng) {
-        
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName(); 
-        // User user = UserRepository.findByUsername(username).orElseThrow();
+    
 
         var seat = seatsService.createSeat(passeng);
         if (seat == null) {
