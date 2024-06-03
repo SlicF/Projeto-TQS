@@ -44,4 +44,24 @@ public class UserTest {
             () -> assertEquals(Roles.USER, user.getRole())
         );
     }
+
+    @Test
+    @DisplayName(" Test if user is correctly added to the list")
+    public void userAddedToListTest() {
+        assertEquals("1", user.getUserId());
+    }
+
+    @Test
+    @DisplayName(" Test if user details are correct")
+    public void getUserDetailsTest() {
+        assertEquals("João", user.getFirstName());
+        assertEquals("Neves", user.getLastName());
+        assertEquals("joaoNeves", user.getUsername());
+        assertEquals("password123", user.getPassword());
+        
+    }
+
+
+
+
 }
