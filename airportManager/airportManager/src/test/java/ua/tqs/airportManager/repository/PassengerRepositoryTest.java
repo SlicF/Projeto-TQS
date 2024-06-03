@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,9 @@ class PassengerRepositoryTest {
 
     @DisplayName("Test findByPassengerId")
     @Test
-    @Disabled
     void testFindByPassengerId() {
         // Create a passenger
         Passenger passenger = new Passenger();
-        passenger.setPassengerId("1");
         passenger.setFirstName("John");
         passenger.setLastName("Doe");
         passenger.setBirthDate(LocalDate.parse("1990-01-01"));
@@ -45,12 +42,12 @@ class PassengerRepositoryTest {
         passengerRepository.save(passenger);
 
         // Find the passenger by passengerId
-        Passenger foundPassenger = passengerRepository.findByPassengerId("1");
+        Passenger foundPassenger = passengerRepository.findByPassengerId(passenger.getPassengerId());
 
         // Assert that the found passenger is not null
         assertNotNull(foundPassenger);
         // Assert that the found passenger has the correct passengerId
-        assertEquals("1", foundPassenger.getPassengerId());
+        assertEquals(passenger.getPassengerId(), foundPassenger.getPassengerId());
     }
 
     @DisplayName("Test findByState")
