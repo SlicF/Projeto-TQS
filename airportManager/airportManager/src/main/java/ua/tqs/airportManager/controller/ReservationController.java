@@ -1,6 +1,5 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import ua.tqs.airportManager.entity.Luggage;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.ReservationService;
 

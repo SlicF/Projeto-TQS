@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.tqs.airportManager.entity.Luggage;
-import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.LuggageService;
 
 import java.util.List;
