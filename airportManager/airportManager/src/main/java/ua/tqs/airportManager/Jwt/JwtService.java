@@ -92,6 +92,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -118,6 +120,7 @@ public class JwtService {
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {
         logger.info("JwtService: getToken: user: {}", user.getUsername());
         logger.info("Using SignatureAlgorithm: {}", SignatureAlgorithm.HS256);
+        logger.info("SignatureAlgorithm: {}", SignatureAlgorithm.HS256);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

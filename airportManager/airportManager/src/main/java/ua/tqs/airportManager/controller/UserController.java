@@ -1,18 +1,20 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.dto.RegisterDTO;
 import ua.tqs.airportManager.entity.Reservation;
+
 import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.AuthService;
 import ua.tqs.airportManager.service.UserService;
@@ -31,6 +33,9 @@ public class UserController {
     private UserService userService;
     private UserRepository userRespository;
 
+    private final AuthService authService;
+    private final UserService usersService;
+    private final UserRepository userRespository;
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
@@ -39,7 +44,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
-    return ResponseEntity.ok(authService.login(loginDTO));
+        return ResponseEntity.ok(authService.login(loginDTO));
     }
 
     @GetMapping("/userInfo")
@@ -61,7 +66,6 @@ public class UserController {
         // System.out.println("username: " + username);
 
         User user = userRespository.findByUsername(username).orElseThrow();
-
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

@@ -3,11 +3,10 @@ package ua.tqs.airportManager.entity;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class AirlineTest {
+class AirlineTest {
     
     private static List<Airline> airlines = new ArrayList<>();
 
@@ -17,7 +16,7 @@ public class AirlineTest {
     static Airline airline4 = new Airline("QTR", "Qatar Airways");
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
 
         airlines.add(airline1);
         airlines.add(airline2);

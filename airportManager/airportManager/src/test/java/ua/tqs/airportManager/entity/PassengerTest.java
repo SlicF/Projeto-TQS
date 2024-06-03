@@ -1,57 +1,100 @@
-// package ua.tqs.airportManager.entity;
+package ua.tqs.airportManager.entity;
 
-// import static org.junit.jupiter.api.Assertions.assertAll;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import java.time.LocalDate;
-// import java.util.Date;
-// import org.junit.jupiter.api.BeforeAll;
-// import org.junit.jupiter.api.DisplayName;
-// import org.junit.jupiter.api.Test;
-// import ua.tqs.airportManager.Roles;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-// public class PassengerTest {
-    
-//     private static Passenger passenger;
+class PassengerTest {
 
-//     @BeforeAll
-//     public static void setUp() {
-//         passenger = new Passenger();
-//         passenger.setUserId(1);
-//         passenger.setFirstName("João");
-//         passenger.setLastName("Neves");
-//         passenger.setSex("Masculino");
-//         passenger.setBirthDate(LocalDate.of(2004, 2, 11));
-//         passenger.setUsername("joaoNeves");
-//         passenger.setPassword("password123");
-//         passenger.setPhoneNumber("917133984");
-//         passenger.setEmail("joaoNeves@gmail.com");
-//         passenger.setPassportNumber("A12485");
-//         passenger.setPostalCode("4430-450");
-//         passenger.setStreetAddress("Rua Santa Inácio, 148");
-//         passenger.setCity("Porto");
-//         passenger.setCountry("Portugal");
-//     }
+    @Test
+    void testPassengerId() {
+        Passenger passenger = new Passenger();
+        passenger.setPassengerId("ABC123");
+        assertEquals("ABC123", passenger.getPassengerId());
+    }
 
-//     @DisplayName("Test Passenger Entity")
-//     @Test
-//     void getPassengerTest() {
-//         assertAll(
-//             () -> assertEquals(1, passenger.getUserId()),
-//             () -> assertEquals("João", passenger.getFirstName()),
-//             () -> assertEquals("Neves", passenger.getLastName()),
-//             () -> assertEquals("Masculino", passenger.getSex()),
-//             () -> assertEquals(LocalDate.of(2004, 2, 11), passenger.getBirthDate()),
-//             () -> assertEquals("joaoNeves", passenger.getUsername()),
-//             () -> assertEquals("password123", passenger.getPassword()),
-//             () -> assertEquals("917133984", passenger.getPhoneNumber()),
-//             () -> assertEquals("joaoNeves@gmail.com", passenger.getEmail()),
-//             () -> assertEquals("A12485", passenger.getPassportNumber()),
-//             () -> assertEquals("Portuguesa", passenger.getNationality()),
-//             () -> assertEquals("4430-450", passenger.getPostalCode()),
-//             () -> assertEquals("Rua Santa Inácio, 148", passenger.getStreetAddress()),
-//             () -> assertEquals("Porto", passenger.getCity()),
-//             () -> assertEquals("Portugal", passenger.getCountry()),
-//             () -> assertEquals(Roles.USER, passenger.getRole())
-//         );
-//     }
-// }
+    @Test
+    void testUserId() {
+        Passenger passenger = new Passenger();
+        passenger.setUserId("user123");
+        assertEquals("user123", passenger.getUserId());
+    }
+
+    @Test
+    void testFirstName() {
+        Passenger passenger = new Passenger();
+        passenger.setFirstName("John");
+        assertEquals("John", passenger.getFirstName());
+    }
+
+    @Test
+    void testLastName() {
+        Passenger passenger = new Passenger();
+        passenger.setLastName("Doe");
+        assertEquals("Doe", passenger.getLastName());
+    }
+
+    @Test
+    void testEmail() {
+        Passenger passenger = new Passenger();
+        passenger.setEmail("algo@algo.pt");
+        assertEquals("algo@algo.pt", passenger.getEmail());
+    }
+
+    @Test
+    void testPhone() {
+        Passenger passenger = new Passenger();
+        passenger.setPhoneNumber("123456789");
+        assertEquals("123456789", passenger.getPhoneNumber());
+    }
+
+    @Test
+    void testAddress() {
+        Passenger passenger = new Passenger();
+        passenger.setStreetAddress("Rua do Algo");
+        assertEquals("Rua do Algo", passenger.getStreetAddress());
+    }
+
+    @Test
+    void testCity() {
+        Passenger passenger = new Passenger();
+        passenger.setCity("Porto");
+        assertEquals("Porto", passenger.getCity());
+    }
+
+    @Test
+    void testCountry() {
+        Passenger passenger = new Passenger();
+        passenger.setCountry("Portugal");
+        assertEquals("Portugal", passenger.getCountry());
+    }
+
+    @Test
+    void testPostalCode() {
+        Passenger passenger = new Passenger();
+        passenger.setPostalCode("4000-007");
+        assertEquals("4000-007", passenger.getPostalCode());
+    }
+
+    @Test
+    void testState() {
+        Passenger passenger = new Passenger();
+        passenger.setState("Portugal");
+        assertEquals("Portugal", passenger.getState());
+    }
+
+    @Test
+    void testPassengerAssociation() {
+        Passenger passenger = new Passenger();
+        passenger.setPassengerId("ABC123");
+        assertEquals("ABC123", passenger.getPassengerId());
+    }
+
+    @Test
+    void testUserAssociation() {
+        Passenger passenger = new Passenger();
+        User user = new User();
+        user.setUserId("user123");
+        passenger.setUser(user);
+        assertEquals(user, passenger.getUser());
+    }
+}
