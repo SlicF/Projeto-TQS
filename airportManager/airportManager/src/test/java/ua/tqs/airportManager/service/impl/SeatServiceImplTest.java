@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.repository.SeatRepository;
 
-public class SeatServiceImplTest {
+class SeatServiceImplTest {
 
     @Mock
     private SeatRepository seatRepository;
@@ -25,12 +25,12 @@ public class SeatServiceImplTest {
     private SeatServiceImpl seatService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateSeat() {
+    void testCreateSeat() {
         Seat seat = new Seat();
         seat.setSeatId("S123");
 
@@ -44,7 +44,7 @@ public class SeatServiceImplTest {
     }
 
     @Test
-    public void testGetSeatByFlightId() {
+    void testGetSeatByFlightId() {
         Seat seat1 = new Seat();
         seat1.setSeatId("S123");
 
@@ -65,7 +65,7 @@ public class SeatServiceImplTest {
   
 
     @Test
-    public void testGetAllSeats() {
+    void testGetAllSeats() {
         Seat seat1 = new Seat();
         seat1.setSeatId("S123");
 

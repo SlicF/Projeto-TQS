@@ -246,4 +246,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void setId(int i) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+    }
 }

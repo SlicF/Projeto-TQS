@@ -15,18 +15,18 @@ import org.mockito.MockitoAnnotations;
 
 import ua.tqs.airportManager.entity.Airline;
 
-public class AirlineServiceTest {
+class AirlineServiceTest {
 
     @Mock
     private AirlineService airlineService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateAirline() {
+    void testCreateAirline() {
         Airline airline = new Airline();
         airline.setAirlineCode("AA");
         airline.setAirlineName("American Airlines");
@@ -43,7 +43,7 @@ public class AirlineServiceTest {
     }
 
     @Test
-    public void testGetAirlineByAirlineCode() {
+    void testGetAirlineByAirlineCode() {
         Airline airline = new Airline();
         airline.setAirlineCode("AA");
         airline.setAirlineName("American Airlines");
@@ -60,7 +60,7 @@ public class AirlineServiceTest {
     }
 
     @Test
-    public void testGetAllAirlines() {
+    void testGetAllAirlines() {
         Airline airline1 = new Airline();
         airline1.setAirlineCode("AA");
         airline1.setAirlineName("American Airlines");

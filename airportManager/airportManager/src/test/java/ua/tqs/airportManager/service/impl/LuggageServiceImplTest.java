@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import ua.tqs.airportManager.entity.Luggage;
 import ua.tqs.airportManager.repository.LuggageRepository;
 
-public class LuggageServiceImplTest {
+class LuggageServiceImplTest {
 
     @Mock
     private LuggageRepository luggageRepository;
@@ -25,12 +25,12 @@ public class LuggageServiceImplTest {
     private LuggageServiceImpl luggageService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateLuggage() {
+    void testCreateLuggage() {
         Luggage luggage = new Luggage();
         luggage.setLuggageId("L123");
 
@@ -45,7 +45,7 @@ public class LuggageServiceImplTest {
 
 
     @Test
-    public void testGetAllLuggages() {
+    void testGetAllLuggages() {
         Luggage luggage1 = new Luggage();
         luggage1.setLuggageId("L123");
 
@@ -64,7 +64,7 @@ public class LuggageServiceImplTest {
     }
 
     @Test
-    public void testGetLuggagesByReservationId() {
+    void testGetLuggagesByReservationId() {
         Luggage luggage1 = new Luggage();
         luggage1.setLuggageId("L123");
 

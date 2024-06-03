@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import ua.tqs.airportManager.entity.Flight;
 import ua.tqs.airportManager.repository.FlightRepository;
 
-public class FlightServiceImplTest {
+class FlightServiceImplTest {
 
     @Mock
     private FlightRepository flightRepository;
@@ -26,12 +26,12 @@ public class FlightServiceImplTest {
     private FlightServiceImpl flightService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateFlight() {
+    void testCreateFlight() {
         Flight flight = new Flight();
         flight.setFlightId("F123");
 
@@ -45,7 +45,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetFlightsByState() {
+    void testGetFlightsByState() {
         Flight flight1 = new Flight();
         flight1.setFlightId("F123");
 
@@ -64,7 +64,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetAllFlights() {
+    void testGetAllFlights() {
         Flight flight1 = new Flight();
         flight1.setFlightId("F123");
 
@@ -83,7 +83,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testFindByDepartureCityAndArrivalCityAndDate() {
+    void testFindByDepartureCityAndArrivalCityAndDate() {
         Flight flight = new Flight();
         flight.setFlightId("F123");
 
