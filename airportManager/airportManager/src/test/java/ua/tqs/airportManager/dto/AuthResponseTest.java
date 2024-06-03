@@ -1,8 +1,7 @@
 package ua.tqs.airportManager.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +10,13 @@ class AuthResponseTest {
     @Test
     void testNoArgsConstructor() {
         AuthResponse authResponse = new AuthResponse();
-        assertNotNull(authResponse);
+        assertThat(authResponse).isNotNull();
     }
 
     @Test
     void testAllArgsConstructor() {
         AuthResponse authResponse = new AuthResponse("testToken");
-        assertNotNull(authResponse);
-        assertEquals("testToken", authResponse.getToken());
+        assertThat(authResponse.getToken()).isEqualTo("testToken");
     }
 
     @Test
@@ -26,35 +24,41 @@ class AuthResponseTest {
         AuthResponse authResponse = AuthResponse.builder()
                                                 .token("builderToken")
                                                 .build();
-        assertNotNull(authResponse);
-        assertEquals("builderToken", authResponse.getToken());
+        assertThat(authResponse.getToken()).isEqualTo("builderToken");
     }
 
     @Test
     void testSetAndGetToken() {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken("newToken");
-        assertEquals("newToken", authResponse.getToken());
+        assertThat(authResponse.getToken()).isEqualTo("newToken");
+    }
+
+    @Test
+    void testGetUserId() {
+        AuthResponse authResponse = new AuthResponse();
+        assertThrows(UnsupportedOperationException.class, authResponse::getUserId);
+    }
+
+    @Test
+    void testSetUserId() {
+        AuthResponse authResponse = new AuthResponse();
+        assertThrows(UnsupportedOperationException.class, () -> authResponse.setUserId(1));
     }
 
     @Test
     void testToString() {
         AuthResponse authResponse = new AuthResponse("testToken");
         String expectedString = "AuthResponse(token=testToken)";
-        assertEquals(expectedString, authResponse.toString());
+        assertThat(authResponse).hasToString(expectedString);
     }
 
     @Test
-    void testEquals() {
+    void testEqualsAndHashCode() {
         AuthResponse authResponse1 = new AuthResponse("testToken");
         AuthResponse authResponse2 = new AuthResponse("testToken");
-        assertEquals(authResponse1, authResponse2);
-    }
 
-    @Test
-    void testHashCode() {
-        AuthResponse authResponse1 = new AuthResponse("testToken");
-        AuthResponse authResponse2 = new AuthResponse("testToken");
-        assertEquals(authResponse1.hashCode(), authResponse2.hashCode());
+        assertThat(authResponse1).isEqualTo(authResponse2);
+        assertThat(authResponse1.hashCode()).isEqualTo(authResponse2.hashCode());
     }
 }
