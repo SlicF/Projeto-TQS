@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/NavbarAdmin';
-import './../css/administrator.css'
+import '../css/administrator.css'
 import { useNavigate } from "react-router-dom";
 import fundo from '../img/fond.jpg';
 
 const Administrator = () => {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const userId = localStorage.getItem("userId");
+        setIsLoggedIn(!!userId);
+      }, []);
+
     const handleHome = () => {
-        navigate("/adminHome");
+        navigate("/admin");
     };
 
     const handleCheckIn = () => {
@@ -36,6 +43,7 @@ const Administrator = () => {
         >
             <Navbar />  
             <div className="container">
+            {isLoggedIn ? (
                 <form className="administrator-form" onSubmit={handleSubmit}>
                     <h2>Enter your reservation details</h2>
                     <label htmlFor="reservationCode">Reservation Code:</label>
@@ -65,6 +73,10 @@ const Administrator = () => {
                     <br />
                     <button type="submit" onClick={handleHome}>Continue</button>
                 </form>
+            ):(<div>
+                <h1>ACCESS DENIED</h1>
+            </div>
+                )}
             </div>
         </div>
     );

@@ -9,6 +9,12 @@ const Formulario = () => {
   const [flights, setFlights] = useState([]);
   const location = useLocation();
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
 
   // get the flights data from the previous page
   useEffect(() => {
@@ -18,43 +24,28 @@ const Formulario = () => {
     }
   }, [location.state]);
 
-  /* // fetch data from api with the params from the form 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:8980/api/searchFlight").then((res) => console.log(res));
-        if (!response.ok) {
-          throw new Error("Error fetching flights");
-        }
-        const data = await response.json();
-        console.log(data);
-        setFlightsData(data);
-      } catch (error) {
-        console.error("Error fetching flights", error);
-      }
-    };
-    fetchData();
-  }
-    , []); */
 
   return (
     <div>
       <Navbar />
-      <div className="flightsContainer">
-        <div className="containerFlight">
-          {flightsData.length > 0 ? (
-            flightsData.map((flight, index) => (
-              <CardFlights
-                outboundFlight={flight}
-                key={flight.flightId}
+      {isLoggedIn ? (
+        <div className="flightsContainer">
+          <div className="containerFlight">
+            {flightsData.length > 0 ? (
+              flightsData.map((flight, index) => (
+                <CardFlights
+                  outboundFlight={flight}
+                  key={flight.flightId}
 
-              />
-            ))
-          ) : (
-            <p>No flights available</p>
-          )}
-        </div>
-      </div>
+                />
+              ))
+            ) : (
+              <p>No flights available</p>
+            )}
+          </div>
+        </div>) : (
+        <div><h1>ACCESS DENIED</h1></div>
+      )}
     </div>
   );
 };

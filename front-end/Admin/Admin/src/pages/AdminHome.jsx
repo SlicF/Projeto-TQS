@@ -1,56 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/NavbarAdmin';
 import '../css/adminHome.css';
+import fundo from '../img/fond.jpg';
 
 const AdminHome = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
 
-    const handleCheckIn = () => {
-        navigate("/checkin");
-    };
+  const handleCheckIn = () => {
+    navigate("/checkin");
+  };
 
-    const handleLuggage = () => {
-        navigate("/luggage");
-    };
+  const handleLuggage = () => {
+    navigate("/luggage");
+  };
 
-
-    return (
-
-        <div>
-            <Navbar />
-            <h1 className='titleAdmin'>Airport Organizer Check-In</h1>
-
+  return (
+    <div className="register-container"
+        style={{ backgroundImage: `url(${fundo})` }} 
+        >
+      <Navbar />
+      <div className='container'>
+        {isLoggedIn? (
+          <div className='administrator-form2'>
             <div className="card-container">
-                <div className="cardLuggage" onClick={handleLuggage}>
-
-                    <h2 className="card-title">Luggage</h2>
-
-                    <div className="card-content">
-                        Tenha acesso a todas as reservas e faça alterações quando necessário.
-                    </div>
-
+              <div className="cardLuggage" onClick={handleLuggage}>
+                <h2 className="card-title">Luggage</h2>
+                <div className="card-content">
+                 Regist the passengers luggage
                 </div>
+              </div>
             </div>
             <div className="card-container">
-                <div className="cardLuggage" onClick={handleLuggage}>
-
-                    <h2 className="card-title">Luggage</h2>
-
-                    <div className="card-content">
-                        Tenha acesso a todas as reservas e faça alterações quando necessário.
-                    </div>
-
+              <div className="cardLuggage" onClick={handleCheckIn}>
+                <h2 className="card-title">Checkin</h2>
+                <div className="card-content">
+                  Make the passengers checkIn
                 </div>
+              </div>
             </div>
-
-        </div>
-
-
-    );
-
+          </div>
+        ) : (
+          <div>
+            <h1>ACCESS DENIED</h1>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
-
 
 export default AdminHome;

@@ -3,8 +3,6 @@ import '../css/Login.css';
 import fundo from '../img/fundo.jpg';
 import logo_s from '../img/logo_s.png';
 import Navbar from '../components/Navbar';
-// import { Stomp } from "@stomp/stompjs";
-// import SockJS from "sockjs-client";
 
 import { useNavigate } from 'react-router-dom';
 

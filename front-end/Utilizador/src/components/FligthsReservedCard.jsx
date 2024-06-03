@@ -178,7 +178,7 @@ import "../css/FlightReservedCard.css";
 import airlineLogo from "../img/TAP.png";
 
 const FlightReservedCard = ({ reservation }) => {
-  const { flight, passenger } = reservation;
+  const { flight, passenger, luggage } = reservation;
 
   return (
     <div className="containerFlightReserved">
@@ -204,6 +204,7 @@ const FlightReservedCard = ({ reservation }) => {
       </div>
       <div className="infoFlightReserved">
         <div className="titleFlightReserved">Reservation ID: {reservation.reservationId}</div>
+        {luggage && <div className="subtitleFlightReserved">Luggage Weight: {luggage.weight}</div>}
         <div className="subtitleFlightReserved">Reservation Date: {reservation.reservationDate}</div>
         <div className="subtitleFlightReserved">Total Price: {reservation.totalPrice}</div>
         <div className="subtitleFlightReserved"><br /></div>

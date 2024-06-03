@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Fundo from '../img/fundo.jpg';
 import Navbar from '../components/Navbar';
 import "../css/SearchFlight.css";
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import FlightsSearch from "../components/FlightSearch";
 
 function SearchFlight() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     from: '',
@@ -17,10 +19,10 @@ function SearchFlight() {
 
   const flightsData = location.state?.flightsData;
 
-  // const formatDate = (date) => {
-  //   const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  //   return new Date(dateString).toLocaleDateString('en-GB', options);
-  // };
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,23 +65,17 @@ function SearchFlight() {
   return (
     <div className="container-index">
       <Navbar />
-      <FlightsSearch />
 
+
+      {isLoggedIn ? (
       <div className="containerSearchFlight" style={{ alignItems: "start" }}>
-        {/* {flightsData && flightsData["outboundFlights"].length > 0 ? (
-            flightsData["outboundFlights"].map((outboundFlight, index) => {
-
-              return (
-                <CardFlights
-                  outboundFlight={outboundFlight}
-                  key={index}
-                />
-              );
-            })
-          ) : (
-            <p>No flights available</p>
-          )} */}
+        <FlightsSearch />
       </div>
+      ) : (
+        <div>
+          <h1>ACCESS DENIED</h1>
+        </div>
+      )}  
     </div>
 
     /* <div className="background-image" style={{ backgroundImage: `url(${Fundo})` }}>
