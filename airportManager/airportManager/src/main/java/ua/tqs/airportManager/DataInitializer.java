@@ -1,6 +1,7 @@
 package ua.tqs.airportManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -20,9 +21,12 @@ import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.repository.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Component
 public class DataInitializer {
+
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
     private AirlineRepository airlineRepository;
@@ -167,24 +171,39 @@ public class DataInitializer {
 
     public void generateAndSaveUsers() {
 
-        for (int i = 0; i < 20; i++) {
-            String username = generateUsername();
-            String userId = generateUserNumber(username);
+        for (int i = 0; i < 10; i++) {
+            String userString = generateUsername();
+            // String userId = generateUserNumber(username);
             String firstName = generateRandomFirstName();
             String lastName = generateRandomLastName();
-            String password = generateRandomPassword();
-            String email = generateRandomEmail(username);
+            String password = encoder.encode(generateRandomPassword());
+            String email = generateRandomEmail(userString);
+            String username = email;
             String passportNumber = generateRandomPassportNumber();
             String country = generateRandomCountry();
             String city = generateRandomCity(country);
-            Roles role = random.nextBoolean() ? Roles.ADMIN : Roles.USER;
+            // Roles role = random.nextBoolean() ? Roles.ADMIN : Roles.USER;
+            Roles role = Roles.USER;
 
-            User user = new User(userId, username, firstName, lastName, password, email, passportNumber, city, country, role);
+            User user = new User(username, firstName, lastName, password, email, passportNumber, city, country, role);
             System.out.println(user);
 
             // users.add(user);
             userRepository.save(user);
+            // System.out.println("\n\n\n\n\n\nn done \n\n\n\n\\n\n");
         }
+
+        User user1 = new User("john.doe@example.com", "John", "Doe", encoder.encode("passjoe"), "john.doe@example.com", generateRandomPassportNumber(), "New York", "USA", Roles.ADMIN);
+        User user2 = new User("jane.smith@example.com", "Jane", "Smith", encoder.encode("passjane"), "jane.smith@example.com", generateRandomPassportNumber(), "Los Angeles", "USA", Roles.ADMIN);
+        User user3 = new User("bob.jones@example.com", "Bob", "Jones", encoder.encode("passbob"), "bob.jones@example.com", generateRandomPassportNumber(), "Chicago", "USA", Roles.ADMIN);
+        User user4 = new User("alice.williams@example.com", "Alice", "Williams", encoder.encode("passalice"), "alice.williams@example.com", generateRandomPassportNumber(), "Houston", "USA", Roles.ADMIN);
+        User user5 = new User("charlie.brown@example.com", "Charlie", "Brown", encoder.encode("passcharlie"), "charlie.brown@example.com", generateRandomPassportNumber(), "Phoenix", "USA", Roles.ADMIN);
+        
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        userRepository.save(user4);
+        userRepository.save(user5);
     }
 
     public void generateAndSavePassengers() {
@@ -194,7 +213,7 @@ public class DataInitializer {
             User user = users.get(random.nextInt(users.size()));
 
             String passengerId = generatePassengerNumber();
-            String userId = user.getUserId();
+            int userId = user.getUserId();
             String firstName = generateRandomFirstName();
             String lastName = generateRandomLastName();
             String state = random.nextBoolean() ? "null" : "checked-in";
@@ -210,7 +229,7 @@ public class DataInitializer {
             String cardNumber = generateRandomCardNumber();
             String cardPIN = generateRandomCardPIN();
 
-            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN, user);
+            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN);
             System.out.println(passenger);
 
             // passengers.add(passenger);
@@ -250,10 +269,10 @@ public class DataInitializer {
             LocalDate reservationDate = generateRandomReservationDate(flight.getDate());
             String nameCard = passenger.getFirstName() + " " + passenger.getLastName();
             String numberCard = passenger.getCardNumber();
-            String expirationDateCard = generateRandomExpirationDateCard();
+            // String expirationDateCard = generateRandomExpirationDateCard();
             String countryCard = passenger.getCountry();
 
-            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, expirationDateCard, countryCard, passenger, flight);
+            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, countryCard, passenger, flight);
             System.out.println(reservation);
 
             // reservations.add(reservation);
@@ -387,10 +406,10 @@ public class DataInitializer {
     // }
 
     // users
-    private String generateUserNumber(String username) {
-        String[] letters = username.split("");
-        return letters[0] + random.nextInt(9999) + 1000 + letters[1];
-    }
+    // private String generateUserNumber(String username) {
+    //     String[] letters = username.split("");
+    //     return letters[0] + random.nextInt(9999) + 1000 + letters[1];
+    // }
 
     private String generateUsername() {
 
@@ -603,7 +622,7 @@ public class DataInitializer {
         String[] seatPrefixes = {"AA", "AB", "AC"}; // adjust
 
         String seatPrefix = seatPrefixes[random.nextInt(seatPrefixes.length)];
-        int seatNumber = random.nextInt(200) + 40;
+        int seatNumber = random.nextInt(40) + 5;
         String seatId = seatPrefix + seatNumber;
 
         return seatId;
@@ -629,16 +648,6 @@ public class DataInitializer {
         return LocalDate.ofEpochDay(randomDay);
     }
 
-    public String generateRandomExpirationDateCard() {
-
-        StringBuilder expirationDateCard = new StringBuilder();
-        String year = Integer.toString(random.nextInt(6) + 2024);
-        String month = Integer.toString(random.nextInt(12) + 1);
-
-        expirationDateCard.append(year).append(" - ").append(month);
-
-        return expirationDateCard.toString();
-    }
 
     // luggage
     public String generateLuggageNumber() {

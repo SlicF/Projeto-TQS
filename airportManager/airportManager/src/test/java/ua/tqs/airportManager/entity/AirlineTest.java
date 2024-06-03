@@ -37,11 +37,4 @@ public class AirlineTest {
         );
     }
 
-    @Test
-    @DisplayName("test association between airline and flight")
-    public void testReservationAirlineAssociation() {
-        assertEquals(airline1, airline1);
-    }
-
-
 }

@@ -61,5 +61,4 @@ public class FlightTest {
         assertEquals(airline2, flight3.getAirline());
     }
 
-
 }

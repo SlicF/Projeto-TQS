@@ -9,21 +9,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
+import ua.tqs.airportManager.dto.RegisterDTO;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.repository.UserRepository;
-import ua.tqs.airportManager.service.UserService;
 import ua.tqs.airportManager.service.AuthService;
+import ua.tqs.airportManager.service.UserService;
 
-// import ua.ies.TravelingBooking.TravelingBooking.entity.User;
-// import ua.ies.TravelingBooking.TravelingBooking.repository.UsersRepository;
-// import ua.ies.TravelingBooking.TravelingBooking.service.AuthService;
 import org.springframework.security.core.Authentication;
 import ua.tqs.airportManager.dto.AuthResponse;
 import ua.tqs.airportManager.dto.LoginDTO;
-import ua.tqs.airportManager.dto.RegisterDTO;
-// import ua.tqs.airportManager.dto.UserInfoDTO;
 
 @CrossOrigin(origins = "http://localhost:8981")
 @RestController
@@ -31,39 +27,38 @@ import ua.tqs.airportManager.dto.RegisterDTO;
 @RequestMapping("/api/accounts")
 public class UserController {
 
-    // private AuthService authService;
-    private UserService usersService;
+    private AuthService authService;
+    private UserService userService;
     private UserRepository userRespository;
 
 
-    // @PostMapping("/register")
-    // public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
-    // return ResponseEntity.ok(authService.register(registerDTO));
-    // }
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
+    return ResponseEntity.ok(authService.register(registerDTO));
+    }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
-    // return ResponseEntity.ok(authService.login(loginDTO));
-    // }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
+    return ResponseEntity.ok(authService.login(loginDTO));
+    }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<User> getUserInfo(@RequestParam("userId") String userId) {
+    public ResponseEntity<User> getUserInfo(@RequestParam("userId") int userId) {
 
-        User user = usersService.findByUserId(userId);
+        User user = userService.findByUserId(userId);
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/userInfoByUsername")
-    // public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username")
-    // String username) {
-    public ResponseEntity<User> getUserInfoByUsername() {
+    public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
+    // public ResponseEntity<User> getUserInfoByUsername() {
 
-        // User user = usersService.findByUsername(username);
+        // User user = userService.findByUsername(username);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        System.out.println("username: " + username);
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // System.out.println("username: " + username);
 
         User user = userRespository.findByUsername(username).orElseThrow();
 
@@ -73,7 +68,7 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
 
-        List<User> users = usersService.getAllUsers();
+        List<User> users = userService.getAllUsers();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
