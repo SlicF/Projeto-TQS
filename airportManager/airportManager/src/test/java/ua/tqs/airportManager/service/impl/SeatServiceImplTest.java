@@ -62,7 +62,19 @@ class SeatServiceImplTest {
         verify(seatRepository, times(1)).findByFlightId("F123");
     }
 
-  
+    @Test
+    void testGetSeatBySeatId() {
+        Seat seat = new Seat();
+        seat.setSeatId("S123");
+
+        when(seatRepository.findBySeatId("S123")).thenReturn(seat);
+
+        Seat foundSeat = seatService.getSeatBySeatId("S123");
+
+        assertNotNull(foundSeat);
+        assertEquals("S123", foundSeat.getSeatId());
+        verify(seatRepository, times(1)).findBySeatId("S123");
+    }
 
     @Test
     void testGetAllSeats() {

@@ -47,6 +47,7 @@ class JwtAuthenticationFilterTest {
         filterChain = (req, res) -> {
             // No-op filter chain
         };
+        SecurityContextHolder.clearContext();
     }
 
     @Test
@@ -83,5 +84,27 @@ class JwtAuthenticationFilterTest {
         assertNull(SecurityContextHolder.getContext().getAuthentication());
     }
 
- 
+    @Test
+    void testDoFilterInternalWithExpiredToken() throws ServletException, IOException {
+        String token = "expiredToken";
+        String username = "user";
+        UserDetails userDetails = org.mockito.Mockito.mock(UserDetails.class);
+        
+        when(jwtService.getUsernameFromToken(token)).thenReturn(username);
+        when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
+        when(jwtService.isTokenValid(token, userDetails)).thenReturn(false);
+        
+        request.addHeader("Authorization", "Bearer " + token);
+
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test
+    void testDoFilterInternalWithoutToken() throws ServletException, IOException {
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
 }
