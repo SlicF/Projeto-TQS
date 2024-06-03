@@ -33,10 +33,6 @@ public class UserController {
     private UserService userService;
     private UserRepository userRespository;
 
-    private final AuthService authService;
-    private final UserService usersService;
-    private final UserRepository userRespository;
-
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
     return ResponseEntity.ok(authService.register(registerDTO));
