@@ -71,12 +71,15 @@ class AirlineServiceImplTest {
 
         List<Airline> foundAirlines = airlineService.getAllAirlines();
 
-        assertThat(foundAirlines).isNotNull();
-        assertThat(foundAirlines).hasSize(2);
-        assertThat(foundAirlines.get(0).getAirlineCode()).isEqualTo("TAP");
-        assertThat(foundAirlines.get(0).getAirlineName()).isEqualTo("TAP Portugal");
-        assertThat(foundAirlines.get(1).getAirlineCode()).isEqualTo("RYA");
-        assertThat(foundAirlines.get(1).getAirlineName()).isEqualTo("Ryanair");
+        assertThat(foundAirlines)
+            .isNotNull()
+            .hasSize(2)
+            .extracting(Airline::getAirlineCode)
+            .containsExactly("TAP", "RYA");
+
+        assertThat(foundAirlines)
+            .extracting(Airline::getAirlineName)
+            .containsExactly("TAP Portugal", "Ryanair");
 
         verify(airlineRepository).findAll();
     }
