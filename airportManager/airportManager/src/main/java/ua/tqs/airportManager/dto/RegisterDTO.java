@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterDTO {
+    private String username;
     private String firstName;
     private String lastName;
+    private String password;
     private String email;
-    private String userPassword;
     private String passportNumber;
     private String city;
     private String country;

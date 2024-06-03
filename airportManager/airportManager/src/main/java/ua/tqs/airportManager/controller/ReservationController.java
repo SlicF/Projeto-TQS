@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import ua.tqs.airportManager.entity.Luggage;
 import ua.tqs.airportManager.entity.Reservation;
 import ua.tqs.airportManager.service.ReservationService;
 
@@ -26,13 +27,20 @@ import ua.tqs.airportManager.service.ReservationService;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
-    private final ReservationService reservationService;
-    
+    private ReservationService reservationService;
+
     @PostMapping("/createReservation")
-    public ResponseEntity<Map<String, Object>> createReservation(@RequestBody Reservation reserv) {
-        Reservation reservation = reservationService.createReservation(reserv);
+    public ResponseEntity<?> createReservation(@RequestBody Reservation reserv) {
+
+        // Authentication authentication =
+        // SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // User user = UserRepository.findByUsername(username).orElseThrow();
+
+        var reservation = reservationService.createReservation(reserv);
         if (reservation == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Error creating reservation"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating reservation");
+          
         } else {
             Map<String, Object> response = new HashMap<>();
             response.put("reservationId", reservation.getReservationId());
@@ -52,9 +60,12 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
-    @GetMapping("/getReservationsByPassenger")
-    public ResponseEntity<List<Reservation>> getReservationsByPassenger(@RequestParam("passengerId") String passengerId) {
+    @GetMapping("/getReservationsByPassenger") 
+    public ResponseEntity<List<Reservation>> getReservationsByPassenger(
+            @RequestParam("passengerId") String passengerId) {
+        // array of reservations
         List<Reservation> reservations = reservationService.getReservationsByPassengerId(passengerId);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
+
 }

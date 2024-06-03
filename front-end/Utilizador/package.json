@@ -15,7 +15,9 @@
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
     "@stomp/stompjs": "^7.0.0",
+    "bootstrap": "^5.3.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
     "sockjs-client": "^1.6.1"

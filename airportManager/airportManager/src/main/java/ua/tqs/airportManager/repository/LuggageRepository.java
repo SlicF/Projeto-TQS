@@ -1,9 +1,16 @@
 package ua.tqs.airportManager.repository;
 
+
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import ua.tqs.airportManager.entity.Luggage;
 
 public interface LuggageRepository extends JpaRepository<Luggage, String> {
     
-    Luggage findByLuggageId (String lugaggeId);
+    Optional<Luggage> findByLuggageId (String lugaggeId);
+    // List<Luggage> getAllLuggages();
+
+    List<Luggage> findByReservationId(String reservationId);
 }

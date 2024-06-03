@@ -11,13 +11,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
+import ua.tqs.airportManager.dto.RegisterDTO;
+import ua.tqs.airportManager.entity.Reservation;
+
 import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.repository.UserRepository;
-import ua.tqs.airportManager.service.UserService;
 import ua.tqs.airportManager.service.AuthService;
+import ua.tqs.airportManager.service.UserService;
+
+import org.springframework.security.core.Authentication;
 import ua.tqs.airportManager.dto.AuthResponse;
 import ua.tqs.airportManager.dto.LoginDTO;
-import ua.tqs.airportManager.dto.RegisterDTO;
 
 @CrossOrigin(origins = "http://localhost:8981")
 @RestController
@@ -25,7 +29,9 @@ import ua.tqs.airportManager.dto.RegisterDTO;
 @RequestMapping("/api/accounts")
 public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private AuthService authService;
+    private UserService userService;
+    private UserRepository userRespository;
 
     private final AuthService authService;
     private final UserService usersService;
@@ -33,7 +39,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
-        return ResponseEntity.ok(authService.register(registerDTO));
+    return ResponseEntity.ok(authService.register(registerDTO));
     }
 
     @PostMapping("/login")
@@ -42,16 +48,22 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    public ResponseEntity<User> getUserInfo(@RequestParam("userId") String userId) {
-        User user = usersService.findByUserId(userId);
+    public ResponseEntity<User> getUserInfo(@RequestParam("userId") int userId) {
+
+        User user = userService.findByUserId(userId);
+
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/userInfoByUsername")
-    public ResponseEntity<User> getUserInfoByUsername() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        logger.info("username: {}", username);
+    public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
+    // public ResponseEntity<User> getUserInfoByUsername() {
+
+        // User user = userService.findByUsername(username);
+
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // System.out.println("username: " + username);
 
         User user = userRespository.findByUsername(username).orElseThrow();
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -59,7 +71,9 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
-        List<User> users = usersService.getAllUsers();
+
+        List<User> users = userService.getAllUsers();
+
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
