@@ -1,6 +1,5 @@
 package ua.tqs.airportManager.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -12,12 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Passenger;
-import ua.tqs.airportManager.entity.Reservation;
-import ua.tqs.airportManager.entity.User;
-import ua.tqs.airportManager.repository.ReservationRepository;
 import ua.tqs.airportManager.service.PassengerService;
-
-import ua.tqs.airportManager.repository.PassengerRepository;
 
 @CrossOrigin(origins = "http://localhost:8981")
 @RestController
@@ -76,6 +70,17 @@ public class PassengerController {
     public ResponseEntity<List<Passenger>> getPassengersByUserId(@PathVariable("userId") int userId) {
         List<Passenger> passengers = passengersService.findByUserId(userId);
         return new ResponseEntity<>(passengers, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/check-in")
+    public ResponseEntity<Passenger> checkInPassenger(@PathVariable("id") String passengerId) {
+        Passenger passenger = passengersService.findByPassengerId(passengerId);
+        if (passenger == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        passenger.setState("checked-in");
+        passengersService.checkIn(passenger);
+        return new ResponseEntity<>(passenger, HttpStatus.OK);
     }
 
 }

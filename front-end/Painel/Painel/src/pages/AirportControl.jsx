@@ -1,40 +1,69 @@
-// AirportControl.jsx
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import Flight from '../components/Flight.jsx';
-import '../css/AirportControl.css'; 
+import FlightAlterState from '../components/FlightAlterState.jsx';
+import '../css/AirportControl.css';
 
 const AirportControl = () => {
-  const flights = [
-    { flightNumber: 'TP1219', destination: 'Braga', departureTime: '12:34', gate: '0' },
-    { flightNumber: 'TP1220', destination: 'Porto', departureTime: '13:34', gate: '1' },
-    { flightNumber: 'TP1221', destination: 'Lisboa', departureTime: '14:34', gate: '2' },
-    { flightNumber: 'TP1222', destination: 'Faro', departureTime: '15:34', gate: '3' },
-    { flightNumber: 'TP1223', destination: 'Paris', departureTime: '16:34', gate: '4' },
-    { flightNumber: 'TP1224', destination: 'Londres', departureTime: '17:34', gate: '5' },
-    
-  ];
+  const [flights, setFlights] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8981/api/flights/flights')
+      .then(response => response.json())
+      .then(data => {
+        // Ordena os voos por hora de partida
+        const sortedFlights = data.sort((a, b) => a.departureHour.localeCompare(b.departureHour));
+
+        // Obtém a hora atual
+        const currentHour = new Date().toISOString().slice(11, 16);
+
+        // Filtra os voos que ocorrem após a hora atual
+        const filteredFlights = sortedFlights.filter(flight => flight.departureHour > currentHour);
+
+        const limitedFlights = filteredFlights.slice(0, 18);
+
+        setFlights(limitedFlights);
+      })
+      .catch(error => console.error('Error fetching flights:', error));
+  }, []);
+
+  const getRandomIntBetween1And10 = () => {
+    return Math.floor(Math.random() * 10) + 1;
+  };
 
   return (
     <div className="airport-container">
       <header className="header">
-        <h1 className="Title-Viagar">VIAJAR</h1>
+        <h1 className="Title-Viagar">NEXT FLIGHTS</h1>
       </header>
       <div className="flights-container">
         <div className="flight-header">
-          <span>Companhia</span>
-          <span>Voo</span>
-          <span>Destino</span>
-          <span>Saída</span>
-          <span>Portão</span>
+          <span>Airline</span>
+          <span>Flight ID</span>
+          <span>Destiny</span>
+          <span>Departure Hour</span>
+          <span>Gate</span>
         </div>
         {flights.map((flight, index) => (
-          <Flight 
-            key={index}
-            flightNumber={flight.flightNumber}
-            destination={flight.destination}
-            departureTime={flight.departureTime}
-            gate={flight.gate}
-          />
+          flight.state === "OK" ? (
+            <Flight 
+              key={index}
+              airline={flight.airlineCode}  
+              flightNumber={flight.flightId}  
+              destination={flight.arrivalCity}
+              departureTime={flight.departureHour}
+              gate={getRandomIntBetween1And10()}  
+            />
+          ) : (
+            <FlightAlterState
+              key={index}
+              airline={flight.airlineCode}  
+              flightNumber={flight.flightId}
+              destination={flight.arrivalCity}
+              departureTime={flight.departureHour}
+              state={flight.state}
+            />
+          )
         ))}
       </div>
     </div>

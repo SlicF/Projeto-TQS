@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 
 import ua.tqs.airportManager.entity.*;
 import ua.tqs.airportManager.repository.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Component
 public class DataInitializer {
@@ -36,7 +35,7 @@ public class DataInitializer {
     private List<Passenger> passengers;
     private List<Reservation> reservations;
     private Random random;
-    
+
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
@@ -82,9 +81,11 @@ public class DataInitializer {
     private static final String BELGICA = "Bélgica";
 
     @Autowired
-    public DataInitializer(AirlineRepository airlineRepository, FlightRepository flightRepository, UserRepository userRepository, 
-                           PassengerRepository passengerRepository, SeatRepository seatRepository, ReservationRepository reservationRepository,
-                           LuggageRepository luggageRepository) {
+    public DataInitializer(AirlineRepository airlineRepository, FlightRepository flightRepository,
+            UserRepository userRepository,
+            PassengerRepository passengerRepository, SeatRepository seatRepository,
+            ReservationRepository reservationRepository,
+            LuggageRepository luggageRepository) {
         this.airlineRepository = airlineRepository;
         this.flightRepository = flightRepository;
         this.userRepository = userRepository;
@@ -100,21 +101,20 @@ public class DataInitializer {
 
         // airlines
         List<Airline> initialAirlines = Arrays.asList(
-            new Airline("TAP", "TAP Portugal"),
-            new Airline("RYA", "RyanAir Services"),
-            new Airline("EJU", "easyJet Europe"),
-            new Airline("QTR", "Qatar Airways"),
-            new Airline("LH", "Lufthansa"),
-            new Airline("BA", "British Airways"),
-            new Airline("KL", "KLM"),
-            new Airline("AF", "Air France"),
-            new Airline("IB", "Iberia"),
-            new Airline("TK", "Turkish Airlines"),
-            new Airline("AI", "Air India"),
-            new Airline("SQ", "Singapore Airlines"),
-            new Airline("MH", "Malaysia Airlines"),
-            new Airline("CA", "Air China")
-        );
+                new Airline("TAP", "TAP Portugal"),
+                new Airline("RYA", "RyanAir Services"),
+                new Airline("EJU", "easyJet Europe"),
+                new Airline("QTR", "Qatar Airways"),
+                new Airline("LH", "Lufthansa"),
+                new Airline("BA", "British Airways"),
+                new Airline("KL", "KLM"),
+                new Airline("AF", "Air France"),
+                new Airline("IB", "Iberia"),
+                new Airline("TK", "Turkish Airlines"),
+                new Airline("AI", "Air India"),
+                new Airline("SQ", "Singapore Airlines"),
+                new Airline("MH", "Malaysia Airlines"),
+                new Airline("CA", "Air China"));
 
         airlineRepository.saveAll(initialAirlines);
         airlines = airlineRepository.findAll();
@@ -122,11 +122,13 @@ public class DataInitializer {
         // flights
         generateAndSaveFlights(airlines);
 
-        Flight flight1 = new Flight("RYA9830", "RYA", "Viena", "Paris", LocalDate.of(2024,06,07), "07h45", "09h15", "100", "OK", 230, airline2);
-        Flight flight2 = new Flight("RYA9833", "RYA", "Viena", "Paris", LocalDate.of(2024,06,07), "09h45", "11h15", "120", "OK", 210, airline2);
+        Flight flight1 = new Flight("RYA9830", "RYA", "Viena", "Paris", LocalDate.of(2024, 06, 07), "07h45", "09h15",
+                "100", "OK", 230, initialAirlines.get(1));
+        Flight flight2 = new Flight("RYA9833", "RYA", "Viena", "Paris", LocalDate.of(2024, 06, 07), "09h45", "11h15",
+                "120", "OK", 210, initialAirlines.get(1));
         flightRepository.save(flight1);
         flightRepository.save(flight2);
-      
+
         flights = flightRepository.findAll();
 
         // users
@@ -181,7 +183,8 @@ public class DataInitializer {
             String status = random.nextBoolean() ? "OK" : "Cancelado";
             int capacity = random.nextInt(200) + 50;
 
-            Flight flight = new Flight(flightNumber, airline.getAirlineCode(), departure, destination, departureDate, departureTime, arrivalTime, price, status, capacity, airline);
+            Flight flight = new Flight(flightNumber, airline.getAirlineCode(), departure, destination, departureDate,
+                    departureTime, arrivalTime, price, status, capacity, airline);
             logger.info("Saving flight: {}", flight);
             flightRepository.save(flight);
         }
@@ -213,12 +216,17 @@ public class DataInitializer {
             // System.out.println("\n\n\n\n\n\nn done \n\n\n\n\\n\n");
         }
 
-        User user1 = new User("john.doe@example.com", "John", "Doe", encoder.encode("passjoe"), "john.doe@example.com", generateRandomPassportNumber(), "New York", "USA", Roles.ADMIN);
-        User user2 = new User("jane.smith@example.com", "Jane", "Smith", encoder.encode("passjane"), "jane.smith@example.com", generateRandomPassportNumber(), "Los Angeles", "USA", Roles.ADMIN);
-        User user3 = new User("bob.jones@example.com", "Bob", "Jones", encoder.encode("passbob"), "bob.jones@example.com", generateRandomPassportNumber(), "Chicago", "USA", Roles.ADMIN);
-        User user4 = new User("alice.williams@example.com", "Alice", "Williams", encoder.encode("passalice"), "alice.williams@example.com", generateRandomPassportNumber(), "Houston", "USA", Roles.ADMIN);
-        User user5 = new User("charlie.brown@example.com", "Charlie", "Brown", encoder.encode("passcharlie"), "charlie.brown@example.com", generateRandomPassportNumber(), "Phoenix", "USA", Roles.ADMIN);
-        
+        User user1 = new User("john.doe@example.com", "John", "Doe", encoder.encode("passjoe"), "john.doe@example.com",
+                generateRandomPassportNumber(), "New York", "USA", Roles.ADMIN);
+        User user2 = new User("jane.smith@example.com", "Jane", "Smith", encoder.encode("passjane"),
+                "jane.smith@example.com", generateRandomPassportNumber(), "Los Angeles", "USA", Roles.ADMIN);
+        User user3 = new User("bob.jones@example.com", "Bob", "Jones", encoder.encode("passbob"),
+                "bob.jones@example.com", generateRandomPassportNumber(), "Chicago", "USA", Roles.ADMIN);
+        User user4 = new User("alice.williams@example.com", "Alice", "Williams", encoder.encode("passalice"),
+                "alice.williams@example.com", generateRandomPassportNumber(), "Houston", "USA", Roles.ADMIN);
+        User user5 = new User("charlie.brown@example.com", "Charlie", "Brown", encoder.encode("passcharlie"),
+                "charlie.brown@example.com", generateRandomPassportNumber(), "Phoenix", "USA", Roles.ADMIN);
+
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
@@ -246,11 +254,12 @@ public class DataInitializer {
             String cardNumber = generateRandomCardNumber();
             String cardPIN = generateRandomCardPIN();
 
-            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email, phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN);
+            Passenger passenger = new Passenger(passengerId, userId, firstName, lastName, state, sex, birthDate, email,
+                    phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN);
             System.out.println(passenger);
 
             // passengers.add(passenger);
-          
+
             passengerRepository.save(passenger);
         }
     }
@@ -284,7 +293,8 @@ public class DataInitializer {
             // String expirationDateCard = generateRandomExpirationDateCard();
             String countryCard = passenger.getCountry();
 
-            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice, reservationDate, nameCard, numberCard, countryCard, passenger, flight);
+            Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice,
+                    reservationDate, nameCard, numberCard, countryCard, passenger, flight);
             System.out.println(reservation);
 
             // reservations.add(reservation);
@@ -313,11 +323,11 @@ public class DataInitializer {
 
     private String generateRandomDepartureCity() {
         String[] citiesArray = {
-            LONDRES, PARIS, MADRID, ROMA, BERLIM,
-            AMESTERDAO, BARCELONA, MILAO, FRANKFURT, VIENA,
-            NOVA_IORQUE, LOS_ANGELES, MIAMI, TORONTO, SAO_PAULO,
-            RIO_DE_JANEIRO, BUENOS_AIRES, TOQUIO, SINGAPURA, PEQUIM,
-            DUBAI, ISTAMBUL, KUALA_LUMPUR, DELHI, SYDNEY
+                LONDRES, PARIS, MADRID, ROMA, BERLIM,
+                AMESTERDAO, BARCELONA, MILAO, FRANKFURT, VIENA,
+                NOVA_IORQUE, LOS_ANGELES, MIAMI, TORONTO, SAO_PAULO,
+                RIO_DE_JANEIRO, BUENOS_AIRES, TOQUIO, SINGAPURA, PEQUIM,
+                DUBAI, ISTAMBUL, KUALA_LUMPUR, DELHI, SYDNEY
         };
 
         return citiesArray[random.nextInt(citiesArray.length)];
@@ -325,11 +335,11 @@ public class DataInitializer {
 
     private String generateRandomDestinationCity(String departure) {
         String[] citiesArray = {
-            LONDRES, PARIS, MADRID, ROMA, BERLIM,
-            AMESTERDAO, BARCELONA, MILAO, FRANKFURT, VIENA,
-            NOVA_IORQUE, LOS_ANGELES, MIAMI, TORONTO, SAO_PAULO,
-            RIO_DE_JANEIRO, BUENOS_AIRES, TOQUIO, SINGAPURA, PEQUIM,
-            DUBAI, ISTAMBUL, KUALA_LUMPUR, DELHI, SYDNEY
+                LONDRES, PARIS, MADRID, ROMA, BERLIM,
+                AMESTERDAO, BARCELONA, MILAO, FRANKFURT, VIENA,
+                NOVA_IORQUE, LOS_ANGELES, MIAMI, TORONTO, SAO_PAULO,
+                RIO_DE_JANEIRO, BUENOS_AIRES, TOQUIO, SINGAPURA, PEQUIM,
+                DUBAI, ISTAMBUL, KUALA_LUMPUR, DELHI, SYDNEY
         };
 
         List<String> cities = new ArrayList<>(Arrays.asList(citiesArray));
@@ -368,39 +378,40 @@ public class DataInitializer {
     }
 
     // private List<Seat> generateRandomSeats(int capacity) {
-    //     Random random = new Random();
-    //     int numSeatsTaken = random.nextInt(capacity / 3) + 1;
-    //     List<Seat> seatsTaken = new ArrayList<>();
-    
-    //     // generate random seat ids
-    //     for (int i = 0; i < numSeatsTaken; i++) {
-    //         String seatId = generateSeatId();
-    //         Seat seat = new Seat(seatId);
-    //         seatsTaken.add(seat)    ;
-    //     }
-        
-    //     Set<String> existingSeatIds = new HashSet<>(); // set to store unique seat ids
+    // Random random = new Random();
+    // int numSeatsTaken = random.nextInt(capacity / 3) + 1;
+    // List<Seat> seatsTaken = new ArrayList<>();
 
-    //     for (int i = 0; i < numSeatsTaken; i++) {
-    //         String seatId;
+    // // generate random seat ids
+    // for (int i = 0; i < numSeatsTaken; i++) {
+    // String seatId = generateSeatId();
+    // Seat seat = new Seat(seatId);
+    // seatsTaken.add(seat) ;
+    // }
 
-    //         do {
-    //             seatId = generateSeatId();
-    //         } while (existingSeatIds.contains(seatId));
+    // Set<String> existingSeatIds = new HashSet<>(); // set to store unique seat
+    // ids
 
-    //         existingSeatIds.add(seatId); // Add to set if unique
+    // for (int i = 0; i < numSeatsTaken; i++) {
+    // String seatId;
 
-    //         Seat seat = new Seat(seatId);
-    //         seatsTaken.add(seat);
-    //     }
+    // do {
+    // seatId = generateSeatId();
+    // } while (existingSeatIds.contains(seatId));
 
-    //     return seatsTaken;
+    // existingSeatIds.add(seatId); // Add to set if unique
+
+    // Seat seat = new Seat(seatId);
+    // seatsTaken.add(seat);
+    // }
+
+    // return seatsTaken;
     // }
 
     // users
     // private String generateUserNumber(String username) {
-    //     String[] letters = username.split("");
-    //     return letters[0] + random.nextInt(9999) + 1000 + letters[1];
+    // String[] letters = username.split("");
+    // return letters[0] + random.nextInt(9999) + 1000 + letters[1];
     // }
 
     private String generateUsername() {
@@ -418,21 +429,21 @@ public class DataInitializer {
 
     private String generateRandomFirstName() {
         String[] firstNames = {
-            "Lucas", "Miguel", "Arthur", "Gabriel", "Heitor",
-            "Alice", "Sophia", "Laura", "Valentina", "Helena",
-            "Maria", "José", "Duarte", "João", "Rafael", "Marta",
-            "Diogo", "Beatriz", "Leonor", "Daniel", "Henrique",
-            "Bernardo", "Luísa", "Júlia", "Mariana", "Matilde", "Carlota"
+                "Lucas", "Miguel", "Arthur", "Gabriel", "Heitor",
+                "Alice", "Sophia", "Laura", "Valentina", "Helena",
+                "Maria", "José", "Duarte", "João", "Rafael", "Marta",
+                "Diogo", "Beatriz", "Leonor", "Daniel", "Henrique",
+                "Bernardo", "Luísa", "Júlia", "Mariana", "Matilde", "Carlota"
         };
         return firstNames[random.nextInt(firstNames.length)];
     }
 
     private String generateRandomLastName() {
         String[] lastNames = {
-            "Silva", "Santos", "Oliveira", "Sousa", "Lima",
-            "Ferreira", "Costa", "Pereira", "Almeida", "Ribeiro",
-            "Dias", "Teixeira", "Alves", "Madeira", "Gomes", "Miranda",
-            "Falcão", "Gameiro", "Capucho", "Godinho", "Freixo", "Carvalho"
+                "Silva", "Santos", "Oliveira", "Sousa", "Lima",
+                "Ferreira", "Costa", "Pereira", "Almeida", "Ribeiro",
+                "Dias", "Teixeira", "Alves", "Madeira", "Gomes", "Miranda",
+                "Falcão", "Gameiro", "Capucho", "Godinho", "Freixo", "Carvalho"
         };
         return lastNames[random.nextInt(lastNames.length)];
     }
@@ -487,7 +498,7 @@ public class DataInitializer {
     }
 
     private String generateRandomCountry() {
-        String[] countriesArray = {PORTUGAL, ESPANHA, FRANCA, ALEMANHA, AUSTRIA, REINO_UNIDO, LUXEMBURGO, BELGICA};
+        String[] countriesArray = { PORTUGAL, ESPANHA, FRANCA, ALEMANHA, AUSTRIA, REINO_UNIDO, LUXEMBURGO, BELGICA };
         return countriesArray[random.nextInt(countriesArray.length)];
     }
 
@@ -531,10 +542,13 @@ public class DataInitializer {
 
     private String generateRandomStreetAddress() {
         String[] prefix = { "Rua", "Avenida", "Travessa", "Largo", "Praço" };
-        String[] names = { " das Flores", " do Sol", " da Paz", " da Liberdade", " do Horizonte", " dos Pinheiros", " da Alegria", " do Mar", " do Rio", " da Serra", " Comandante", " Augusto" };
-        String[] suffix = { "", " Velha", " Nova", " Grande", " Pequena", " do Sul", " do Norte", " do Leste", " do Oeste", " Santos", " Pereira" };
+        String[] names = { " das Flores", " do Sol", " da Paz", " da Liberdade", " do Horizonte", " dos Pinheiros",
+                " da Alegria", " do Mar", " do Rio", " da Serra", " Comandante", " Augusto" };
+        String[] suffix = { "", " Velha", " Nova", " Grande", " Pequena", " do Sul", " do Norte", " do Leste",
+                " do Oeste", " Santos", " Pereira" };
 
-        return prefix[random.nextInt(prefix.length)] + names[random.nextInt(names.length)] + suffix[random.nextInt(suffix.length)];
+        return prefix[random.nextInt(prefix.length)] + names[random.nextInt(names.length)]
+                + suffix[random.nextInt(suffix.length)];
     }
 
     private String generateRandomCardNumber() {
@@ -562,8 +576,8 @@ public class DataInitializer {
     }
 
     private String generateSeatNumber() {
-        String[] seatPrefixes = {"AA", "AB", "AC"};
-      
+        String[] seatPrefixes = { "AA", "AB", "AC" };
+
         String seatPrefix = seatPrefixes[random.nextInt(seatPrefixes.length)];
         int seatNumber = random.nextInt(40) + 5;
         String seatId = seatPrefix + seatNumber;

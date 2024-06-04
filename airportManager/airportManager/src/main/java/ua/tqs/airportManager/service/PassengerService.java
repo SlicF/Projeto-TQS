@@ -10,4 +10,5 @@ public interface PassengerService {
     List<Passenger> findByState (String state);
     List<Passenger> getAllPassengers();
     List<Passenger> findByUserId(int userId);
+    void checkIn(Passenger passenger);
 }

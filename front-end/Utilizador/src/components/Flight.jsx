@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // Flight.jsx
 import React from 'react';
 import airportLogo from '../img/logo_s.png'; 
