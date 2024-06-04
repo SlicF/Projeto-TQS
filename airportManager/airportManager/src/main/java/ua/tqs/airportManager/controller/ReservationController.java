@@ -30,6 +30,11 @@ public class ReservationController {
     @PostMapping("/createReservation")
     public ResponseEntity<?> createReservation(@RequestBody Reservation reserv) {
 
+        // Authentication authentication =
+        // SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // User user = UserRepository.findByUsername(username).orElseThrow();
+
         var reservation = reservationService.createReservation(reserv);
         if (reservation == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating reservation");
