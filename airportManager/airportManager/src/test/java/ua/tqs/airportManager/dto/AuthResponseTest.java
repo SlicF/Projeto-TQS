@@ -2,6 +2,7 @@ package ua.tqs.airportManager.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -44,21 +45,13 @@ class AuthResponseTest {
         assertEquals(expectedString, authResponse.toString());
     }
 
-<<<<<<< HEAD
-  
-=======
     @Test
-    void testEquals() {
-        AuthResponse authResponse1 = new AuthResponse("testToken");
-        AuthResponse authResponse2 = new AuthResponse("testToken");
-        assertEquals(authResponse1, authResponse2);
+    void testSetUserId() {
+        AuthResponse authResponse = new AuthResponse();
+        assertThrows(UnsupportedOperationException.class, () -> authResponse.setUserId(1));
     }
 
-    @Test
-    void testHashCode() {
-        AuthResponse authResponse1 = new AuthResponse("testToken");
-        AuthResponse authResponse2 = new AuthResponse("testToken");
-        assertEquals(authResponse1.hashCode(), authResponse2.hashCode());
-    }
->>>>>>> parent of aa46a7e... more test
+    
+
+  
 }
