@@ -572,4 +572,9 @@ public class DataInitializer {
         double weight = random.nextDouble() * 45 + 5;
         return String.format("%.1f", weight);
     }
+
+    public void initializeData() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initializeData'");
+    }
 }

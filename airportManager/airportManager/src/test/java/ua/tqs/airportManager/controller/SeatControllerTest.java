@@ -86,6 +86,7 @@ class SeatControllerTest {
                 .andExpect(jsonPath("$.flightId").value("F123"));
     }
 
+
     @Test
     void testCreateSeat() throws Exception {
         Seat seat = new Seat("S123", "1A", "F123", null);
@@ -97,5 +98,16 @@ class SeatControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.seatId").value("S123"));
     }
-}
 
+    @Test
+    void testCreateSeatError() throws Exception {
+        when(seatService.createSeat(any(Seat.class))).thenReturn(null);
+
+        Seat seat = new Seat("S123", "1A", "F123", null);
+        mockMvc.perform(post("/api/seats/createSeat")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(seat)))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$").value("Error creating seat"));
+    }
+}
