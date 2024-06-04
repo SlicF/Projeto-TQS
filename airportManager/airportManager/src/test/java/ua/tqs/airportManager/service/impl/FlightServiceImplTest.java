@@ -1,12 +1,5 @@
 package ua.tqs.airportManager.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,7 +8,16 @@ import org.mockito.MockitoAnnotations;
 import ua.tqs.airportManager.entity.Flight;
 import ua.tqs.airportManager.repository.FlightRepository;
 
-class FlightServiceImplTest {
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+public class FlightServiceImplTest {
 
     @Mock
     private FlightRepository flightRepository;
@@ -24,77 +26,66 @@ class FlightServiceImplTest {
     private FlightServiceImpl flightService;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testCreateFlight() {
+    public void testCreateFlight() {
         Flight flight = new Flight();
-        flight.setFlightId("F123");
-
         when(flightRepository.save(any(Flight.class))).thenReturn(flight);
-
         Flight createdFlight = flightService.createFlight(flight);
-
-        assertNotNull(createdFlight);
-        assertEquals("F123", createdFlight.getFlightId());
-        verify(flightRepository, times(1)).save(any(Flight.class));
+        assertEquals(flight, createdFlight);
+        verify(flightRepository, times(1)).save(flight);
     }
 
     @Test
-    void testGetFlightsByState() {
-        Flight flight1 = new Flight();
-        flight1.setFlightId("F123");
-
-        Flight flight2 = new Flight();
-        flight2.setFlightId("F124");
-
-        List<Flight> flights = Arrays.asList(flight1, flight2);
-
-        when(flightRepository.findByState("On Time")).thenReturn(flights);
-
-        List<Flight> foundFlights = flightService.getFlightsByState("On Time");
-
-        assertNotNull(foundFlights);
-        assertEquals(2, foundFlights.size());
-        verify(flightRepository, times(1)).findByState("On Time");
+    public void testGetFlightByFlightId() {
+        Flight flight = new Flight();
+        when(flightRepository.findByFlightId(anyString())).thenReturn(flight);
+        Flight fetchedFlight = flightService.getFlightByFlightId("ABC123");
+        assertEquals(flight, fetchedFlight);
+        verify(flightRepository, times(1)).findByFlightId("ABC123");
     }
 
     @Test
-    void testGetAllFlights() {
-        Flight flight1 = new Flight();
-        flight1.setFlightId("F123");
+    public void testGetFlightsByState() {
+        List<Flight> flights = Arrays.asList(new Flight(), new Flight());
+        when(flightRepository.findByState(anyString())).thenReturn(flights);
+        List<Flight> fetchedFlights = flightService.getFlightsByState("Scheduled");
+        assertEquals(flights, fetchedFlights);
+        verify(flightRepository, times(1)).findByState("Scheduled");
+    }
 
-        Flight flight2 = new Flight();
-        flight2.setFlightId("F124");
-
-        List<Flight> flights = Arrays.asList(flight1, flight2);
-
+    @Test
+    public void testGetAllFlights() {
+        List<Flight> flights = Arrays.asList(new Flight(), new Flight());
         when(flightRepository.findAll()).thenReturn(flights);
-
-        List<Flight> foundFlights = flightService.getAllFlights();
-
-        assertNotNull(foundFlights);
-        assertEquals(2, foundFlights.size());
+        List<Flight> fetchedFlights = flightService.getAllFlights();
+        assertEquals(flights, fetchedFlights);
         verify(flightRepository, times(1)).findAll();
     }
 
     @Test
-    void testFindByDepartureCityAndArrivalCityAndDate() {
-        Flight flight = new Flight();
-        flight.setFlightId("F123");
-
-        List<Flight> flights = Arrays.asList(flight);
-        LocalDate date = LocalDate.of(2023, 6, 3);
-
-        when(flightRepository.findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", date)).thenReturn(flights);
-
-        List<Flight> foundFlights = flightService.findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", date);
-
-        assertNotNull(foundFlights);
-        assertEquals(1, foundFlights.size());
-        verify(flightRepository, times(1)).findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", date);
+    public void testFindByDepartureCityAndArrivalCityAndDate() {
+        List<Flight> flights = Arrays.asList(new Flight(), new Flight());
+        when(flightRepository.findByDepartureCityAndArrivalCityAndDate(anyString(), anyString(), any(LocalDate.class))).thenReturn(flights);
+        List<Flight> fetchedFlights = flightService.findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", LocalDate.now());
+        assertEquals(flights, fetchedFlights);
+        verify(flightRepository, times(1)).findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", LocalDate.now());
     }
 
+    @Test
+    public void testGetAllCities() {
+        List<String> departureCities = Arrays.asList("CityA", "CityB");
+        List<String> arrivalCities = Arrays.asList("CityB", "CityC");
+        when(flightRepository.findAllDepartureCities()).thenReturn(departureCities);
+        when(flightRepository.findAllArrivalCities()).thenReturn(arrivalCities);
+        List<String> allCities = flightService.getAllCities();
+        List<String> expectedCities = Arrays.asList("CityA", "CityB", "CityC");
+        assertEquals(expectedCities.size(), allCities.size());
+        assertTrue(allCities.containsAll(expectedCities));
+        verify(flightRepository, times(1)).findAllDepartureCities();
+        verify(flightRepository, times(1)).findAllArrivalCities();
+    }
 }
