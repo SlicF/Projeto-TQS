@@ -1,100 +1,107 @@
-// package ua.tqs.airportManager.entity;
+package ua.tqs.airportManager.entity;
 
-// import org.junit.jupiter.api.Test;
-// import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-// class PassengerTest {
+import java.time.LocalDate;
 
-//     @Test
-//     void testPassengerId() {
-//         Passenger passenger = new Passenger();
-//         passenger.setPassengerId("ABC123");
-//         assertEquals("ABC123", passenger.getPassengerId());
-//     }
+import org.junit.jupiter.api.Test;
 
-//     @Test
-//     void testUserId() {
-//         Passenger passenger = new Passenger();
-//         passenger.setUserId("user123");
-//         assertEquals("user123", passenger.getUserId());
-//     }
+class PassengerTest {
 
-//     @Test
-//     void testFirstName() {
-//         Passenger passenger = new Passenger();
-//         passenger.setFirstName("John");
-//         assertEquals("John", passenger.getFirstName());
-//     }
+    @Test
+    void testNoArgsConstructor() {
+        Passenger passenger = new Passenger();
+        assertThat(passenger).isNotNull();
+    }
 
-//     @Test
-//     void testLastName() {
-//         Passenger passenger = new Passenger();
-//         passenger.setLastName("Doe");
-//         assertEquals("Doe", passenger.getLastName());
-//     }
+    @Test
+    void testAllArgsConstructor() {
+        LocalDate birthDate = LocalDate.of(1990, 1, 1);
 
-//     @Test
-//     void testEmail() {
-//         Passenger passenger = new Passenger();
-//         passenger.setEmail("algo@algo.pt");
-//         assertEquals("algo@algo.pt", passenger.getEmail());
-//     }
+        Passenger passenger = new Passenger(
+            "P1234567", 1, "John", "Doe", "Checked-in", "Male", birthDate, 
+            "john.doe@example.com", "123456789", "A1234567", "12345", 
+            "123 Main St", "New York", "USA", "4111111111111111", "1234"
+        );
+        
+        assertThat(passenger.getPassengerId()).isEqualTo("P1234567");
+        assertThat(passenger.getUserId()).isEqualTo(1);
+        assertThat(passenger.getFirstName()).isEqualTo("John");
+        assertThat(passenger.getLastName()).isEqualTo("Doe");
+        assertThat(passenger.getState()).isEqualTo("Checked-in");
+        assertThat(passenger.getSex()).isEqualTo("Male");
+        assertThat(passenger.getBirthDate()).isEqualTo(birthDate);
+        assertThat(passenger.getEmail()).isEqualTo("john.doe@example.com");
+        assertThat(passenger.getPhoneNumber()).isEqualTo("123456789");
+        assertThat(passenger.getPassportNumber()).isEqualTo("A1234567");
+        assertThat(passenger.getPostalCode()).isEqualTo("12345");
+        assertThat(passenger.getStreetAddress()).isEqualTo("123 Main St");
+        assertThat(passenger.getCity()).isEqualTo("New York");
+        assertThat(passenger.getCountry()).isEqualTo("USA");
+        assertThat(passenger.getCardNumber()).isEqualTo("4111111111111111");
+        assertThat(passenger.getCardPIN()).isEqualTo("1234");
+    }
 
-//     @Test
-//     void testPhone() {
-//         Passenger passenger = new Passenger();
-//         passenger.setPhoneNumber("123456789");
-//         assertEquals("123456789", passenger.getPhoneNumber());
-//     }
+    @Test
+    void testSettersAndGetters() {
+        LocalDate birthDate = LocalDate.of(1990, 1, 1);
 
-//     @Test
-//     void testAddress() {
-//         Passenger passenger = new Passenger();
-//         passenger.setStreetAddress("Rua do Algo");
-//         assertEquals("Rua do Algo", passenger.getStreetAddress());
-//     }
+        Passenger passenger = new Passenger();
+        passenger.setPassengerId("P1234567");
+        passenger.setUserId(1);
+        passenger.setFirstName("John");
+        passenger.setLastName("Doe");
+        passenger.setState("Checked-in");
+        passenger.setSex("Male");
+        passenger.setBirthDate(birthDate);
+        passenger.setEmail("john.doe@example.com");
+        passenger.setPhoneNumber("123456789");
+        passenger.setPassportNumber("A1234567");
+        passenger.setPostalCode("12345");
+        passenger.setStreetAddress("123 Main St");
+        passenger.setCity("New York");
+        passenger.setCountry("USA");
+        passenger.setCardNumber("4111111111111111");
+        passenger.setCardPIN("1234");
 
-//     @Test
-//     void testCity() {
-//         Passenger passenger = new Passenger();
-//         passenger.setCity("Porto");
-//         assertEquals("Porto", passenger.getCity());
-//     }
+        assertThat(passenger.getPassengerId()).isEqualTo("P1234567");
+        assertThat(passenger.getUserId()).isEqualTo(1);
+        assertThat(passenger.getFirstName()).isEqualTo("John");
+        assertThat(passenger.getLastName()).isEqualTo("Doe");
+        assertThat(passenger.getState()).isEqualTo("Checked-in");
+        assertThat(passenger.getSex()).isEqualTo("Male");
+        assertThat(passenger.getBirthDate()).isEqualTo(birthDate);
+        assertThat(passenger.getEmail()).isEqualTo("john.doe@example.com");
+        assertThat(passenger.getPhoneNumber()).isEqualTo("123456789");
+        assertThat(passenger.getPassportNumber()).isEqualTo("A1234567");
+        assertThat(passenger.getPostalCode()).isEqualTo("12345");
+        assertThat(passenger.getStreetAddress()).isEqualTo("123 Main St");
+        assertThat(passenger.getCity()).isEqualTo("New York");
+        assertThat(passenger.getCountry()).isEqualTo("USA");
+        assertThat(passenger.getCardNumber()).isEqualTo("4111111111111111");
+        assertThat(passenger.getCardPIN()).isEqualTo("1234");
+    }
 
-//     @Test
-//     void testCountry() {
-//         Passenger passenger = new Passenger();
-//         passenger.setCountry("Portugal");
-//         assertEquals("Portugal", passenger.getCountry());
-//     }
 
-//     @Test
-//     void testPostalCode() {
-//         Passenger passenger = new Passenger();
-//         passenger.setPostalCode("4000-007");
-//         assertEquals("4000-007", passenger.getPostalCode());
-//     }
+    @Test
+    void testGeneratePassengerId() {
+        Passenger passenger = new Passenger();
+        passenger.generateReservationId();
+        assertThat(passenger.getPassengerId()).isNotNull();
+        assertThat(passenger.getPassengerId()).hasSize(7);
+    }
 
-//     @Test
-//     void testState() {
-//         Passenger passenger = new Passenger();
-//         passenger.setState("Portugal");
-//         assertEquals("Portugal", passenger.getState());
-//     }
+    @Test
+    void testToString() {
+        LocalDate birthDate = LocalDate.of(1990, 1, 1);
 
-//     @Test
-//     void testPassengerAssociation() {
-//         Passenger passenger = new Passenger();
-//         passenger.setPassengerId("ABC123");
-//         assertEquals("ABC123", passenger.getPassengerId());
-//     }
+        Passenger passenger = new Passenger(
+            "P1234567", 1, "John", "Doe", "Checked-in", "Male", birthDate, 
+            "john.doe@example.com", "123456789", "A1234567", "12345", 
+            "123 Main St", "New York", "USA", "4111111111111111", "1234"
+        );
 
-//     @Test
-//     void testUserAssociation() {
-//         Passenger passenger = new Passenger();
-//         User user = new User();
-//         user.setUserId("user123");
-//         passenger.setUser(user);
-//         assertEquals(user, passenger.getUser());
-//     }
-// }
+        String expectedString = "Passenger(passengerId=P1234567, userId=1, firstName=John, lastName=Doe, state=Checked-in, sex=Male, birthDate=1990-01-01, email=john.doe@example.com, phoneNumber=123456789, passportNumber=A1234567, postalCode=12345, streetAddress=123 Main St, city=New York, country=USA, cardNumber=4111111111111111, cardPIN=1234)";
+        assertThat(passenger.toString()).isEqualTo(expectedString);
+    }
+}

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Passenger;
 import ua.tqs.airportManager.service.PassengerService;
-
 @CrossOrigin(origins = "http://localhost:8981")
 @RestController
 @AllArgsConstructor
@@ -49,18 +48,12 @@ public class PassengerController {
     @PostMapping("/createPassenger")
     public ResponseEntity<?> createPassenger(@RequestBody Passenger passeng) {
 
-        // Authentication authentication =
-        // SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName();
-        // User user = UserRepository.findByUsername(username).orElseThrow();
-
         var passenger = passengersService.createPassenger(passeng);
         if (passenger == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating passenger");
         } else {
             Map<String, Object> response = new HashMap<>();
             response.put("passengerId", passenger.getPassengerId());
-            // return ResponseEntity.ok().body(response);
             return ResponseEntity.ok().body(passenger);
 
         }

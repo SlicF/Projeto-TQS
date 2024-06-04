@@ -1,0 +1,575 @@
+openapi: 3.0.1
+info:
+  title: Airport Manager API
+  description: API documentation for the Airport Manager application
+  version: 1.0.0
+servers:
+  - url: http://localhost:8981
+paths:
+  /api/flights/airlines:
+    get:
+      summary: Get all airlines
+      responses:
+        '200':
+          description: A list of airlines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Airline'
+  /api/flights/cities:
+    get:
+      summary: Get all cities
+      responses:
+        '200':
+          description: A list of cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/flights/flights:
+    get:
+      summary: Get all flights
+      responses:
+        '200':
+          description: A list of flights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+  /api/flights/flights/{state}:
+    get:
+      summary: Get flights by state
+      parameters:
+        - name: state
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of flights by state
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+  /api/flights/flightCheckout/{flightId}:
+    get:
+      summary: Get flight details by flight ID
+      parameters:
+        - name: flightId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flight details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+  /api/flights/searchFlight:
+    post:
+      summary: Search for flights
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flight'
+      responses:
+        '200':
+          description: A list of flights matching the search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flight'
+  /api/luggage/luggage:
+    get:
+      summary: Get all luggage
+      responses:
+        '200':
+          description: A list of luggage
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Luggage'
+  /api/luggage/luggage/{id}:
+    get:
+      summary: Get luggage by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Luggage details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Luggage'
+  /api/luggage/createLuggage:
+    post:
+      summary: Create a new luggage entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Luggage'
+      responses:
+        '201':
+          description: Luggage created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Luggage'
+  /api/passengers/passengers:
+    get:
+      summary: Get all passengers
+      responses:
+        '200':
+          description: A list of passengers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+  /api/passengers/passengerInfo:
+    get:
+      summary: Get passenger by ID
+      parameters:
+        - name: passengerId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Passenger details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+  /api/passengers/passengers/{state}:
+    get:
+      summary: Get passengers by state
+      parameters:
+        - name: state
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of passengers by state
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+  /api/passengers/createPassenger:
+    post:
+      summary: Create a new passenger entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Passenger'
+      responses:
+        '200':
+          description: Passenger created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Passenger'
+  /api/passengers/user/{userId}:
+    get:
+      summary: Get passengers by user ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of passengers by user ID
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Passenger'
+  /api/reservations/createReservation:
+    post:
+      summary: Create a new reservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '200':
+          description: Reservation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+  /api/reservations/getAllReservations:
+    get:
+      summary: Get all reservations
+      responses:
+        '200':
+          description: A list of reservations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+  /api/reservations/getReservation/{reservationId}:
+    get:
+      summary: Get reservation by ID
+      parameters:
+        - name: reservationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reservation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservation'
+  /api/reservations/getReservationsByPassenger:
+    get:
+      summary: Get reservations by passenger ID
+      parameters:
+        - name: passengerId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of reservations by passenger ID
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservation'
+  /api/accounts/userInfo:
+    get:
+      summary: Get user info by ID
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/accounts/userInfoByUsername:
+    get:
+      summary: Get user info by username
+      parameters:
+        - name: username
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /api/accounts/users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /api/accounts/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDTO'
+      responses:
+        '200':
+          description: User registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/accounts/login:
+    post:
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDTO'
+      responses:
+        '200':
+          description: User logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+  /api/seats/seats:
+    get:
+      summary: Get all seats
+      responses:
+        '200':
+          description: A list of seats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Seat'
+  /api/seats/seatsByFlight:
+    get:
+      summary: Get seats by flight ID
+      parameters:
+        - name: flightId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of seats by flight ID
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Seat'
+  /api/seats/seatInfo:
+    get:
+      summary: Get seat info by ID
+      parameters:
+        - name: seatId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Seat details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+  /api/seats/createSeat:
+    post:
+      summary: Create a new seat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Seat'
+      responses:
+        '200':
+          description: Seat created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Seat'
+components:
+  schemas:
+    Airline:
+      type: object
+      properties:
+        airlineCode:
+          type: string
+        airlineName:
+          type: string
+    Flight:
+      type: object
+      properties:
+        flightId:
+          type: string
+        airlineCode:
+          type: string
+        departureCity:
+          type: string
+        arrivalCity:
+          type: string
+        date:
+          type: string
+          format: date
+        departureHour:
+          type: string
+        arrivalHour:
+          type: string
+        price:
+          type: string
+        state:
+          type: string
+        seatsNumber:
+          type: integer
+        airline:
+          $ref: '#/components/schemas/Airline'
+    Luggage:
+      type: object
+      properties:
+        luggageId:
+          type: string
+        reservationId:
+          type: string
+        weight:
+          type: string
+        reservation:
+          $ref: '#/components/schemas/Reservation'
+    Passenger:
+      type: object
+      properties:
+        passengerId:
+          type: string
+        userId:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        state:
+          type: string
+        sex:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        passportNumber:
+          type: string
+        postalCode:
+          type: string
+        streetAddress:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        cardNumber:
+          type: string
+        cardPIN:
+          type: string
+    Reservation:
+      type: object
+      properties:
+        reservationId:
+          type: string
+        passengerId:
+          type: string
+        flightId:
+          type: string
+        seat:
+          type: string
+        totalPrice:
+          type: number
+          format: double
+        reservationDate:
+          type: string
+          format: date
+        nameCard:
+          type: string
+        numberCard:
+          type: string
+        countryCard:
+          type: string
+        passenger:
+          $ref: '#/components/schemas/Passenger'
+        flight:
+          $ref: '#/components/schemas/Flight'
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        passportNumber:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        role:
+          type: string
+    RegisterDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    LoginDTO:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    Seat:
+      type: object
+      properties:
+        seatId:
+          type: string
+        seatNumber:
+          type: string
+        flightId:
+          type: string
+        flight:
+          $ref: '#/components/schemas/Flight'

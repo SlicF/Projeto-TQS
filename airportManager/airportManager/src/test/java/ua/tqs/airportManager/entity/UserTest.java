@@ -1,48 +1,78 @@
-// package ua.tqs.airportManager.entity;
+package ua.tqs.airportManager.entity;
 
-// import static org.junit.jupiter.api.Assertions.assertAll;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import java.time.LocalDate;
-// import java.util.Date;
-// import org.junit.jupiter.api.BeforeAll;
-// import org.junit.jupiter.api.DisplayName;
-// import org.junit.jupiter.api.Test;
-// import ua.tqs.airportManager.Roles;
+import static org.assertj.core.api.Assertions.assertThat;
 
-// public class UserTest {
-    
-//     private static User user;
+import java.util.Collection;
+import java.util.List;
 
-//     @BeforeAll
-//     public static void setUp() {
-//         user = new User();
-//         user.setUserId("1");
-//         user.setFirstName("João");
-//         user.setLastName("Neves");
-//         user.setUsername("joaoNeves");
-//         user.setPassword("password123");
-//         user.setEmail("joaoNeves@gmail.com");
-//         user.setPassportNumber("A12485");
-//         user.setCity("Porto");
-//         user.setCountry("Portugal");
-//         user.setRole(Roles.USER);
-//     }
+import org.junit.jupiter.api.Test;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import ua.tqs.airportManager.Roles;
 
-//     @DisplayName("Test User Entity")
-//     @Test
-//     void getUserTest() {
-//         assertAll(
-//             () -> assertEquals("1", user.getUserId()),
-//             () -> assertEquals("João", user.getFirstName()),
-//             () -> assertEquals("Neves", user.getLastName()),
-//             () -> assertEquals("joaoNeves", user.getUsername()),
-//             () -> assertEquals("password123", user.getPassword()),
-//             () -> assertEquals("joaoNeves@gmail.com", user.getEmail()),
-//             () -> assertEquals("A12485", user.getPassportNumber()),
-//             () -> assertEquals("Porto", user.getCity()),
-//             () -> assertEquals("Portugal", user.getCountry()),
-//             () -> assertEquals(Roles.USER, user.getRole())
-//         );
-//     }
-// }
+class UserTest {
+
+    @Test
+    void testNoArgsConstructor() {
+        User user = new User();
+        assertThat(user).isNotNull();
+    }
+
+    @Test
+    void testAllArgsConstructor() {
+        User user = new User("john.doe", "John", "Doe", "password", "john.doe@example.com", "A1234567", "New York", "USA", Roles.USER);
+        assertThat(user.getUsername()).isEqualTo("john.doe");
+        assertThat(user.getFirstName()).isEqualTo("John");
+        assertThat(user.getLastName()).isEqualTo("Doe");
+        assertThat(user.getPassword()).isEqualTo("password");
+        assertThat(user.getEmail()).isEqualTo("john.doe@example.com");
+        assertThat(user.getPassportNumber()).isEqualTo("A1234567");
+        assertThat(user.getCity()).isEqualTo("New York");
+        assertThat(user.getCountry()).isEqualTo("USA");
+        assertThat(user.getRole()).isEqualTo(Roles.USER);
+    }
+
+    @Test
+    void testSettersAndGetters() {
+        User user = new User();
+        user.setUserId(1);
+        user.setUsername("john.doe");
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setPassword("password");
+        user.setEmail("john.doe@example.com");
+        user.setPassportNumber("A1234567");
+        user.setCity("New York");
+        user.setCountry("USA");
+        user.setRole(Roles.USER);
+
+        assertThat(user.getUserId()).isEqualTo(1);
+        assertThat(user.getUsername()).isEqualTo("john.doe");
+        assertThat(user.getFirstName()).isEqualTo("John");
+        assertThat(user.getLastName()).isEqualTo("Doe");
+        assertThat(user.getPassword()).isEqualTo("password");
+        assertThat(user.getEmail()).isEqualTo("john.doe@example.com");
+        assertThat(user.getPassportNumber()).isEqualTo("A1234567");
+        assertThat(user.getCity()).isEqualTo("New York");
+        assertThat(user.getCountry()).isEqualTo("USA");
+        assertThat(user.getRole()).isEqualTo(Roles.USER);
+    }
+
+    @Test
+    void testToString() {
+        User user = new User("john.doe", "John", "Doe", "password", "john.doe@example.com", "A1234567", "New York", "USA", Roles.USER);
+        String expectedString = "User(userId=0, username=john.doe, firstName=John, lastName=Doe, password=password, email=john.doe@example.com, passportNumber=A1234567, city=New York, country=USA, role=USER)";
+        assertThat(user).hasToString(expectedString);
+    }
+
+    @Test
+    void testUserDetailsMethods() {
+        User user = new User("john.doe", "John", "Doe", "password", "john.doe@example.com", "A1234567", "New York", "USA", Roles.USER);
+
+        assertThat(user.isAccountNonExpired()).isTrue();
+        assertThat(user.isAccountNonLocked()).isTrue();
+        assertThat(user.isCredentialsNonExpired()).isTrue();
+        assertThat(user.isEnabled()).isTrue();
+    }
+}

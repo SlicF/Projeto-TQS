@@ -194,7 +194,6 @@ public class DataInitializer {
 
         for (int i = 0; i < 10; i++) {
             String userString = generateUsername();
-            // String userId = generateUserNumber(username);
             String firstName = generateRandomFirstName();
             String lastName = generateRandomLastName();
             String password = encoder.encode(generateRandomPassword());
@@ -203,7 +202,6 @@ public class DataInitializer {
             String passportNumber = generateRandomPassportNumber();
             String country = generateRandomCountry();
             String city = generateRandomCity(country);
-            // Roles role = random.nextBoolean() ? Roles.ADMIN : Roles.USER;
             Roles role = Roles.USER;
 
             User user = new User(username, firstName, lastName, password, email, passportNumber, city, country, role);
@@ -213,7 +211,6 @@ public class DataInitializer {
             logger.info("Saving user: {}", user);
 
             userRepository.save(user);
-            // System.out.println("\n\n\n\n\n\nn done \n\n\n\n\\n\n");
         }
 
         User user1 = new User("john.doe@example.com", "John", "Doe", encoder.encode("passjoe"), "john.doe@example.com",
@@ -290,7 +287,6 @@ public class DataInitializer {
             LocalDate reservationDate = generateRandomReservationDate(flight.getDate());
             String nameCard = passenger.getFirstName() + " " + passenger.getLastName();
             String numberCard = passenger.getCardNumber();
-            // String expirationDateCard = generateRandomExpirationDateCard();
             String countryCard = passenger.getCountry();
 
             Reservation reservation = new Reservation(reservationNumber, passengerId, flightId, seat, totalPrice,
