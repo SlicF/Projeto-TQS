@@ -43,7 +43,6 @@ class LuggageTest {
         Reservation reservation = new Reservation();
         Luggage luggage = new Luggage("L123", "R123", "20", reservation);
         
-        String expectedString = "Luggage(luggageId=L123, reservationId=R123, weight=20, reservation=Reservation(...))";
         assertThat(luggage.toString()).contains("luggageId=L123");
         assertThat(luggage.toString()).contains("reservationId=R123");
         assertThat(luggage.toString()).contains("weight=20");

@@ -41,7 +41,6 @@ class SeatTest {
     void testToString() {
         Flight flight = new Flight();
         Seat seat = new Seat("S123", "12A", "F123", flight);
-        String expectedString = "Seat(seatId=S123, seatNumber=12A, flightId=F123, flight=Flight(...))";
         assertThat(seat.toString()).contains("seatId=S123");
         assertThat(seat.toString()).contains("seatNumber=12A");
         assertThat(seat.toString()).contains("flightId=F123");

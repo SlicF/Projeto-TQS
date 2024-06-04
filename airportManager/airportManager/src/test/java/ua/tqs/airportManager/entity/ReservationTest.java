@@ -81,7 +81,6 @@ class ReservationTest {
             "John Doe", "1234567890123456", "USA", passenger, flight
         );
         
-        String expectedString = "Reservation(reservationId=R12345, passengerId=P123, flightId=F123, seat=12A, totalPrice=100.0, reservationDate=2023-01-01, nameCard=John Doe, numberCard=1234567890123456, countryCard=USA, passenger=Passenger(...), flight=Flight(...))";
         assertThat(reservation.toString()).contains("reservationId=R12345");
         assertThat(reservation.toString()).contains("passengerId=P123");
         assertThat(reservation.toString()).contains("flightId=F123");
