@@ -9,6 +9,7 @@
 // import static org.assertj.core.api.Assertions.assertThat;
 
 // @SpringBootTest
+// @ActiveProfiles("test")
 // class AirportManagerApplicationTests {
 
 //     @Autowired
