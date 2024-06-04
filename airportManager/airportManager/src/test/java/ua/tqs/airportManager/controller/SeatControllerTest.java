@@ -37,7 +37,7 @@ class SeatControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @Mock   
     private SeatService seatService;
 
     @InjectMocks

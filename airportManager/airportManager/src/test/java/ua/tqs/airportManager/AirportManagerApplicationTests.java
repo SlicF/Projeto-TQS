@@ -20,4 +20,3 @@ class AirportManagerApplicationTests {
         assertThat(applicationContext.containsBean("airportManagerApplication")).isTrue();
     }
 }
-

@@ -21,7 +21,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
-    private static final String SECRET_KEY = "586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
+    private static final String SECRET_KEY = System.getenv("JWT_SECRET_KEY");
 
     public String getToken(UserDetails user) {
         logger.info("Cheguei aqui");
@@ -43,7 +43,7 @@ public class JwtService {
     }
 
     private Key getKey() {
-        logger.info("JwtService: getKey: {}", SECRET_KEY);
+        logger.info("JwtService: getKey: using environment variable for key");
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         logger.info("JwtService: getKey: keyBytes: {}", keyBytes);
         return Keys.hmacShaKeyFor(keyBytes);
