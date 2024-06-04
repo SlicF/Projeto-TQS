@@ -1,6 +1,5 @@
 package ua.tqs.airportManager.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +33,11 @@ public class ReservationController {
         var reservation = reservationService.createReservation(reserv);
         if (reservation == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating reservation");
+          
         } else {
             Map<String, Object> response = new HashMap<>();
             response.put("reservationId", reservation.getReservationId());
-            return ResponseEntity.ok().body(response);
+            return ResponseEntity.ok(response);
         }
     }
 
@@ -53,12 +53,11 @@ public class ReservationController {
         return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
-    @GetMapping("/getReservationsByPassenger")
+    @GetMapping("/getReservationsByPassenger") 
     public ResponseEntity<List<Reservation>> getReservationsByPassenger(
             @RequestParam("passengerId") String passengerId) {
         // array of reservations
         List<Reservation> reservations = reservationService.getReservationsByPassengerId(passengerId);
-
         return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 

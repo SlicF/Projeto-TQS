@@ -33,7 +33,7 @@ public class FlightController {
         List<String> cities = flightService.getAllCities();
         return new ResponseEntity<>(cities, HttpStatus.OK);
     }
-    
+
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> getFlights() {
         List<Flight> flights = flightService.getAllFlights();
@@ -52,13 +52,24 @@ public class FlightController {
         return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 
-
     @PostMapping(path = "/searchFlight", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight search) {
         List<Flight> flights = flightService.findByDepartureCityAndArrivalCityAndDate(
-            search.getDepartureCity().trim(), 
-            search.getArrivalCity().trim(), 
-            search.getDate());
+                search.getDepartureCity().trim(),
+                search.getArrivalCity().trim(),
+                search.getDate());
         return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{flightId}/{state}")
+    public ResponseEntity<Flight> updateFlightState(@PathVariable("flightId") String flightId,
+            @PathVariable("state") String state) {
+        Flight flight = flightService.getFlightByFlightId(flightId);
+        if (flight == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        flight.setState(state);
+        flightService.updateFlight(flight);
+        return new ResponseEntity<>(flight, HttpStatus.OK);
     }
 }

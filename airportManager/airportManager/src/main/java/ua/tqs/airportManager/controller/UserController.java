@@ -26,7 +26,6 @@ public class UserController {
     private UserService userService;
     private UserRepository userRespository;
 
-
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO registerDTO) {
     return ResponseEntity.ok(authService.register(registerDTO));
@@ -34,7 +33,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginDTO loginDTO) {
-    return ResponseEntity.ok(authService.login(loginDTO));
+        return ResponseEntity.ok(authService.login(loginDTO));
     }
 
     @GetMapping("/userInfo")
@@ -49,7 +48,6 @@ public class UserController {
     public ResponseEntity<User> getUserInfoByUsername(@RequestParam("username") String username) {
 
         User user = userRespository.findByUsername(username).orElseThrow();
-
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

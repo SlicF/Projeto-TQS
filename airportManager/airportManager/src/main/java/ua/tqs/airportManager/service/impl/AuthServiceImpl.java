@@ -16,6 +16,7 @@ import ua.tqs.airportManager.entity.User;
 import ua.tqs.airportManager.repository.UserRepository;
 import ua.tqs.airportManager.service.AuthService;
 
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -27,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse register(RegisterDTO registerDTO) {
+
         User user = new User();
         user.setFirstName(registerDTO.getFirstName());
         user.setLastName(registerDTO.getLastName());
@@ -34,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(registerDTO.getEmail());
         user.setPassword(encoder.encode(registerDTO.getPassword()));
         user.setPassportNumber(registerDTO.getPassportNumber());
+
         user.setCity(registerDTO.getCity());
         user.setCountry(registerDTO.getCountry());
         user.setRole(Roles.USER);

@@ -50,4 +50,5 @@ public class Usero {
     @Enumerated(EnumType.STRING) 
     Roles role;
 
+    
 }

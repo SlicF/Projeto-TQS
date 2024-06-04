@@ -51,6 +51,7 @@ class FlightTest {
     @Test
     @DisplayName("test association between flight and airline")
     void testReservationFlightAssociation() {
+    void testReservationFlightAssociation() {
         assertEquals(airline1, flight1.getAirline());
         assertEquals(airline2, flight3.getAirline());
     }

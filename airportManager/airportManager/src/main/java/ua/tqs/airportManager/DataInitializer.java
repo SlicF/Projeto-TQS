@@ -255,6 +255,7 @@ public class DataInitializer {
                     phoneNumber, passportNumber, postalCode, streetAddress, city, country, cardNumber, cardPIN);
             System.out.println(passenger);
 
+            // passengers.add(passenger);
 
             passengerRepository.save(passenger);
         }
@@ -292,6 +293,7 @@ public class DataInitializer {
                     reservationDate, nameCard, numberCard, countryCard, passenger, flight);
             System.out.println(reservation);
 
+            // reservations.add(reservation);
 
             reservationRepository.save(reservation);
         }
@@ -371,6 +373,42 @@ public class DataInitializer {
         return Integer.toString(finalPrice);
     }
 
+    // private List<Seat> generateRandomSeats(int capacity) {
+    // Random random = new Random();
+    // int numSeatsTaken = random.nextInt(capacity / 3) + 1;
+    // List<Seat> seatsTaken = new ArrayList<>();
+
+    // // generate random seat ids
+    // for (int i = 0; i < numSeatsTaken; i++) {
+    // String seatId = generateSeatId();
+    // Seat seat = new Seat(seatId);
+    // seatsTaken.add(seat) ;
+    // }
+
+    // Set<String> existingSeatIds = new HashSet<>(); // set to store unique seat
+    // ids
+
+    // for (int i = 0; i < numSeatsTaken; i++) {
+    // String seatId;
+
+    // do {
+    // seatId = generateSeatId();
+    // } while (existingSeatIds.contains(seatId));
+
+    // existingSeatIds.add(seatId); // Add to set if unique
+
+    // Seat seat = new Seat(seatId);
+    // seatsTaken.add(seat);
+    // }
+
+    // return seatsTaken;
+    // }
+
+    // users
+    // private String generateUserNumber(String username) {
+    // String[] letters = username.split("");
+    // return letters[0] + random.nextInt(9999) + 1000 + letters[1];
+    // }
 
     private String generateUsername() {
         int length = random.nextInt(10) + 5;
@@ -571,10 +609,5 @@ public class DataInitializer {
     private String generateRandomWeight() {
         double weight = random.nextDouble() * 45 + 5;
         return String.format("%.1f", weight);
-    }
-
-    public void initializeData() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initializeData'");
     }
 }

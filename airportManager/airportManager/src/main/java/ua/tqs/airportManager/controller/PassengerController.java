@@ -1,6 +1,7 @@
 package ua.tqs.airportManager.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,8 @@ import ua.tqs.airportManager.service.PassengerService;
 @AllArgsConstructor
 @RequestMapping("/api/passengers")
 public class PassengerController {
-
+  
+    // private AuthService authService;
     private PassengerService passengersService;
 
     @GetMapping("/passengers")
@@ -61,6 +63,17 @@ public class PassengerController {
     public ResponseEntity<List<Passenger>> getPassengersByUserId(@PathVariable("userId") int userId) {
         List<Passenger> passengers = passengersService.findByUserId(userId);
         return new ResponseEntity<>(passengers, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/check-in")
+    public ResponseEntity<Passenger> checkInPassenger(@PathVariable("id") String passengerId) {
+        Passenger passenger = passengersService.findByPassengerId(passengerId);
+        if (passenger == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        passenger.setState("checked-in");
+        passengersService.checkIn(passenger);
+        return new ResponseEntity<>(passenger, HttpStatus.OK);
     }
 
 }
