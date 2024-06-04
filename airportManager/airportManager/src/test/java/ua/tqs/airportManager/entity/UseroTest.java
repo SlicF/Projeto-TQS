@@ -55,6 +55,11 @@ class UseroTest {
         assertThat(user.getRole()).isEqualTo(Roles.USER);
     }
 
-
+    @Test
+    void testToString() {
+        Usero user = new Usero("1", "John", "Doe", "john.doe", "password", "john.doe@example.com", "A1234567", "New York", "USA", Roles.USER);
+        String expectedString = "Usero(userId=1, firstName=John, lastName=Doe, username=john.doe, password=password, email=john.doe@example.com, passportNumber=A1234567, city=New York, country=USA, role=USER)";
+        assertThat(user.toString()).isEqualTo(expectedString);
+    }
  
 }
