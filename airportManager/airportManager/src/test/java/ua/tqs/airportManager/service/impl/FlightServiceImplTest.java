@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class FlightServiceImplTest {
+class FlightServiceImplTest {
 
     @Mock
     private FlightRepository flightRepository;
@@ -26,12 +26,12 @@ public class FlightServiceImplTest {
     private FlightServiceImpl flightService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCreateFlight() {
+    void testCreateFlight() {
         Flight flight = new Flight();
         when(flightRepository.save(any(Flight.class))).thenReturn(flight);
         Flight createdFlight = flightService.createFlight(flight);
@@ -40,7 +40,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetFlightByFlightId() {
+    void testGetFlightByFlightId() {
         Flight flight = new Flight();
         when(flightRepository.findByFlightId(anyString())).thenReturn(flight);
         Flight fetchedFlight = flightService.getFlightByFlightId("ABC123");
@@ -49,7 +49,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetFlightsByState() {
+    void testGetFlightsByState() {
         List<Flight> flights = Arrays.asList(new Flight(), new Flight());
         when(flightRepository.findByState(anyString())).thenReturn(flights);
         List<Flight> fetchedFlights = flightService.getFlightsByState("Scheduled");
@@ -58,7 +58,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetAllFlights() {
+    void testGetAllFlights() {
         List<Flight> flights = Arrays.asList(new Flight(), new Flight());
         when(flightRepository.findAll()).thenReturn(flights);
         List<Flight> fetchedFlights = flightService.getAllFlights();
@@ -67,7 +67,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testFindByDepartureCityAndArrivalCityAndDate() {
+    void testFindByDepartureCityAndArrivalCityAndDate() {
         List<Flight> flights = Arrays.asList(new Flight(), new Flight());
         when(flightRepository.findByDepartureCityAndArrivalCityAndDate(anyString(), anyString(), any(LocalDate.class))).thenReturn(flights);
         List<Flight> fetchedFlights = flightService.findByDepartureCityAndArrivalCityAndDate("CityA", "CityB", LocalDate.now());
@@ -76,7 +76,7 @@ public class FlightServiceImplTest {
     }
 
     @Test
-    public void testGetAllCities() {
+    void testGetAllCities() {
         List<String> departureCities = Arrays.asList("CityA", "CityB");
         List<String> arrivalCities = Arrays.asList("CityB", "CityC");
         when(flightRepository.findAllDepartureCities()).thenReturn(departureCities);
