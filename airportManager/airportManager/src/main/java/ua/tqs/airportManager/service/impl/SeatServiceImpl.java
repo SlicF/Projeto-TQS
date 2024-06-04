@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class SeatServiceImpl implements SeatService {
 
+    private final SeatRepository seatRepository;
+
     @Autowired
-    private SeatRepository seatRepository;
+    public SeatServiceImpl(SeatRepository seatRepository) {
+        this.seatRepository = seatRepository;
+    }
 
     @Override
     public Seat createSeat(Seat seat) {
@@ -21,14 +25,12 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public List<Seat> getSeatByFlightId(String flightId) {
-        List<Seat> seat = seatRepository.findByFlightId(flightId);
-        return seat;
+        return seatRepository.findByFlightId(flightId);
     }
 
     @Override
     public Seat getSeatBySeatId(String seatId) {
-        Seat seat = seatRepository.findBySeatId(seatId);
-        return seat;
+        return seatRepository.findBySeatId(seatId);
     }
 
     @Override

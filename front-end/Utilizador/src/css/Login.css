@@ -1,56 +1,54 @@
-/* Register.css */
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
     height: 100%;
-    background: url('../img/fundo.jpg') no-repeat center  fixed; 
+    background: url('../img/fundo.jpg') no-repeat center fixed; 
+    /* background-size: cover; */
+    font-family: Arial, sans-serif; 
 }
 
 .register-container {
-    background-size: cover;
     display: flex;
     flex-direction: row; 
     justify-content: space-between;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    margin: 0 auto;
     position: relative;
+    padding-top: 120px;
 }
 
 .register-logo img {
     max-width: 300px;
-    margin-bottom: 20px;
-    margin-bottom: 16rem ;
-    position: relative; 
+    margin-bottom: 16rem;
 }
 
 .register-form {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 12rem;
+    background: rgba(255, 255, 255, 0.9); /* Aumentei a opacidade do fundo branco */
+    padding: 6rem; /* Aumentei o padding */
     border-radius: 24px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 600px; /* Aumentei a largura do formulário */
     margin: 0 auto;
-    position: relative;
 }
 
 .register-form h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 .input-group {
-    margin-bottom: 10px;
+    margin-bottom: 1.5rem; /* Aumentei o espaçamento para melhor visualização */
 }
 
 .input-group input {
-    width: calc(100%); 
+    width: 100%; 
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
-    border-radius: 25px;
+    border-radius: 5px;
     box-sizing: border-box; 
 }
 
@@ -66,8 +64,9 @@ body, html {
     color: white;
     font-weight: bold; 
     flex-grow: 1; 
-    margin: 10px 5px ; 
+    margin: 10px 5px; 
     border-radius: 25px;
+    text-align: center;
 }
 
 .btn-success {
@@ -87,12 +86,12 @@ body, html {
     top: 1px;
 }
 
-.left{
+.left {
     flex: 1; 
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-left: 100px;
+    margin-right: 2rem; /* Adicionado espaço entre a esquerda e direita */
 }
 
 .right {
@@ -102,22 +101,23 @@ body, html {
     align-items: center;
 }
 
-.Title{
+.Title {
     font-size: 3rem;
     font-weight: bold;
     color: #000000;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    top: 55px;
-    left: 38%;
-    
-
+    text-align: center;
+    margin-bottom: 20px; /* Ajustei o margin para consistência */
 }
+
 .label {
     display: block;
     font-size: 1.2rem; 
     color: #333; 
     margin-bottom: .5rem; 
     font-weight: bold; 
-  }
+}
+
+.buttonCreateAccount:hover{
+    cursor: pointer;
+    color: blue;
+}

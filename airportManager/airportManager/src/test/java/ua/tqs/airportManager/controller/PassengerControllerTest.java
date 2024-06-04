@@ -1,87 +1,110 @@
 package ua.tqs.airportManager.controller;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import ua.tqs.airportManager.entity.Passenger;
-import ua.tqs.airportManager.repository.PassengerRepository;
+import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import ua.tqs.airportManager.entity.Passenger;
+import ua.tqs.airportManager.service.PassengerService;
+
+@ExtendWith(MockitoExtension.class)
 class PassengerControllerTest {
 
     @Mock
-    private PassengerRepository passengerRepository;
+    private PassengerService passengerService;
 
     @InjectMocks
     private PassengerController passengerController;
 
+    private Passenger passenger;
+
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        passenger = new Passenger();
+        passenger.setPassengerId("P123");
+        passenger.setFirstName("John");
+        passenger.setLastName("Doe");
+        passenger.setState("NY");
+        passenger.setUserId(1);
     }
 
     @Test
-    @DisplayName("Test getPassengers")
     void testGetPassengers() {
-        // Arrange
-        List<Passenger> passengers = new ArrayList<>();
-        passengers.add(new Passenger());
+        List<Passenger> passengers = Arrays.asList(passenger, new Passenger());
+        when(passengerService.getAllPassengers()).thenReturn(passengers);
 
-        when(passengerRepository.findAll()).thenReturn(passengers);
-
-        // Act
         ResponseEntity<List<Passenger>> response = passengerController.getPassengers();
 
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(passengers, response.getBody());
-        verify(passengerRepository, times(1)).findAll();
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(passengers);
+        verify(passengerService, times(1)).getAllPassengers();
     }
 
     @Test
-    @DisplayName("Test getPassengerInfo")
     void testGetPassengerInfo() {
-        // Arrange
-        String passengerId = "123456789";
-        Passenger passenger = new Passenger();
+        when(passengerService.findByPassengerId(anyString())).thenReturn(passenger);
 
-        when(passengerRepository.findByPassengerId(passengerId)).thenReturn(passenger);
+        ResponseEntity<Passenger> response = passengerController.getPassengerInfo("P123");
 
-        // Act
-        ResponseEntity<Passenger> response = passengerController.getPassengerInfo(passengerId);
-
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(passenger, response.getBody());
-        verify(passengerRepository, times(1)).findByPassengerId(passengerId);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(passenger);
+        verify(passengerService, times(1)).findByPassengerId(anyString());
     }
 
     @Test
-    @DisplayName("Test getPassengerInfoByState")
     void testGetPassengerInfoByState() {
-        // Arrange
-        String state = "active";
-        List<Passenger> passengers = new ArrayList<>();
-        passengers.add(new Passenger());
+        List<Passenger> passengers = Arrays.asList(passenger, new Passenger());
+        when(passengerService.findByState(anyString())).thenReturn(passengers);
 
-        when(passengerRepository.findByState(state)).thenReturn(passengers);
+        ResponseEntity<List<Passenger>> response = passengerController.getPassengerInfoByState("NY");
 
-        // Act
-        ResponseEntity<List<Passenger>> response = passengerController.getPassengerInfoByState(state);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(passengers);
+        verify(passengerService, times(1)).findByState(anyString());
+    }
 
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(passengers, response.getBody());
-        verify(passengerRepository, times(1)).findByState(state);
+    @Test
+    void testCreatePassenger() {
+        when(passengerService.createPassenger(any(Passenger.class))).thenReturn(passenger);
+
+        ResponseEntity<?> response = passengerController.createPassenger(passenger);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(((Passenger) response.getBody()).getPassengerId()).isEqualTo("P123");
+        verify(passengerService, times(1)).createPassenger(any(Passenger.class));
+    }
+
+    @Test
+    void testCreatePassengerFailure() {
+        when(passengerService.createPassenger(any(Passenger.class))).thenReturn(null);
+
+        ResponseEntity<?> response = passengerController.createPassenger(passenger);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(response.getBody()).isEqualTo("Error creating passenger");
+        verify(passengerService, times(1)).createPassenger(any(Passenger.class));
+    }
+
+    @Test
+    void testGetPassengersByUserId() {
+        List<Passenger> passengers = Arrays.asList(passenger, new Passenger());
+        when(passengerService.findByUserId(anyInt())).thenReturn(passengers);
+
+        ResponseEntity<List<Passenger>> response = passengerController.getPassengersByUserId(1);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(passengers);
+        verify(passengerService, times(1)).findByUserId(anyInt());
     }
 }

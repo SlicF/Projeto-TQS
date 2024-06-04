@@ -1,103 +1,97 @@
-// package ua.tqs.airportManager.service.impl;
+package ua.tqs.airportManager.service.impl;
 
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.DisplayName;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
-// import org.mockito.MockitoAnnotations;
-// import ua.tqs.airportManager.entity.Seat;
-// import ua.tqs.airportManager.repository.SeatRepository;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
-// import java.util.Arrays;
-// import java.util.List;
-// import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotNull;
-// import static org.mockito.ArgumentMatchers.any;
-// import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import ua.tqs.airportManager.entity.Seat;
+import ua.tqs.airportManager.repository.SeatRepository;
 
-// class SeatServiceImplTest {
+class SeatServiceImplTest {
 
-//     @Mock
-//     private SeatRepository seatRepository;
+    @Mock
+    private SeatRepository seatRepository;
 
-//     @InjectMocks
-//     private SeatServiceImpl seatService;
+    @InjectMocks
+    private SeatServiceImpl seatService;
 
-//     @BeforeEach
-//     void setUp() {
-//         MockitoAnnotations.openMocks(this);
-//     }
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-//     @Test
-//     @DisplayName("Test createSeat")
-//     void testCreateSeat() {
-//         Seat seat = new Seat();
-//         seat.setSeatId("1");
+    @Test
+    void testCreateSeat() {
+        Seat seat = new Seat();
+        seat.setSeatId("S123");
 
-//         when(seatRepository.save(any(Seat.class))).thenReturn(seat);
+        when(seatRepository.save(any(Seat.class))).thenReturn(seat);
 
-//         Seat createdSeat = seatService.createSeat(seat);
+        Seat createdSeat = seatService.createSeat(seat);
 
-//         assertNotNull(createdSeat);
-//         assertEquals("1", createdSeat.getSeatId());
-//         verify(seatRepository, times(1)).save(seat);
-//     }
+        assertNotNull(createdSeat);
+        assertEquals("S123", createdSeat.getSeatId());
+        verify(seatRepository, times(1)).save(any(Seat.class));
+    }
 
-//     @Test
-//     @DisplayName("Test getSeatByFlightId")
-//     void testGetSeatByFlightId() {
-//         Seat seat1 = new Seat();
-//         seat1.setSeatId("1");
-//         seat1.setFlightId("flight1");
+    @Test
+    void testGetSeatByFlightId() {
+        Seat seat1 = new Seat();
+        seat1.setSeatId("S123");
 
-//         Seat seat2 = new Seat();
-//         seat2.setSeatId("2");
-//         seat2.setFlightId("flight1");
+        Seat seat2 = new Seat();
+        seat2.setSeatId("S124");
 
-//         when(seatRepository.findByFlightId("flight1")).thenReturn(Arrays.asList(seat1, seat2));
+        List<Seat> seats = Arrays.asList(seat1, seat2);
 
-//         List<Seat> seats = seatService.getSeatByFlightId("flight1");
+        when(seatRepository.findByFlightId("F123")).thenReturn(seats);
 
-//         assertNotNull(seats);
-//         assertEquals(2, seats.size());
-//         verify(seatRepository, times(1)).findByFlightId("flight1");
-//     }
+        List<Seat> foundSeats = seatService.getSeatByFlightId("F123");
 
-//     @Test
-//     @DisplayName("Test getSeatBySeatId")
-//     void testGetSeatBySeatId() {
-//         Seat seat = new Seat();
-//         seat.setSeatId("1");
+        assertNotNull(foundSeats);
+        assertEquals(2, foundSeats.size());
+        verify(seatRepository, times(1)).findByFlightId("F123");
+    }
 
-//         when(seatRepository.findById("1")).thenReturn(Optional.of(seat));
+    @Test
+    void testGetSeatBySeatId() {
+        Seat seat = new Seat();
+        seat.setSeatId("S123");
 
-//         Seat foundSeat = seatService.getSeatBySeatId("1");
+        when(seatRepository.findBySeatId("S123")).thenReturn(seat);
 
-//         assertNotNull(foundSeat);
-//         assertEquals("1", foundSeat.getSeatId());
-//         verify(seatRepository, times(1)).findById("1");
+        Seat foundSeat = seatService.getSeatBySeatId("S123");
 
+        assertNotNull(foundSeat);
+        assertEquals("S123", foundSeat.getSeatId());
+        verify(seatRepository, times(1)).findBySeatId("S123");
+    }
 
-//     }
+    @Test
+    void testGetAllSeats() {
+        Seat seat1 = new Seat();
+        seat1.setSeatId("S123");
 
-//     @Test
-//     @DisplayName("Test getAllSeats")
-//     void testGetAllSeats() {
-//         Seat seat1 = new Seat();
-//         seat1.setSeatId("1");
+        Seat seat2 = new Seat();
+        seat2.setSeatId("S124");
 
-//         Seat seat2 = new Seat();
-//         seat2.setSeatId("2");
+        List<Seat> seats = Arrays.asList(seat1, seat2);
 
-//         when(seatRepository.findAll()).thenReturn(Arrays.asList(seat1, seat2));
+        when(seatRepository.findAll()).thenReturn(seats);
 
-//         List<Seat> seats = seatService.getAllSeats();
+        List<Seat> foundSeats = seatService.getAllSeats();
 
-//         assertNotNull(seats);
-//         assertEquals(2, seats.size());
-//         verify(seatRepository, times(1)).findAll();
-//     }
-// }
+        assertNotNull(foundSeats);
+        assertEquals(2, foundSeats.size());
+        verify(seatRepository, times(1)).findAll();
+    }
+}

@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findByUserId (String userId) { 
+    public User findByUserId (int userId) { 
         return userRepository.findByUserId(userId);
     }
 
@@ -42,8 +42,6 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByUsernameAndPassword(email, password);
     }
     
-    // @Override
-    // public User authenticateUser(String email, String password) {
-    // }
+  
 
 }

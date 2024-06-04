@@ -43,11 +43,14 @@ public class FlightServiceImpl implements FlightService{
         List<String> departureCities = flightRepository.findAllDepartureCities();
         List<String> arrivalCities = flightRepository.findAllArrivalCities();
         
-        // Combine as listas de cidades de partida e chegada e remova duplicatas
         Set<String> uniqueCities = new HashSet<>();
         uniqueCities.addAll(departureCities);
         uniqueCities.addAll(arrivalCities);
         
         return new ArrayList<>(uniqueCities);
+    }
+
+    public void updateFlight(Flight flight) {
+        flightRepository.save(flight);
     }
 }

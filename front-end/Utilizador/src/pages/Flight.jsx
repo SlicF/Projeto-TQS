@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import CardFlights from "../components/CardFlights";
 import "../css/flight.css";
 
 const Flights = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
 
   const userId = localStorage.getItem("userId");
   const [flightsData, setFlightsData] = useState([]);
@@ -53,16 +61,18 @@ const Flights = () => {
   // if (userId) {
   //   navigate("/flightCheckout", null);
   //   localStorage.setItem("flight", flight["flightNumber"]);
-  
+
   // } else {
   //   navigate("/login");
   // }
 
   return (
-      <div className="flightsContainer">
+    <div className="flightsContainer">
       <Navbar />
-        <h1 className="flightsTitle">Discover unique places</h1>
+      <h1 className="flightsTitle">Discover unique places</h1>
+      {isLoggedIn ? (
         <div className="containerFlight">
+
           {flightsData.length > 0 ? (
             flightsData.map((flight, index) => (
               <CardFlights
@@ -73,8 +83,8 @@ const Flights = () => {
           ) : (
             <p>No flights available</p>
           )}
-        </div>
-      </div>
+        </div>) : (<div><h1>ACCESS DENIED</h1></div>)}
+    </div>
 
   );
 };

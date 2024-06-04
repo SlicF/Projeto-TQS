@@ -1,0 +1,11 @@
+.custom-modal .modal-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+}
+
+.custom-modal .modal-backdrop.show {
+    opacity: 0.5; /* Semi-transparent backdrop */
+}
+
+.custom-modal .modal-dialog {
+    z-index: 1050; /* Ensure it appears on top of other elements */
+}

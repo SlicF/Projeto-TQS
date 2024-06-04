@@ -1,13 +1,20 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import { React, useEffect, useState } from 'react';
 import '../css/Navbar.css';
 import logo from '../img/logo_s.png';
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    setIsLoggedIn(!!userId);
+  }, []);
+
   const handleHome = () => {
-    navigate("/");
+    navigate("/admin");
   };
 
   const handleCheckIn = () => {
@@ -18,6 +25,20 @@ const Navbar = () => {
     navigate("/luggage");
   };
 
+  const handleLogin = () => {
+    navigate("/");
+  };
+
+  const handleFlightAdmin = () => {
+    navigate("/flightAdministration");
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -26,16 +47,19 @@ const Navbar = () => {
             <img src={logo} alt="Site Logo" />
           </a>
         </span>
-        <div className="navItems">
-          <a onClick={handleCheckIn}>Check-In</a>
-          <a onClick={handleLuggage}>Luggage</a>
-
-          
-        </div>
-        <span>Admin</span> 
-        {/* aqui depois meter o nome do admin
+        {isLoggedIn ? (
+          <div className="navItems">
+            <a onClick={handleCheckIn}>Check-In</a>
+            <a onClick={handleLuggage}>Luggage</a>
+            <a onClick={handleFlightAdmin}>Flights Admin</a>
+            <a onClick={handleLogout}>Logout</a>
+          </div>) : (<div className="navItems">
+            <a onClick={handleLogin}>Login</a>
+          </div>)}
+        {/* <span>Admin</span> 
+        aqui depois meter o nome do admin
          */}
-         
+
       </div>
     </div>
   );

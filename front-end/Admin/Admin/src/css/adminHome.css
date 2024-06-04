@@ -45,3 +45,67 @@
     background-color: #aaaaaa;
     border-radius: 10px;
   } */
+
+   /* Register.css */
+
+
+
+   h1 {
+     text-align: center;
+     color: #333;
+     margin-top: 10rem
+   }
+
+   .form-group {
+     margin-bottom: 15px;
+   }
+
+   .form-group label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: bold;
+     color: #333;
+   }
+
+   .card-container {
+     width: 40%;
+     margin: 20px;
+     background-color: #fff;
+     border: 1px solid #ddd;
+     border-radius: 10px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+
+   .cardLuggage {
+     padding: 20px;
+     cursor: pointer;
+   }
+
+   .cardLuggage:hover {
+     background-color: #f7f7f7;
+   }
+
+   .card-title {
+     font-size: 18px;
+     font-weight: bold;
+     margin-bottom: 10px;
+   }
+
+   .card-content {
+     font-size: 14px;
+     color: #666;
+   }
+
+   .titleAdmin {
+     font-size: 24px;
+     font-weight: bold;
+     margin-bottom: 20px;
+   }
+
+   .administrator-form2 {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     padding: 20px;
+   }

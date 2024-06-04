@@ -32,4 +32,14 @@ public class PassengerServiceImpl implements PassengerService{
     public List<Passenger> getAllPassengers() {
         return passengerRepository.findAll();
     }
+
+    @Override
+    public List<Passenger> findByUserId(int userId) {
+        return passengerRepository.findByUserId(userId);
+    }
+
+    @Override
+    public void checkIn(Passenger passenger) {
+        passengerRepository.save(passenger);
+    }
 }

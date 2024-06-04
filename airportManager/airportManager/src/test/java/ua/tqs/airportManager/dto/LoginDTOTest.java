@@ -2,52 +2,69 @@ package ua.tqs.airportManager.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LoginDTOTest {
+class LoginDTOTest {
 
     @Test
-    @DisplayName("Test creating LoginDTO using all-args constructor")
-    public void testAllArgsConstructor() {
-        LoginDTO loginDTO = new LoginDTO("user@example.com", "password123");
-        assertNotNull(loginDTO);
-        assertEquals("user@example.com", loginDTO.getEmail());
-        assertEquals("password123", loginDTO.getPassword());
-    }
-
-    @Test
-    @DisplayName("Test creating LoginDTO using no-args constructor")
-    public void testNoArgsConstructor() {
+    void testNoArgsConstructor() {
         LoginDTO loginDTO = new LoginDTO();
         assertNotNull(loginDTO);
-        loginDTO.setEmail("user@example.com");
-        loginDTO.setPassword("password123");
-        assertEquals("user@example.com", loginDTO.getEmail());
+    }
+
+    @Test
+    void testAllArgsConstructor() {
+        LoginDTO loginDTO = new LoginDTO("test@example.com", "password123");
+        assertNotNull(loginDTO);
+        assertEquals("test@example.com", loginDTO.getEmail());
         assertEquals("password123", loginDTO.getPassword());
     }
 
     @Test
-    @DisplayName("Test creating LoginDTO using builder")
-    public void testBuilder() {
+    void testBuilder() {
         LoginDTO loginDTO = LoginDTO.builder()
-                .email("user@example.com")
-                .password("password123")
-                .build();
+                                    .email("builder@example.com")
+                                    .password("builderPassword")
+                                    .build();
         assertNotNull(loginDTO);
-        assertEquals("user@example.com", loginDTO.getEmail());
-        assertEquals("password123", loginDTO.getPassword());
+        assertEquals("builder@example.com", loginDTO.getEmail());
+        assertEquals("builderPassword", loginDTO.getPassword());
     }
 
     @Test
-    @DisplayName("Test setting and getting email and password in LoginDTO")
-    public void testSetAndGet() {
+    void testSetAndGetEmail() {
         LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setEmail("user@example.com");
-        loginDTO.setPassword("password123");
-        assertEquals("user@example.com", loginDTO.getEmail());
-        assertEquals("password123", loginDTO.getPassword());
+        loginDTO.setEmail("newemail@example.com");
+        assertEquals("newemail@example.com", loginDTO.getEmail());
+    }
+
+    @Test
+    void testSetAndGetPassword() {
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setPassword("newPassword");
+        assertEquals("newPassword", loginDTO.getPassword());
+    }
+
+    @Test
+    void testToString() {
+        LoginDTO loginDTO = new LoginDTO("test@example.com", "password123");
+        String expectedString = "LoginDTO(email=test@example.com, password=password123)";
+        assertEquals(expectedString, loginDTO.toString());
+    }
+
+    @Test
+    void testEquals() {
+        LoginDTO loginDTO1 = new LoginDTO("test@example.com", "password123");
+        LoginDTO loginDTO2 = new LoginDTO("test@example.com", "password123");
+        assertEquals(loginDTO1, loginDTO2);
+    }
+
+    @Test
+    void testHashCode() {
+        LoginDTO loginDTO1 = new LoginDTO("test@example.com", "password123");
+        LoginDTO loginDTO2 = new LoginDTO("test@example.com", "password123");
+        assertEquals(loginDTO1.hashCode(), loginDTO2.hashCode());
     }
 }
-

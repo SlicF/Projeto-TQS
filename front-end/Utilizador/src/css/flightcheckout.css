@@ -2,28 +2,44 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%; 
-  
   background-image: url('../img/fundo.jpg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  overflow: hidden; 
-  background: url('../img/fundo.jpg') no-repeat center  fixed; 
-
+  font-family: Arial, sans-serif; 
+  overflow: auto;
 }
 
 .flight-checkout {
   max-width: 80%;
-  margin: 8rem auto;
+  margin: 5rem auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-.flight-details-section, .payment-info-section {
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.flight-details-section {
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
-  margin-bottom: 20px;
-  height: 50rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  background-color: white;
+}
+
+.flight-details-section .left-side, .flight-details-section .right-side {
+  width: 48%; 
+}
+
+.left-side, .right-side {
+  border-radius: 20px;
+  padding: 20px;
+  
 }
 
 .flight-details-section h2, .payment-info-section h2 {
@@ -47,7 +63,6 @@ body, html {
 }
 
 .form-group input[type="text"], .form-group input[type="email"] {
-
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -55,10 +70,13 @@ body, html {
   box-sizing: border-box; 
 }
 
+
 .button-group {
   display: flex;
-  justify-content: left;
+  justify-content: center; 
+  align-items: center; 
   gap: 1rem;
+  margin: auto;
 }
 
 button {
@@ -84,43 +102,7 @@ button:hover {
   background-color: #e2271a; 
 }
 
-.left-side, .right-side {
-  height: 95%;
-  border-radius: 20px;
-  width: 45%;
-  background-color: white;
-  padding: 20px;
-  margin: 10px;
-  float: left;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.flight-details-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
 .seat-selection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.seat-row {
-  display: flex;
-  justify-content: center;
-}
-
-.group-one {
-  margin-bottom: 20px; 
-}
-
-.row-spacer {
-  height: 20px; 
-}
-
-.seat-selection {
-  padding: 5%;  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,6 +113,7 @@ button:hover {
   justify-content: center;
   position: relative; 
 }
+
 
 .seat-row::before,
 .seat-row::after {
@@ -243,6 +226,33 @@ button:hover {
   border-radius: 4px; 
   align-items: center;  
 }
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.form-group label {
+  flex: 1;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"], .form-group input[type="email"], .form-group input[type="date"], .form-group input[type="password"] {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.separator {
+  width: 1px; 
+  background-color: black;
+  margin: 0 1rem;
+}
+
+
 
 /* Aesthetic adjustments */
 @media (max-width: 600px) {

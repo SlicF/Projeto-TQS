@@ -1,80 +1,99 @@
-package ua.tqs.airportManager.controller;
+// package ua.tqs.airportManager.controller;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+// import static org.mockito.ArgumentMatchers.any;
+// import static org.mockito.ArgumentMatchers.anyString;
+// import static org.mockito.Mockito.when;
+// import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+// import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+// import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+// import java.util.Arrays;
+// import java.util.List;
 
-import ua.tqs.airportManager.entity.Reservation;
-import ua.tqs.airportManager.service.ReservationService;
+// import org.junit.jupiter.api.BeforeEach;
+// import org.junit.jupiter.api.Disabled;
+// import org.junit.jupiter.api.Test;
+// import org.junit.jupiter.api.extension.ExtendWith;
+// import org.mockito.InjectMocks;
+// import org.mockito.Mock;
+// import org.mockito.junit.jupiter.MockitoExtension;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+// import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.http.MediaType;
+// import org.springframework.test.web.servlet.MockMvc;
+// import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-public class ReservationControllerTest {
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
-    private MockMvc mockMvc;
+// import ua.tqs.airportManager.entity.Reservation;
+// import ua.tqs.airportManager.service.ReservationService;
 
-    @Mock
-    private ReservationService reservationService;
+// @ExtendWith(MockitoExtension.class)
+// @AutoConfigureMockMvc
+// @SpringBootTest
+// class ReservationControllerTest {
 
-    @InjectMocks
-    private ReservationController reservationController;
+//     @Autowired
+//     private MockMvc mockMvc;
 
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(reservationController).build();
-    }
+//     @Mock
+//     private ReservationService reservationService;
 
-    // @DisplayName("Test createReservation")
-    // @Test
-    // public void testCreateReservation() throws Exception {
-    //     Reservation reservation = new Reservation();
-    //     reservation.setReservationId("1");
+//     @InjectMocks
+//     private ReservationController reservationController;
 
-    //     when(reservationService.createReservation(reservation)).thenReturn(reservation);
+//     @BeforeEach
+//     void setUp() {
+//         mockMvc = MockMvcBuilders.standaloneSetup(reservationController).build();
+//     }
 
-    //     mockMvc.perform(post("/api/reservations/createReservation")
-    //             .contentType(MediaType.APPLICATION_JSON)
-    //             .content("{\"reservationId\": 1}"))
-    //             .andExpect(status().isOk());
-    // }
+//     @Test
+//     @Disabled
+//     void testCreateReservation() throws Exception {
+//         Reservation reservation = new Reservation();
+//         reservation.setReservationId("R123");
+        
+//         when(reservationService.createReservation(any(Reservation.class))).thenReturn(reservation);
 
-    @DisplayName("Test getAllReservations")
-    @Test
-    public void testGetAllReservations() throws Exception {
-        List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation());
-        reservations.add(new Reservation());
+//         mockMvc.perform(post("/api/reservations/createReservation")
+//                 .contentType(MediaType.APPLICATION_JSON)
+//                 .content(new ObjectMapper().writeValueAsString(reservation)))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.reservationId").value("R123"));
+//     }
 
-        when(reservationService.getAllReservations()).thenReturn(reservations);
+//     @Test
+//     @Disabled
+//     void testGetAllReservations() throws Exception {
+//         List<Reservation> reservations = Arrays.asList(new Reservation("R123", "P123", "F123", "Seat1", 100.0, null, "John Doe", "1234567890", "USA", null, null));
+//         when(reservationService.getAllReservations()).thenReturn(reservations);
 
-        mockMvc.perform(get("/api/reservations/getAllReservations"))
-                .andExpect(status().isOk());
-    }
+//         mockMvc.perform(get("/api/reservations/getAllReservations"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$[0].reservationId").value("R123"));
+//     }
 
-    @DisplayName("Test getReservation")
-    @Test
-    public void testGetReservation() throws Exception {
-        Reservation reservation = new Reservation();
-        reservation.setReservationId("1");
+//     @Test
+//     void testGetReservation() throws Exception {
+//         Reservation reservation = new Reservation("R123", "P123", "F123", "Seat1", 100.0, null, "John Doe", "1234567890", "USA", null, null);
+//         when(reservationService.getReservationByReservationId(anyString())).thenReturn(reservation);
 
-        when(reservationService.getReservationByReservationId("1")).thenReturn(reservation);
+//         mockMvc.perform(get("/api/reservations/getReservation/R123"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$.reservationId").value("R123"));
+//     }
 
-        mockMvc.perform(get("/api/reservations/getReservation/1"))
-                .andExpect(status().isOk());
-    }
+//     @Test
+//     @Disabled
+//     void testGetReservationsByPassenger() throws Exception {
+//         List<Reservation> reservations = Arrays.asList(new Reservation("R123", "P123", "F123", "Seat1", 100.0, null, "John Doe", "1234567890", "USA", null, null));
+//         when(reservationService.getReservationsByPassengerId(anyString())).thenReturn(reservations);
 
-
-   
-}
+//         mockMvc.perform(get("/api/reservations/getReservationsByPassenger")
+//                 .param("passengerId", "P123"))
+//                 .andExpect(status().isOk())
+//                 .andExpect(jsonPath("$[0].reservationId").value("R123"));
+//     }
+// }

@@ -8,5 +8,5 @@ public interface PassengerRepository extends JpaRepository<Passenger, String> {
     
     Passenger findByPassengerId (String passengerId);
     List<Passenger> findByState (String state);
-    // List<Passenger> getAllPassengers();
+    List<Passenger> findByUserId(int userId);
 }
