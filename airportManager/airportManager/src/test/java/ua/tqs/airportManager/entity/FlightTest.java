@@ -13,7 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FlightTest {
-
     private static List<Flight> flights = new ArrayList<>();
 
     static LocalDate flightDate13 = LocalDate.of(2024, 5, 19);
@@ -50,7 +49,6 @@ class FlightTest {
 
     @Test
     @DisplayName("test association between flight and airline")
-    void testReservationFlightAssociation() {
     void testReservationFlightAssociation() {
         assertEquals(airline1, flight1.getAirline());
         assertEquals(airline2, flight3.getAirline());
