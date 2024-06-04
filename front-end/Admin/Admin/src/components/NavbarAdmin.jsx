@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { React, useEffect, useState } from 'react';
 import '../css/Navbar.css';
 import logo from '../img/logo_s.png';
@@ -28,6 +29,10 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleFlightAdmin = () => {
+    navigate("/flightAdministration");
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
@@ -46,6 +51,7 @@ const Navbar = () => {
           <div className="navItems">
             <a onClick={handleCheckIn}>Check-In</a>
             <a onClick={handleLuggage}>Luggage</a>
+            <a onClick={handleFlightAdmin}>Flights Admin</a>
             <a onClick={handleLogout}>Logout</a>
           </div>) : (<div className="navItems">
             <a onClick={handleLogin}>Login</a>

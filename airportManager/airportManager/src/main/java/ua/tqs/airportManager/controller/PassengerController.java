@@ -72,4 +72,15 @@ public class PassengerController {
         return new ResponseEntity<>(passengers, HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}/check-in")
+    public ResponseEntity<Passenger> checkInPassenger(@PathVariable("id") String passengerId) {
+        Passenger passenger = passengersService.findByPassengerId(passengerId);
+        if (passenger == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        passenger.setState("checked-in");
+        passengersService.checkIn(passenger);
+        return new ResponseEntity<>(passenger, HttpStatus.OK);
+    }
+
 }
