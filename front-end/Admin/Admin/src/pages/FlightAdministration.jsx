@@ -28,7 +28,7 @@ const FlightAdministrator = () => {
 
     const handleState = (state, flightId) => {
 
-        fetch(`http://localhost:8981/api/flights/${flightId}/${state}`, {
+        fetch(`http://192.168.160.219:8981/api/flights/${flightId}/${state}`, {
             method: 'PATCH'
         })
             .then(response => {

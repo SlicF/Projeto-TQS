@@ -46,7 +46,7 @@ function LoginAdmin() {
   const UserInfo = async (email) => {
 
     try {
-      const response = await fetch(`http://localhost:8981/api/accounts/userInfoByUsername?username=${email}`, {
+      const response = await fetch(`http://192.168.160.219:8981/api/accounts/userInfoByUsername?username=${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

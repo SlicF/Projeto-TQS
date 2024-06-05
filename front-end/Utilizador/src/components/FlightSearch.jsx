@@ -178,7 +178,7 @@ const FlightsSearch = () => {
 
     const fetchCities = async (searchValue = '', type = '') => {
         try {
-            const response = await fetch('http://localhost:8981/api/flights/cities');
+            const response = await fetch('http://192.168.160.219:8981/api/flights/cities');
             if (!response.ok) {
                 throw new Error('Failed fetch: ${response.status}');
             }
