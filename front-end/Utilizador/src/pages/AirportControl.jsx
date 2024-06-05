@@ -1,7 +1,7 @@
 // AirportControl.jsx
 import React from 'react';
 import Flight from '../components/Flight.jsx';
-import '../css/AirportControl.css'; 
+// import '../css/AirportControl.css'; 
 
 import { useNavigate } from 'react-router-dom';
 
