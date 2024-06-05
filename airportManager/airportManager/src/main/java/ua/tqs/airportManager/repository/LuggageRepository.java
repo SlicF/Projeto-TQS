@@ -10,6 +10,7 @@ import ua.tqs.airportManager.entity.Luggage;
 public interface LuggageRepository extends JpaRepository<Luggage, String> {
     
     Optional<Luggage> findByLuggageId (String lugaggeId);
+    // List<Luggage> getAllLuggages();
 
     List<Luggage> findByReservationId(String reservationId);
 }

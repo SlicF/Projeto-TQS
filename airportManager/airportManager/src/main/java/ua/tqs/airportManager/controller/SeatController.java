@@ -18,6 +18,7 @@ import ua.tqs.airportManager.service.SeatService;
 @RequestMapping("/api/seats")
 public class SeatController {
 
+    // private AuthService authService;
     private SeatService seatsService;
 
     @GetMapping("/seats")
@@ -46,7 +47,10 @@ public class SeatController {
 
     @PostMapping("/createSeat")
     public ResponseEntity<?> createSeat(@RequestBody Seat passeng) {
-    
+        
+        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName(); 
+        // User user = UserRepository.findByUsername(username).orElseThrow();
 
         var seat = seatsService.createSeat(passeng);
         if (seat == null) {

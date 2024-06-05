@@ -2,13 +2,7 @@ package ua.tqs.airportManager.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Collection;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import ua.tqs.airportManager.Roles;
 
 class UserTest {
