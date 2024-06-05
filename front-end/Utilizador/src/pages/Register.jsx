@@ -76,7 +76,7 @@ function Register() {
       console.log(JSON.stringify(userData));
 
       const response = await fetch(
-        `http://localhost:8981/api/accounts/register`,
+        `http://192.168.160.219:8981/api/accounts/register`,
         {
           method: "POST",
           headers: {

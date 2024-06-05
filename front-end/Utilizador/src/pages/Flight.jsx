@@ -34,7 +34,7 @@ const Flights = () => {
     console.log("olaaaaa: ", JSON.stringify(details));
 
     try {
-      const response = await fetch('http://localhost:8981/api/flights/searchFlight', {
+      const response = await fetch('http://192.168.160.219:8981/api/flights/searchFlight', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

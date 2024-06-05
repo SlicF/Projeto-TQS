@@ -24,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchPassengerIds = async () => {
       try {
-        const response = await fetch(`http://localhost:8981/api/passengers/user/${userId}`);
+        const response = await fetch(`http://192.168.160.219:8981/api/passengers/user/${userId}`);
 
         console.log('response');
         console.log(response);

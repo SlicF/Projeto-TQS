@@ -35,7 +35,7 @@ function SearchFlight() {
     // const { from: departureCity, to: arrivalCity, departureDate: date } = formData;
 
     try {
-      const response = await fetch('http://localhost:8981/api/flights/flightCheckout/${flightId}', {
+      const response = await fetch('http://192.168.160.219:8981/api/flights/flightCheckout/${flightId}', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

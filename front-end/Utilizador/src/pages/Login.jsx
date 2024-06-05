@@ -21,7 +21,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8981/api/accounts/login`,
+      const response = await fetch(`http://192.168.160.219:8981/api/accounts/login`,
         {
           method: "POST",
           headers: {
@@ -60,7 +60,7 @@ function Login() {
   const UserInfo = async (email) => {
 
     try {
-      const response = await fetch(`http://localhost:8981/api/accounts/userInfoByUsername?username=${email}`, {
+      const response = await fetch(`http://192.168.160.219:8981/api/accounts/userInfoByUsername?username=${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

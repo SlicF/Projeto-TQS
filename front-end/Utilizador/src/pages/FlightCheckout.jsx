@@ -130,7 +130,7 @@ const FlightCheckout = () => {
   
 
   const createSeat = (seatData) => {
-    fetch('http://localhost:8981/api/seats/createSeat', {
+    fetch('http://192.168.160.219:8981/api/seats/createSeat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ const FlightCheckout = () => {
   };
 
   const createReservation = (reservationData) => {
-    fetch('http://localhost:8981/api/reservations/createReservation', {
+    fetch('http://192.168.160.219:8981/api/reservations/createReservation', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ const FlightCheckout = () => {
   };
 
   const createPassenger = (passengerData) => {
-    return fetch('http://localhost:8981/api/passengers/createPassenger', {
+    return fetch('http://192.168.160.219:8981/api/passengers/createPassenger', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ const FlightCheckout = () => {
 
   const fetchFlightById = async (selectedFlight) => {
     try {
-      const response = await fetch(`http://localhost:8981/api/flights/flightCheckout/${selectedFlight.flightId}`, {
+      const response = await fetch(`http://192.168.160.219:8981/api/flights/flightCheckout/${selectedFlight.flightId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

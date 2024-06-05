@@ -63,7 +63,7 @@ const Payment = () => {
   };
 
   const handleReservationStore = (reservation) => {
-    fetch('http://localhost:8981/api/reservations/createReservation', {
+    fetch('http://192.168.160.219:8981/api/reservations/createReservation', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ const FlightAdministrator = () => {
         const userId = localStorage.getItem("userId");
         setIsLoggedIn(!!userId);
 
-        fetch('http://localhost:8981/api/flights/flights/OK')
+        fetch('http://192.168.160.219:8981/api/flights/flights/OK')
             .then(response => response.json())
             .then(data => setFlights(data))
             .catch(error => console.error('Error fetching flights:', error));

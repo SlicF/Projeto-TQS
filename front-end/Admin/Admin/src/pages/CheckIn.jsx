@@ -15,7 +15,7 @@ const Administrator = () => {
         const userId = localStorage.getItem("userId");
         setIsLoggedIn(!!userId);
 
-      fetch('http://localhost:8981/api/passengers/passengers/null')
+      fetch('http://192.168.160.219:8981/api/passengers/passengers/null')
             .then(response => response.json())
             .then(data => setPassengers(data))
             .catch(error => console.error('Error fetching passengers:', error));
@@ -27,7 +27,7 @@ const Administrator = () => {
 
     const handleCheckIn = (passengerId) => {
         
-        fetch(`http://localhost:8981/api/passengers/${passengerId}/check-in`, {
+        fetch(`http://192.168.160.219:8981/api/passengers/${passengerId}/check-in`, {
             method: 'PATCH'
         })
             .then(response => {

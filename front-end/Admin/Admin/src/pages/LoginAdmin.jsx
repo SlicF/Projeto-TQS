@@ -13,7 +13,7 @@ function LoginAdmin() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://localhost:8981/api/accounts/login`, {
+      const response = await fetch(`http://192.168.160.219:8981/api/accounts/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -175,7 +175,7 @@ const BaggageRegistration = () => {
         console.log("Baggage Information:", baggageInfo);
 
         try {
-            const response = await fetch("http://localhost:8981/api/luggage/createLuggage", {
+            const response = await fetch("http://192.168.160.219:8981/api/luggage/createLuggage", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const AirportControl = () => {
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8981/api/flights/flights')
+    fetch('http://192.168.160.219:8981/api/flights/flights')
       .then(response => response.json())
       .then(data => {
         // Ordena os voos por hora de partida
