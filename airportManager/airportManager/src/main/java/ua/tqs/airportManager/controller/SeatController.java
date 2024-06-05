@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import ua.tqs.airportManager.entity.Seat;
 import ua.tqs.airportManager.service.SeatService;
 
-@CrossOrigin(origins = "http://localhost:8981")
+@CrossOrigin(origins = "http://*:8981")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/seats")
