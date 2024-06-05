@@ -16,7 +16,7 @@ import ua.tqs.airportManager.service.UserService;
 import ua.tqs.airportManager.dto.AuthResponse;
 import ua.tqs.airportManager.dto.LoginDTO;
 
-@CrossOrigin(origins = "http://192.168.160.219:8981")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/accounts")

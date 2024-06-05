@@ -13,7 +13,7 @@ import ua.tqs.airportManager.service.FlightService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://192.168.160.219:8981")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/flights")
