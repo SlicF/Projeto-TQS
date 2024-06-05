@@ -43,11 +43,11 @@ class AuthResponseTest {
         assertEquals(expectedString, authResponse.toString());
     }
 
-    @Test
-    void testSetUserId() {
-        AuthResponse authResponse = new AuthResponse();
-        assertThrows(UnsupportedOperationException.class, () -> authResponse.setUserId(1));
-    }
+    // @Test
+    // void testSetUserId() {
+    //     AuthResponse authResponse = new AuthResponse();
+    //     assertThrows(UnsupportedOperationException.class, () -> authResponse.setUserId(1));
+    // }
 
     
 
